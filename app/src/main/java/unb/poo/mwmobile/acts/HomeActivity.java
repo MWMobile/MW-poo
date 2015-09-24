@@ -1,36 +1,24 @@
 package unb.poo.mwmobile.acts;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import unb.poo.mwmobile.R;
-import unb.poo.mwmobile.models.User;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        /*Activity que checa se ele esta logado ou nao e redireciona para login ou home conforme
-        logado ou nao
-
-        Por agora ele so joga na loginActivity
-        */
-        Intent loginAct = new Intent(this, LoginActivity.class);
-        startActivity(loginAct);
-        finish();
+        setContentView(R.layout.activity_home);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         return true;
     }
 
