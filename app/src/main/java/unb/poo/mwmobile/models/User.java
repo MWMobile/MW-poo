@@ -11,10 +11,12 @@ public class User {
     private String nome;
     private Materia[] materias;
     private Materia[] historico;
+    private double IRA;
 
     public User(int matricula) {
         this.matricula = matricula;
     }
+
 
     public int getMatricula() {
         return matricula;
@@ -52,4 +54,11 @@ public class User {
         this.historico = historico;
     }
 
+    public double getIRA() {
+        return IRA;
+    }
+
+    public void setIRA(double IRA) {
+        this.IRA = IRA;
+    }
 }
