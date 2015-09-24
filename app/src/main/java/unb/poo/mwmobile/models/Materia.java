@@ -10,6 +10,7 @@ public class Materia {
     private int codigo;
     private String turma;
     private String nome;
+    private int creditos;
 
     public Professor getProfessor() {
         return professor;
@@ -49,5 +50,13 @@ public class Materia {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
     }
 }
