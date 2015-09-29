@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,15 +14,21 @@ import android.widget.Toast;
 
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.models.Horario;
+import unb.poo.mwmobile.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false;
+    Intent prevIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        prevIntent = getIntent();
+        User user = (User) prevIntent.getParcelableExtra("sample_user");
+        Log.d("Tag zica do Dollynho", user.getNome());
 
         /*aqui ele checa o db pelo login, por agora ele so redireciona pra home*/
         Button loginBtn = (Button) findViewById(R.id.loginButton);
@@ -31,7 +38,11 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener login = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            prevIntent = getIntent();
+            User user = (User) prevIntent.getParcelableExtra("sample_user");
             Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
+            homeAct.putExtra("sample_user_home", user);
+
             startActivity(homeAct);
         }
     };

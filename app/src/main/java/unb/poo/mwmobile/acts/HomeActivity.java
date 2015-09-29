@@ -1,11 +1,15 @@
 package unb.poo.mwmobile.acts;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import unb.poo.mwmobile.R;
+import unb.poo.mwmobile.models.User;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -13,6 +17,17 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Intent thisIntent = getIntent();
+        User user = (User) thisIntent.getParcelableExtra("sample_user_home");
+
+        /*TextView nome = (TextView) findViewById(R.id.nomeField);
+        TextView matricula = (TextView) findViewById(R.id.matriculaField);
+
+        nome.setText(user.getNome());
+        matricula.setText(user.getMatricula());*/
+
+        Log.d("Tag zica de Exemplo", user.getNome());
     }
 
     @Override

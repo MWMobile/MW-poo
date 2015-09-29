@@ -1,10 +1,17 @@
 package unb.poo.mwmobile.models;
 
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.provider.SyncStateContract;
+import android.util.Log;
+
 /**
  * Created by sousa on 19/09/2015.
  */
 
-public class User {
+public class User implements Parcelable{
 
     private final int matricula;
     private String senha;
@@ -17,6 +24,11 @@ public class User {
         this.matricula = matricula;
     }
 
+    public User(Parcel in) {
+        this.matricula = in.readInt();
+        this.nome = in.readString();        // Por enquanto, só transmite o nome e a matrícula do usuário.
+        Log.d("Construtor zoado pra c*",this.nome);
+    }
 
     public int getMatricula() {
         return matricula;
@@ -61,4 +73,25 @@ public class User {
     public void setIRA(double IRA) {
         this.IRA = IRA;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.getMatricula());
+        dest.writeString(this.getNome());
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

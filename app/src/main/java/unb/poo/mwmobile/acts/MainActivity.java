@@ -9,6 +9,9 @@ import android.view.MenuItem;
 
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.models.Horario;
+import unb.poo.mwmobile.models.Materia;
+import unb.poo.mwmobile.models.Professor;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +25,14 @@ public class MainActivity extends AppCompatActivity {
 
         Por agora ele so joga na loginActivity
         */
+
+        User exampleUser = new User(110115716);
+        exampleUser.setNome("Emanuel B.");
+        exampleUser.setSenha("coelhosverdes");
+        exampleUser.setIRA(3.9502);
+
         Intent loginAct = new Intent(this, LoginActivity.class);
+        loginAct.putExtra("sample_user", exampleUser);
         startActivity(loginAct);
         finish();
     }

@@ -4,7 +4,6 @@ package unb.poo.mwmobile.models;
  * Created by sousa on 19/09/2015.
  */
 public class Materia {
-
     private Professor professor;
     private Horario[] horarios;
     private int codigo;
