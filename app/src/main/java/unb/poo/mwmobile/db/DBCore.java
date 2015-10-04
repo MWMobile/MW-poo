@@ -48,7 +48,7 @@ public class DBCore extends SQLiteOpenHelper {
 
 //    Funcao para testes que dropa a tabela user do DB (onde armazena o usuario logado)
     public void dropDB() {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         onCreate(db);
         db.execSQL("DROP TABLE " + TABLE_USER);
@@ -57,7 +57,7 @@ public class DBCore extends SQLiteOpenHelper {
 
 //    Funcao para testes que imprime o SQLite por inteiro
     public void printDB(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_USER;
         Cursor cursor = db.rawQuery(query, null);
@@ -66,9 +66,10 @@ public class DBCore extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Log.d("ITEM 1", cursor.getString(0) + " ");
-                Log.d("ITEM 2", cursor.getString(1) + " ");
-                Log.d("ITEM 3", cursor.getString(2) + " ");
+                Log.d("ID", cursor.getString(0) + " ");
+                Log.d("MATRICULA", cursor.getString(1) + " ");
+                Log.d("SENHA", cursor.getString(2) + " ");
+                Log.d("NOME", cursor.getString(3) + " ");
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 
@@ -105,20 +106,20 @@ public class DBCore extends SQLiteOpenHelper {
     public User getUser(String string){
         String query = "SELECT * FROM " + TABLE_USER + " WHERE " + KEY_MATRICULA + " = " + string +
                 " OR " + KEY_NOME + " = " + string;
-        return search("a");
+        return search(query);
     }
 
     private User search(String query) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
 
         User user = null;
         if (cursor.moveToFirst()) {
             do {
-                user = new User(cursor.getInt(0));
-                user.setSenha(cursor.getString(1));
-                user.setNome(cursor.getString(2));
+                user = new User(cursor.getInt(1));
+                user.setSenha(cursor.getString(2));
+                user.setNome(cursor.getString(3));
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 

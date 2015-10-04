@@ -78,19 +78,25 @@ public class User implements Parcelable{
 
     public boolean login(Context context){
 
+//        Aqui viria a autenticacao com o MW
         User fakeUser = new User(123456789);
         fakeUser.setSenha("1234");
 
-        if(this.getMatricula()== fakeUser.getMatricula())
-            if(this.getSenha() == fakeUser.getSenha())
+        if(this.getMatricula() == fakeUser.getMatricula())
+            if (this.getSenha().equals(fakeUser.getSenha())) {
+                saveOnDb(this, context);
                 return true;
-            else
+            } else
                 return false;
         else
             return false;
 
     }
 
+    private void saveOnDb(User user, Context context){
+        DBCore db = new DBCore(context);
+        db.addUser(user);
+    }
 
     @Override
     public int describeContents() {
