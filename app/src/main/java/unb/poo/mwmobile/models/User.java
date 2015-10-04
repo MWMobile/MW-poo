@@ -1,11 +1,14 @@
 package unb.poo.mwmobile.models;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.SyncStateContract;
 import android.util.Log;
+
+import unb.poo.mwmobile.db.DBCore;
 
 /**
  * Created by sousa on 19/09/2015.
@@ -27,7 +30,6 @@ public class User implements Parcelable{
     public User(Parcel in) {
         this.matricula = in.readInt();
         this.nome = in.readString();        // Por enquanto, só transmite o nome e a matrícula do usuário.
-        Log.d("Construtor zoado pra c*",this.nome);
     }
 
     public int getMatricula() {
@@ -73,6 +75,22 @@ public class User implements Parcelable{
     public void setIRA(double IRA) {
         this.IRA = IRA;
     }
+
+    public boolean login(Context context){
+
+        User fakeUser = new User(123456789);
+        fakeUser.setSenha("1234");
+
+        if(this.getMatricula()== fakeUser.getMatricula())
+            if(this.getSenha() == fakeUser.getSenha())
+                return true;
+            else
+                return false;
+        else
+            return false;
+
+    }
+
 
     @Override
     public int describeContents() {

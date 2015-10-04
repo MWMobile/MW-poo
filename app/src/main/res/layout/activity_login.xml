@@ -11,8 +11,8 @@
     <EditText
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:id="@+id/usernameField"
-        android:text="Matricula"
+        android:id="@+id/matriculaField"
+        android:hint="Matricula"
         android:layout_centerVertical="true"
         android:layout_above="@+id/passwordField"
         android:layout_centerHorizontal="true"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/passwordField"
         android:inputType="textPassword"
-        android:text="******"
+        android:hint="******"
         android:layout_above="@+id/loginButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp" />

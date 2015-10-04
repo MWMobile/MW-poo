@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import unb.poo.mwmobile.R;
@@ -19,52 +20,69 @@ import unb.poo.mwmobile.models.User;
 public class LoginActivity extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false;
-    Intent prevIntent;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        prevIntent = getIntent();
-        User user = (User) prevIntent.getParcelableExtra("sample_user");
-        Log.d("Tag zica do Dollynho", user.getNome());
+        /*
+        primeiro ele pega o botao do xml da view do app e atrela ele a uma variavel
+        depois ele adiciona um listener para esse botao (evento de click)
+        */
 
-        /*aqui ele checa o db pelo login, por agora ele so redireciona pra home*/
         Button loginBtn = (Button) findViewById(R.id.loginButton);
         loginBtn.setOnClickListener(login);
     }
 
+    /*
+    no listener ele pega os valores dos campos da tela de login
+    depois ele verifica se foi preenchido
+        caso nao seja ele mostra uma mensagem por campo respectivo vazio
+        caso esteja preenchido errado ele tambem mostra uma mensagem avisanso
+    se estiver tudo certo ele cria um objeto de usuario e chama a funcao de autenticacao
+    se ela retornar valida ele vai pra "home", se nao ele avisa que os dados estao errados
+
+    */
     View.OnClickListener login = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            prevIntent = getIntent();
-            User user = (User) prevIntent.getParcelableExtra("sample_user");
             Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
-            homeAct.putExtra("sample_user_home", user);
 
-            startActivity(homeAct);
+            EditText matriculaField = (EditText) findViewById(R.id.matriculaField);
+            EditText passwordField = (EditText) findViewById(R.id.passwordField);
+
+            if(!matriculaField.getText().toString().trim().equals("")){
+                if(!passwordField.getText().toString().trim().equals("")){
+
+                    try {
+                        int matricula = Integer.parseInt(String.valueOf(matriculaField.getText()));
+
+                        String password = String.valueOf(passwordField.getText());
+
+                        user = new User(matricula);
+                        user.setSenha(password);
+                        user.setNome("NOME NAO EDITADO AINDA");
+
+                        if (user.login(getApplicationContext())) {
+                            homeAct.putExtra("user", user);
+                            startActivity(homeAct);
+                            finish();
+                        } else
+                            Toast.makeText(getApplicationContext(), "Informacoes Incorretas", Toast.LENGTH_SHORT).show();
+
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getApplicationContext(), "O campo matricula so aceita numeros", Toast.LENGTH_LONG).show();
+                    }
+
+                } else
+                    Toast.makeText(getApplicationContext(), "Preencha o campo de password", Toast.LENGTH_SHORT).show();
+            } else
+                Toast.makeText(getApplicationContext(), "Preencha o campo de usuario", Toast.LENGTH_SHORT).show();
+
         }
     };
-
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,5 +104,31 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    /*
+    funcao basica de clique duplo no botao voltar para sair
+    verifica se tem menos de 2 segundos que o usuario clicou o botao de voltar
+    se sim ele fecha o app, se nao ele reseta o contador
+    */
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Aperte VOLTAR novamente para sair", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 }
