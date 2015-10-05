@@ -18,6 +18,7 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.utils.Utils;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         */
 
         Intent thisIntent = getIntent();
-        User user = (User) thisIntent.getParcelableExtra("user");
+        User user = thisIntent.getParcelableExtra("user");
 
         TextView nome = (TextView) findViewById(R.id.nomeField);
         TextView matricula = (TextView) findViewById(R.id.matriculaField);
@@ -43,38 +44,11 @@ public class HomeActivity extends AppCompatActivity {
         nome.setText(user.getNome());
         matricula.setText(String.valueOf(user.getMatricula()));
 
-        Materia[] materias = new Materia[15];
-        for(int i=0; i< 15; i++) {
-            materias[i] = new Materia();
-        }
-        /* Preciso de ajuda aqui, nao consegui pegar as materias do usuario, alguem tem alguma ideia de como fazer??
-        eu tentei
-        Materia[] materias = new Materia[];
-        materias = User.getMaterias();
-
-        so q deu erro. dai eu so criei 15 materias.
-
-        * dai eu so criei materias.*/
-
-        String[] nomeMaterias = new String[]{};
-        for (int i = 0; i < 15; i++) {
-            nomeMaterias[i] = materias[i].getNome();
-        }
         GridView gridView = (GridView) findViewById(R.id.gradeHoraria);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, nomeMaterias);
 
-        gridView.setAdapter(adapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        Utils utils = new Utils();
+        utils.gradePopulate(gridView, getApplicationContext());
     }
 
     @Override
