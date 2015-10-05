@@ -10,8 +10,43 @@ public class Materia {
     private String turma;
     private String nome;
     private String sala;
+    private int Periodo_cursado;
+    private boolean OBRIGATORIA,TRANCADA=false;
     private int creditos;
+    private int Peso_mencao;
+    
+    public void setPeso_mencao(String MENCAO){
+        int mencao;
+        switch(MENCAO){
+            case MENCAO=="SR":mencao=0;break;
+			case MENCAO=="II":mencao=1;break;
+			case MENCAO=="MI":mencao=2;break;
+			case MENCAO=="MM":mencao=3;break;
+			case MENCAO=="MS":mencao=4;break;
+			case MENCAO=="SS":mencao=5;break;
+        }
+        this.Peso_mencao=mencao;
+    }
+    public int getPeso_mencao(){
+        return Peso_mencao;
+    }
 
+    public void setObrigatoria(boolean OBR){
+        this.OBRIGATORIA=OBR;
+    }
+    public boolean getObrigatoria(){return OBRIGATORIA;}
+    public void setPeriodo(int Periodo){
+        this.Periodo_cursado=Periodo;
+    }
+    public int getPeriodo_cursado(){return Periodo_cursado;}
+    
+    public void trancar(){
+        this.TRANCADA=true;
+    }
+    public boolean getTrancada(){
+        return TRANCADA;
+    }
+    
     public Professor getProfessor() {
         return professor;
     }
