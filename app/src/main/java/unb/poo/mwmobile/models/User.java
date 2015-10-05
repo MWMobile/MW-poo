@@ -8,6 +8,8 @@ import android.os.Parcelable;
 import android.provider.SyncStateContract;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import unb.poo.mwmobile.db.DBCore;
 
 /**
@@ -19,9 +21,12 @@ public class User implements Parcelable{
     private final int matricula;
     private String senha;
     private String nome;
-    private Materia[] materias;
-    private Materia[] historico;
+    private String curso;
+    private ArrayList<Materia> materias = new ArrayList<Materia>();
+    private ArrayList<MateriaCursada> historico = new ArrayList<MateriaCursada>();
     private double IRA;
+
+
 
     public User(int matricula) {
         this.matricula = matricula;
@@ -52,19 +57,27 @@ public class User implements Parcelable{
         this.nome = nome;
     }
 
-    public Materia[] getMaterias() {
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
+
+    public ArrayList<Materia> getMaterias() {
         return materias;
     }
 
-    public void setMaterias(Materia[] materias) {
+    public void setMaterias(ArrayList<Materia> materias) {
         this.materias = materias;
     }
 
-    public Materia[] getHistorico() {
+    public ArrayList<MateriaCursada> getHistorico() {
         return historico;
     }
 
-    public void setHistorico(Materia[] historico) {
+    public void setHistorico(ArrayList<MateriaCursada> historico) {
         this.historico = historico;
     }
 
