@@ -9,6 +9,7 @@ public class Materia {
     private int codigo;
     private String turma;
     private String nome;
+    private String sala;
     private int creditos;
 
     public Professor getProfessor() {
@@ -51,6 +52,14 @@ public class Materia {
         this.nome = nome;
     }
 
+    public String getSala() {
+        return sala;
+    }
+
+    public void setSala(String sala) {
+        this.sala = sala;
+    }
+
     public int getCreditos() {
         return creditos;
     }
@@ -58,4 +67,5 @@ public class Materia {
     public void setCreditos(int creditos) {
         this.creditos = creditos;
     }
+
 }
