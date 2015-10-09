@@ -85,8 +85,37 @@ public class User implements Parcelable{
         return IRA;
     }
 
-    public void setIRA(double IRA) {
-        this.IRA = IRA;
+    public void setIRA() {
+    /**
+     * DTb:disciplinas OBRIGATORIAS trancadas
+     * DTp:disciplinas OPTATIVAS trancadas
+     * DC: disciplinas matriculadas
+     * Pi:peso da mencao
+     * Pei:Periodo em que uma disciplina foi cursada
+     * CRi:créditos de uma disciplina
+     */
+        double constante,disc,variavel=0,total;
+        int Peso_mencao,Periodo_disciplina,Credito_disciplina;
+         //--------conta alguns parametros das disciplinas
+                int DTb=0,DTp=0,DC;
+                if((materia.OBR==true)&&(materia.TR==true)){
+                    DTp++;
+                }
+                if((materia.OBR==false)&&(materia.TR==true)){
+                    DTb++;
+                }
+                DC=historico.size();
+                constante=1-((0.6*DTb+0.4DTp)/DC);
+        //-----------------------------------------
+        for(ArrayList<MateriaCursada> materia:historico){
+                Peso_mencao=materia.getPeso_mencao();
+                Periodo_disicplina=materia.getPeriodo_cursado();
+                Credito_disciplina=materia.getCreditos();
+                disc=(Periodo_disciplina*Peso_mencao*Credito_disciplina)/(Credito_disciplina*Periodo_disciplina);
+                variavel=variavel+disc;
+        }
+        total=constante*variavel;
+        this.IRA = total;
     }
 
     public boolean login(Context context){
