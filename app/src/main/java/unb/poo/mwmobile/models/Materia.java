@@ -1,11 +1,15 @@
 package unb.poo.mwmobile.models;
 
+import android.os.Parcel;
+
+import java.util.ArrayList;
+
 /**
  * Created by sousa on 19/09/2015.
  */
 public class Materia {
     private Professor professor;
-    private Horario[] horarios;
+    private ArrayList<Horario> horarios;
     private int codigo;
     private String turma;
     private String nome;
@@ -13,7 +17,7 @@ public class Materia {
 
     private int creditos;
     private int Peso_mencao;
-    
+
     public void setPeso_mencao(String MENCAO){
         switch(MENCAO){
             default:
@@ -51,11 +55,11 @@ public class Materia {
         this.professor = professor;
     }
 
-    public Horario[] getHorarios() {
+    public ArrayList<Horario> getHorarios() {
         return horarios;
     }
 
-    public void setHorarios(Horario[] horarios) {
+    public void setHorarios(ArrayList<Horario> horarios) {
         this.horarios = horarios;
     }
 

@@ -16,34 +16,35 @@ import android.widget.Toast;
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.utils.Utils;
 
 public class LoginActivity extends AppCompatActivity {
 
     boolean doubleBackToExitPressedOnce = false;
     User user;
+    Utils utils = new Utils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*
-        primeiro ele pega o botao do xml da view do app e atrela ele a uma variavel
-        depois ele adiciona um listener para esse botao (evento de click)
+        /**
+        * primeiro ele pega o botao do xml da view do app e atrela ele a uma variavel
+        * depois ele adiciona um listener para esse botao (evento de click)
         */
 
         Button loginBtn = (Button) findViewById(R.id.loginButton);
         loginBtn.setOnClickListener(login);
     }
 
-    /*
-    no listener ele pega os valores dos campos da tela de login
-    depois ele verifica se foi preenchido
-        caso nao seja ele mostra uma mensagem por campo respectivo vazio
-        caso esteja preenchido errado ele tambem mostra uma mensagem avisanso
-    se estiver tudo certo ele cria um objeto de usuario e chama a funcao de autenticacao
-    se ela retornar valida ele vai pra "home", se nao ele avisa que os dados estao errados
-
+    /**
+    * no listener ele pega os valores dos campos da tela de login
+    * depois ele verifica se foi preenchido
+    *    caso nao seja ele mostra uma mensagem por campo respectivo vazio
+    *    caso esteja preenchido errado ele tambem mostra uma mensagem avisanso
+    * se estiver tudo certo ele cria um objeto de usuario e chama a funcao de autenticacao
+    * se ela retornar valida ele vai pra "home", se nao ele avisa que os dados estao errados
     */
     View.OnClickListener login = new View.OnClickListener() {
         @Override
@@ -61,9 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         String password = String.valueOf(passwordField.getText());
 
-                        user = new User(matricula);
-                        user.setSenha(password);
-                        user.setNome("NOME NAO EDITADO AINDA");
+                        user = utils.mockUser(matricula, password);
 
                         if (user.login(getApplicationContext())) {
                             homeAct.putExtra("user", user);

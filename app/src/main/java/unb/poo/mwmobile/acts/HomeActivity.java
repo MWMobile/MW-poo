@@ -44,13 +44,12 @@ public class HomeActivity extends AppCompatActivity {
 
         nome.setText(user.getNome());
         matricula.setText(String.valueOf(user.getMatricula()));
-        iraFormat.setText(String.format("IRA: %.4f",user.getIRA()));
+        iraFormat.setText(String.format("IRA: %.4f", user.getIRA()));
 
         GridView gridView = (GridView) findViewById(R.id.gradeHoraria);
 
-
         Utils utils = new Utils();
-        utils.gradePopulate(gridView, getApplicationContext());
+        utils.gradePopulate(gridView, getApplicationContext(), user);
     }
 
     @Override

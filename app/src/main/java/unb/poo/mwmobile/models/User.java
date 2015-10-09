@@ -21,10 +21,18 @@ public class User implements Parcelable{
     private final int matricula;
     private String senha;
     private String nome;
-    private String curso;
+    private int curso;
+    private double IRA;
+
+  /* em vez de setar uma array list e tal, o certo seria ter um addMateria na arraylist
+  * nessa estrutura ele deve poder procurar materias na lista, adicionar e remover
+  * TODO criar um addMateria ou addMateriaCursada
+  * TODO criar um delMateria ou delMateriaCursada
+  * TODO criar um getMateria ou getMateriaCursada
+  * */
+
     private ArrayList<Materia> materias = new ArrayList<Materia>();
     private ArrayList<MateriaCursada> historico = new ArrayList<MateriaCursada>();
-    private double IRA;
 
 
 
@@ -32,14 +40,15 @@ public class User implements Parcelable{
         this.matricula = matricula;
     }
 
-    public User(Parcel in) {                                                                        // Por enquanto, só transmite o nome, o IRA e a matrícula do usuário.
+    // Por enquanto, só transmite o nome, o IRA e a matrícula do usuário.
+    public User(Parcel in) {
         this.matricula = in.readInt();
         this.nome = in.readString();
         this.IRA = in.readDouble();
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(Parcel dest, int flags){
         dest.writeInt(this.getMatricula());
         dest.writeString(this.getNome());
         dest.writeDouble(this.getIRA());
@@ -65,11 +74,11 @@ public class User implements Parcelable{
         this.nome = nome;
     }
 
-    public String getCurso() {
+    public int getCurso() {
         return curso;
     }
 
-    public void setCurso(String curso) {
+    public void setCurso(int curso) {
         this.curso = curso;
     }
 
@@ -86,6 +95,7 @@ public class User implements Parcelable{
     }
 
     public void setHistorico(ArrayList<MateriaCursada> historico) {
+        setIRA();
         this.historico = historico;
     }
 
@@ -93,19 +103,28 @@ public class User implements Parcelable{
         return IRA;
     }
 
-    public void setIRA() {
-    /**
-     * DTb:disciplinas OBRIGATORIAS trancadas
-     * DTp:disciplinas OPTATIVAS trancadas
-     * DC: disciplinas matriculadas
-     * Pi:peso da mencao
-     * Pei:Periodo em que uma disciplina foi cursada
-     * CRi:créditos de uma disciplina
-     */
-        double constante,disc,variavel=0,total;
-        int Peso_mencao,Periodo_disciplina,Credito_disciplina;
+    private void setIRA() {
+        /**
+        * DTb:disciplinas OBRIGATORIAS trancadas
+        * DTp:disciplinas OPTATIVAS trancadas
+        * DC: disciplinas matriculadas
+        * Pi:peso da mencao
+        * Pei:Periodo em que uma disciplina foi cursada
+        * CRi:créditos de uma disciplina
+        */
+        double constante;
+        double disc;
+        double variavel = 0;
+
+        int Peso_mencao;
+        int Periodo_disciplina;
+        int Credito_disciplina;
+
          //--------conta alguns parametros das disciplinas
-        int DTb = 0, DTp = 0, DC;
+        int DTb = 0;
+        int DTp = 0;
+        int DC;
+
         for (MateriaCursada materia : historico) {
             if (materia.obrigatoriaTrancada()) {
                 DTp++;
@@ -114,23 +133,27 @@ public class User implements Parcelable{
                 DTb++;
             }
         }
-                DC=historico.size();
-                constante=1-((0.6*DTb+0.4D*DTp)/DC);
+
+        DC = historico.size();
+        constante = 1 - ((0.6 * DTb + 0.4D * DTp)/DC);
         //-----------------------------------------
         for(MateriaCursada materia : historico){
-                Peso_mencao=materia.getPeso_mencao();
-                Periodo_disciplina=materia.getPeriodoCursado();
-                Credito_disciplina=materia.getCreditos();
-                disc=(Periodo_disciplina*Peso_mencao*Credito_disciplina)/(Credito_disciplina*Periodo_disciplina);
-                variavel=variavel+disc;
+            Peso_mencao = materia.getPeso_mencao();
+            Periodo_disciplina = materia.getPeriodoCursado();
+            Credito_disciplina = materia.getCreditos();
+
+            disc = (Periodo_disciplina * Peso_mencao * Credito_disciplina);
+            disc /= (Credito_disciplina * Periodo_disciplina);
+
+            variavel += disc;
         }
-        total=constante*variavel;
-        this.IRA = total;
+
+        this.IRA = constante * variavel;
     }
 
     public boolean login(Context context){
 
-//        Aqui viria a autenticacao com o MW
+        // TODO autenticacao com o MW
         User fakeUser = new User(123456789);
         fakeUser.setSenha("1234");
 
