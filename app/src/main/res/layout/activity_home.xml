@@ -29,4 +29,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="15dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="IRA: 0.00000"
+        android:id="@+id/iraField"
+        android:layout_alignRight="@+id/gradeHoraria"
+        android:layout_alignEnd="@+id/gradeHoraria"
+        android:layout_alignTop="@+id/matriculaField" />
+
 </RelativeLayout>

@@ -40,9 +40,11 @@ public class HomeActivity extends AppCompatActivity {
 
         TextView nome = (TextView) findViewById(R.id.nomeField);
         TextView matricula = (TextView) findViewById(R.id.matriculaField);
+        TextView iraFormat = (TextView) findViewById(R.id.iraField);
 
         nome.setText(user.getNome());
         matricula.setText(String.valueOf(user.getMatricula()));
+        iraFormat.setText(String.format("IRA: %.4f",user.getIRA()));
 
         GridView gridView = (GridView) findViewById(R.id.gradeHoraria);
 
