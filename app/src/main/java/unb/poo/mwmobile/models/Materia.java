@@ -10,8 +10,7 @@ public class Materia {
     private String turma;
     private String nome;
     private String sala;
-    private int Periodo_cursado;
-    private boolean OBRIGATORIA,TRANCADA=false;
+
     private int creditos;
     private int Peso_mencao;
     
@@ -42,21 +41,7 @@ public class Materia {
         return Peso_mencao;
     }
 
-    public void setObrigatoria(boolean OBR){
-        this.OBRIGATORIA=OBR;
-    }
-    public boolean getObrigatoria(){return OBRIGATORIA;}
-    public void setPeriodo(int Periodo){
-        this.Periodo_cursado=Periodo;
-    }
-    public int getPeriodo_cursado(){return Periodo_cursado;}
-    
-    public void trancar(){
-        this.TRANCADA=true;
-    }
-    public boolean getTrancada(){
-        return TRANCADA;
-    }
+
     
     public Professor getProfessor() {
         return professor;
@@ -114,12 +99,6 @@ public class Materia {
         this.creditos = creditos;
     }
 
-    public boolean obrigatoriaTrancada() {
-        return (OBRIGATORIA && TRANCADA);
-    }
 
-    public boolean optativaTrancada() {
-        return (!OBRIGATORIA && TRANCADA);
-    }
 
 }

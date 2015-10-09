@@ -32,9 +32,17 @@ public class User implements Parcelable{
         this.matricula = matricula;
     }
 
-    public User(Parcel in) {
+    public User(Parcel in) {                                                                        // Por enquanto, só transmite o nome, o IRA e a matrícula do usuário.
         this.matricula = in.readInt();
-        this.nome = in.readString();        // Por enquanto, só transmite o nome e a matrícula do usuário.
+        this.nome = in.readString();
+        this.IRA = in.readDouble();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.getMatricula());
+        dest.writeString(this.getNome());
+        dest.writeDouble(this.getIRA());
     }
 
     public int getMatricula() {
@@ -111,7 +119,7 @@ public class User implements Parcelable{
         //-----------------------------------------
         for(MateriaCursada materia : historico){
                 Peso_mencao=materia.getPeso_mencao();
-                Periodo_disciplina=materia.getPeriodo_cursado();
+                Periodo_disciplina=materia.getPeriodoCursado();
                 Credito_disciplina=materia.getCreditos();
                 disc=(Periodo_disciplina*Peso_mencao*Credito_disciplina)/(Credito_disciplina*Periodo_disciplina);
                 variavel=variavel+disc;
@@ -145,12 +153,6 @@ public class User implements Parcelable{
     @Override
     public int describeContents() {
         return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.getMatricula());
-        dest.writeString(this.getNome());
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
