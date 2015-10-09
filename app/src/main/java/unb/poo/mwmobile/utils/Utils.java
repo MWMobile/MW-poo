@@ -22,24 +22,14 @@ import unb.poo.mwmobile.models.User;
  */
 public class Utils {
 
+
+
     public void gradePopulate(GridView gridView, final Context context, User user) {
-        Materia[] materias = new Materia[15];
-        for(int i=0; i< 15; i++) {
-            materias[i] = new Materia();
-            materias[i].setNome("materia " + String.valueOf(i));
-        }
+
+//        TODO usar user.getMaterias().get(i).getNome() para pegar o nome da materia do usuario
 
 
-//        TODO Usar um ArrayList<Materia> no adapter
-//        TODO user user.getMaterias().get(i).getNome() para pegar o nome da materia do usuario
-
-        String[] nomeMaterias = new String[user.getMaterias().size()];
-        for (int i = 0; i < user.getMaterias().size(); i++) {
-            nomeMaterias[i] = materias[i].getNome();
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, nomeMaterias);
-
+        MateriaAdapter adapter = new MateriaAdapter(context,user);
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
