@@ -114,4 +114,12 @@ public class Materia {
         this.creditos = creditos;
     }
 
+    public boolean obrigatoriaTrancada() {
+        return (OBRIGATORIA && TRANCADA);
+    }
+
+    public boolean optativaTrancada() {
+        return (!OBRIGATORIA && TRANCADA);
+    }
+
 }

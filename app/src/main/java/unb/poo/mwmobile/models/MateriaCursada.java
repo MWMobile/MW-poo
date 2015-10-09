@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * Mais tarde as notas serão utilizadas para o cálculo de IRA.
  */
 public class MateriaCursada extends Materia{
+    private int periodoCursado;                                                                     //Período em que a matéra foi cursada
     private int reprovacoes;                                                                        //Número de vezes que o aluno reprovou
     private ArrayList<String> mencao = new ArrayList<>();                                           //Lista de Menções (uma menção única caso o aluno não tenha reprovado)
     private int avaliacaoMateria;                                                                   //Avaliação numérica de 0 a 100% da qualidade da matéria(envolve desde
@@ -42,5 +43,11 @@ public class MateriaCursada extends Materia{
     }
 
 
+    public int getPeriodoCursado() {
+        return periodoCursado;
+    }
 
+    public void setPeriodoCursado(int periodoCursado) {
+        this.periodoCursado = periodoCursado;
+    }
 }
