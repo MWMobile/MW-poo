@@ -26,9 +26,9 @@ public class User implements Parcelable{
 
   /* em vez de setar uma array list e tal, o certo seria ter um addMateria na arraylist
   * nessa estrutura ele deve poder procurar materias na lista, adicionar e remover
-  * TODO criar um addMateria ou addMateriaCursada
+  * TODO criar um addMateria ou addMateriaCursada (revisar os métodos criados)
   * TODO criar um delMateria ou delMateriaCursada
-  * TODO criar um getMateria ou getMateriaCursada
+  * TODO criar um getMateria ou getMateriaCursada (revisar os métodos criados)
   * */
 
     private ArrayList<Materia> materias = new ArrayList<Materia>();
@@ -187,4 +187,32 @@ public class User implements Parcelable{
             return new User[size];
         }
     };
+
+    public void addMateria(Materia materia) {
+        materias.add(materia);
+    }
+
+    public void addMateriaCursada(MateriaCursada cursada) {
+        historico.add(cursada);
+    }
+
+    public Materia getMateria(String nomeMateria) {
+        Materia ref = null;
+        for (int i = 0; i < materias.size(); i++) {
+            if (materias.get(i).getNome().equals(nomeMateria)) {
+                ref = materias.get(i);
+            }
+        }
+        return ref;
+    }
+
+    public MateriaCursada getMateriaCursada(String nomeMateria) {
+        MateriaCursada ref = null;
+        for (int i = 0; i < historico.size(); i++) {
+            if (historico.get(i).getNome().equals(nomeMateria)) {
+                ref = historico.get(i);
+            }
+        }
+        return ref;
+    }
 }
