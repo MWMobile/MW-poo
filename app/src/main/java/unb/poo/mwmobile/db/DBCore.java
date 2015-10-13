@@ -25,6 +25,7 @@ public class DBCore extends SQLiteOpenHelper {
 //    private Materia[] materias;
 //    private Materia[] historico;
 //    private double IRA;
+//    TODO adicionar também curso e período
 
     public DBCore(Context context){
         super(context, NOME_DB, null, VERSAO_DB);

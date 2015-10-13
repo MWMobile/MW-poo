@@ -21,7 +21,8 @@ public class User implements Parcelable{
     private final int matricula;
     private String senha;
     private String nome;
-    private int curso;
+    private String curso;
+    private int periodo;
     private double IRA;
 
   /* em vez de setar uma array list e tal, o certo seria ter um addMateria na arraylist
@@ -45,6 +46,12 @@ public class User implements Parcelable{
         this.matricula = in.readInt();
         this.nome = in.readString();
         this.IRA = in.readDouble();
+        this.curso = in.readString();
+        this.periodo = in.readInt();
+        this.materias = new ArrayList<>();
+        this.historico = new ArrayList<>();
+        in.readList(this.materias,getClass().getClassLoader());
+        in.readList(this.historico,getClass().getClassLoader());
     }
 
     @Override
@@ -52,6 +59,10 @@ public class User implements Parcelable{
         dest.writeInt(this.getMatricula());
         dest.writeString(this.getNome());
         dest.writeDouble(this.getIRA());
+        dest.writeString(this.getCurso());
+        dest.writeInt(this.getPeriodo());
+        dest.writeList(this.materias);
+        dest.writeList(this.historico);
     }
 
     public int getMatricula() {
@@ -74,11 +85,11 @@ public class User implements Parcelable{
         this.nome = nome;
     }
 
-    public int getCurso() {
+    public String getCurso() {
         return curso;
     }
 
-    public void setCurso(int curso) {
+    public void setCurso(String curso) {
         this.curso = curso;
     }
 
@@ -214,5 +225,13 @@ public class User implements Parcelable{
             }
         }
         return ref;
+    }
+
+    public int getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
     }
 }
