@@ -26,8 +26,6 @@ public class Utils {
 
     public void gradePopulate(GridView gridView, final Context context, User user) {
 
-//        TODO usar user.getMaterias().get(i).getNome() para pegar o nome da materia do usuario
-
 
         MateriaAdapter adapter = new MateriaAdapter(context,user);
         gridView.setAdapter(adapter);
