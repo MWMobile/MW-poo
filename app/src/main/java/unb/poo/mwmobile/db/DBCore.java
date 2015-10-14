@@ -20,6 +20,7 @@ public class DBCore extends SQLiteOpenHelper {
     private static final String KEY_MATRICULA = "matricula";
     private static final String KEY_SENHA = "senha";
     private static final String KEY_NOME = "nome";
+    private static SQLiteDatabase db;
 
 //    Campos para adicionar
 //    private Materia[] materias;
