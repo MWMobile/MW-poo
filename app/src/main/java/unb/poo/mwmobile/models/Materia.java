@@ -22,42 +22,42 @@ public class Materia implements Parcelable {
 
     }
     public Materia(Parcel in) {
-        this.professor = new Professor(in.readString());
-        this.codigo = in.readInt();
-        this.turma = in.readString();
-        this.nome = in.readString();
-        this.sala = in.readString();
-        this.creditos = in.readInt();
+        professor = new Professor(in.readString());
+        codigo = in.readInt();
+        turma = in.readString();
+        nome = in.readString();
+        sala = in.readString();
+        creditos = in.readInt();
         int tam = in.readInt();
         int[] horarioHora = new int[tam];
         int[] horarioDia = new int[tam];
         in.readIntArray(horarioHora);
         in.readIntArray(horarioDia);
-        this.horarios = new ArrayList<>();
+        horarios = new ArrayList<>();
         for (int i = 0; i < tam; i++) {
-            this.horarios.add(new Horario(horarioHora[i],horarioDia[i]));
+            horarios.add(new Horario(horarioHora[i],horarioDia[i]));
         }
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (this.professor != null) {
-            dest.writeString(this.professor.getNome());
+        if (professor != null) {
+            dest.writeString(professor.getNome());
         }
         else {
             dest.writeString("A DESIGNAR");
         }
-        dest.writeInt(this.codigo);
-        dest.writeString(this.turma);
-        dest.writeString(this.nome);
-        dest.writeString(this.sala);
-        dest.writeInt(this.creditos);
-        if (this.horarios == null) {
-            this.horarios = new ArrayList<>();
+        dest.writeInt(codigo);
+        dest.writeString(turma);
+        dest.writeString(nome);
+        dest.writeString(sala);
+        dest.writeInt(creditos);
+        if (horarios == null) {
+            horarios = new ArrayList<>();
         }
-        int[] horarioHora = new int[this.horarios.size()];
-        int[] horarioDia = new int[this.horarios.size()];
-        dest.writeInt(this.horarios.size());
+        int[] horarioHora = new int[horarios.size()];
+        int[] horarioDia = new int[horarios.size()];
+        dest.writeInt(horarios.size());
         int i = 0;
         for (Horario hora : horarios) {
             horarioHora[i] = hora.getHora();

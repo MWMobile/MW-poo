@@ -186,7 +186,7 @@ public class UserTest extends AndroidTestCase {
 
         parcel.setDataPosition(0);
 
-        User newUser = User.CREATOR.createFromParcel(parcel);
+        User newUser = new User(parcel);
 
         assertEquals(u.getNome(),newUser.getNome());
         assertEquals(u.getCurso(),newUser.getCurso());

@@ -46,29 +46,29 @@ public class User implements Parcelable{
 
     // Por enquanto, só transmite o nome, o IRA e a matrícula do usuário.
     public User(Parcel in) {
-        this.nome = in.readString();
-        this.matricula = in.readInt();
-        this.senha = in.readString();
-        this.IRA = in.readDouble();
-        this.curso = in.readString();
-        this.periodo = in.readInt();
-        this.materias = new ArrayList<>();
-        this.historico = new ArrayList<>();
+        nome = in.readString();
+        matricula = in.readInt();
+        senha = in.readString();
+        IRA = in.readDouble();
+        curso = in.readString();
+        periodo = in.readInt();
+        materias = new ArrayList<>();
+        historico = new ArrayList<>();
 
-        in.readTypedList(this.materias,Materia.CREATOR);
-        in.readTypedList(this.historico, MateriaCursada.CREATOR);
+        in.readTypedList(materias,Materia.CREATOR);
+        in.readTypedList(historico, MateriaCursada.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(this.nome);
-        dest.writeInt(this.matricula);
-        dest.writeString(this.senha);
-        dest.writeDouble(this.IRA);
-        dest.writeString(this.curso);
-        dest.writeInt(this.periodo);
-        dest.writeTypedList(this.materias);
-        dest.writeTypedList(this.historico);
+        dest.writeString(nome);
+        dest.writeInt(matricula);
+        dest.writeString(senha);
+        dest.writeDouble(IRA);
+        dest.writeString(curso);
+        dest.writeInt(periodo);
+        dest.writeTypedList(materias);
+        dest.writeTypedList(historico);
     }
 
     public int getMatricula() {

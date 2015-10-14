@@ -33,38 +33,38 @@ public class MateriaCursada extends Materia implements Parcelable {
     }
 
     public MateriaCursada(Parcel in) {
-        //super(in);
+        super(in);
 
-        this.professor = new Professor(in.readString());
-        this.codigo = in.readInt();
-        this.turma = in.readString();
-        this.nome = in.readString();
-        this.sala = in.readString();
-        this.creditos = in.readInt();
+        /*professor = new Professor(in.readString());
+        codigo = in.readInt();
+        turma = in.readString();
+        nome = in.readString();
+        sala = in.readString();
+        creditos = in.readInt();
         int tam = in.readInt();
         int[] horarioHora = new int[tam];
         int[] horarioDia = new int[tam];
         in.readIntArray(horarioHora);
         in.readIntArray(horarioDia);
-        this.horarios = new ArrayList<>();
+        horarios = new ArrayList<>();
         for (int i = 0; i < tam; i++) {
-            this.horarios.add(new Horario(horarioHora[i],horarioDia[i]));
-        }
+            horarios.add(new Horario(horarioHora[i],horarioDia[i]));
+        }*/
 
-        this.obrigatoria = Boolean.parseBoolean(in.readString());
-        this.trancada = Boolean.parseBoolean(in.readString());
-        this.periodoTerminado = in.readInt();
-        this.reprovacoes = in.readInt();
-        this.avaliacaoMateria = in.readInt();
-        this.pesoMencao = in.readInt();
-        this.mencao = new ArrayList<String>();
-        in.readStringList(this.mencao);
+        obrigatoria = Boolean.parseBoolean(in.readString());
+        trancada = Boolean.parseBoolean(in.readString());
+        periodoTerminado = in.readInt();
+        reprovacoes = in.readInt();
+        avaliacaoMateria = in.readInt();
+        pesoMencao = in.readInt();
+        mencao = new ArrayList<String>();
+        in.readStringList(mencao);
         int nPer = in.readInt();
         int[] pArray = new int[nPer];
         in.readIntArray(pArray);
-        this.periodosCursados = new ArrayList<>();
+        periodosCursados = new ArrayList<>();
         for (int i = 0; i < nPer; i++) {
-            this.periodosCursados.add(new Integer(pArray[i]));
+            periodosCursados.add(new Integer(pArray[i]));
         }
     }
 
@@ -87,9 +87,9 @@ public class MateriaCursada extends Materia implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest,int flags) {
-        //super.writeToParcel(dest, flags);
+        super.writeToParcel(dest, flags);
 
-        if (this.professor != null) {
+        /*if (this.professor != null) {
             dest.writeString(this.professor.getNome());
         }
         else {
@@ -113,18 +113,18 @@ public class MateriaCursada extends Materia implements Parcelable {
             i++;
         }
         dest.writeIntArray(horarioHora);
-        dest.writeIntArray(horarioDia);
+        dest.writeIntArray(horarioDia);*/
 
-        dest.writeString(Boolean.toString(this.obrigatoria));
-        dest.writeString(Boolean.toString(this.trancada));
-        dest.writeInt(this.periodoTerminado);
-        dest.writeInt(this.reprovacoes);
-        dest.writeInt(this.avaliacaoMateria);
-        dest.writeInt(this.pesoMencao);
-        dest.writeStringList(this.mencao);
+        dest.writeString(Boolean.toString(obrigatoria));
+        dest.writeString(Boolean.toString(trancada));
+        dest.writeInt(periodoTerminado);
+        dest.writeInt(reprovacoes);
+        dest.writeInt(avaliacaoMateria);
+        dest.writeInt(pesoMencao);
+        dest.writeStringList(mencao);
         int nPer = 0;
-        if (this.periodosCursados != null) {
-            nPer = this.periodosCursados.size();
+        if (periodosCursados != null) {
+            nPer = periodosCursados.size();
         }
         int[] perArray = new int[nPer];
         dest.writeInt(nPer);
