@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import unb.poo.mwmobile.models.Professor;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,9 +13,15 @@ import static org.junit.Assert.*;
  */
 public class ProfessorTest {
 
+    Professor p;
+
+    String nome;
+
     @Before
     public void setUp() throws Exception {
+        nome = "Rodrigo Bonifacio";
 
+        p = new Professor(nome);
     }
 
     @After
@@ -23,6 +31,6 @@ public class ProfessorTest {
 
     @Test
     public void testGetNome() throws Exception {
-
+        assertEquals(nome, p.getNome());
     }
 }

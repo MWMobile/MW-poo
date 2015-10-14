@@ -16,37 +16,7 @@ public class Materia {
     protected String sala;
 
     protected int creditos;
-    protected int Peso_mencao;
 
-    public void setPeso_mencao(String MENCAO){
-        switch(MENCAO){
-            default:
-            case "SR":
-                this.Peso_mencao  = 0;
-                break;
-			case "II":
-                this.Peso_mencao  = 1;
-                break;
-			case "MI":
-                this.Peso_mencao  = 2;
-                break;
-			case "MM":
-                this.Peso_mencao  = 3;
-                break;
-			case "MS":
-                this.Peso_mencao  = 4;
-                break;
-			case "SS":
-                this.Peso_mencao  = 5;
-                break;
-        }
-    }
-    public int getPeso_mencao(){
-        return Peso_mencao;
-    }
-
-
-    
     public Professor getProfessor() {
         return professor;
     }

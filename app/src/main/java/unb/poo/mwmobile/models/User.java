@@ -149,7 +149,7 @@ public class User implements Parcelable{
         constante = 1 - ((0.6 * DTb + 0.4D * DTp)/DC);
         //-----------------------------------------
         for(MateriaCursada materia : historico){
-            Peso_mencao = materia.getPeso_mencao();
+            Peso_mencao = materia.getPesoMencao();
             Periodo_disciplina = materia.getPeriodoCursado();
             Credito_disciplina = materia.getCreditos();
 

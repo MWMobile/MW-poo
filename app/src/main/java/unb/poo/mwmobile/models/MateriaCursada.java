@@ -12,15 +12,44 @@ import java.util.ArrayList;
  * Mais tarde as notas serão utilizadas para o cálculo de IRA.
  */
 public class MateriaCursada extends Materia{
+
+    private ArrayList<String> mencao = new ArrayList<>();                                           //Lista de Menções (uma menção única caso o aluno não tenha reprovado)
+    private ArrayList<Integer> periodosCursados = new ArrayList<>();                                //Períodos em que a matéria foi cursada (em caso de reprovação)
+
     private boolean obrigatoria;                                                                    // Boolean que checa a obrigatoriedade da matéria
     private boolean trancada = false;                                                               // Verifica se a matéria foi trancada.
-    private ArrayList<Integer> periodosCursados = new ArrayList<>();                                //Períodos em que a matéria foi cursada (em caso de reprovação)
     private int periodoTerminado;                                                                   //Período em que a matéria foi concluída
     private int reprovacoes;                                                                        //Número de vezes que o aluno reprovou
-    private ArrayList<String> mencao = new ArrayList<>();                                           //Lista de Menções (uma menção única caso o aluno não tenha reprovado)
     private int avaliacaoMateria;                                                                   //Avaliação numérica de 0 a 100% da qualidade da matéria(envolve desde
-                                                                                                    // ementa e professor até horário.
+    private int pesoMencao;
 
+    public void setPesoMencao(String MENCAO){
+        switch(MENCAO){
+            default:
+            case "SR":
+                this.pesoMencao = 0;
+                break;
+            case "II":
+                this.pesoMencao = 1;
+                break;
+            case "MI":
+                this.pesoMencao = 2;
+                break;
+            case "MM":
+                this.pesoMencao = 3;
+                break;
+            case "MS":
+                this.pesoMencao = 4;
+                break;
+            case "SS":
+                this.pesoMencao = 5;
+                break;
+        }
+    }
+
+    public int getPesoMencao(){
+        return pesoMencao;
+    }
 
     public int getReprovacoes() {
         return reprovacoes;
@@ -82,4 +111,5 @@ public class MateriaCursada extends Materia{
     public boolean getTrancada(){
         return trancada;
     }
+
 }
