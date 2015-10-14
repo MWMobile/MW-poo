@@ -193,9 +193,10 @@ public class UserTest extends AndroidTestCase {
         assertEquals(u.getIRA(),newUser.getIRA());
         assertEquals(u.getMatricula(),newUser.getMatricula());
         assertEquals(u.getPeriodo(),newUser.getPeriodo());
-        assertNotNull(newUser.getHistorico());
-        assertTrue(u.getHistorico().size() > 0);
-        assertTrue(newUser.getHistorico().size() > 0);
+        assertEquals(u.getSenha(),newUser.getSenha());
+        assertNotNull(newUser.getMateria("POO"));
+        assertNotNull(newUser.getMateriaCursada("ED"));
+        assertEquals(newUser.getMateria("POO").getProfessor().getNome(),"Rodrigo Bonifacio");
     }
 
 }

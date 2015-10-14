@@ -56,7 +56,7 @@ public class User implements Parcelable{
         this.historico = new ArrayList<>();
 
         in.readTypedList(this.materias,Materia.CREATOR);
-        in.readTypedList(this.historico,MateriaCursada.CREATOR);
+        in.readTypedList(this.historico, MateriaCursada.CREATOR);
     }
 
     @Override
@@ -225,9 +225,9 @@ public class User implements Parcelable{
 
     public MateriaCursada getMateriaCursada(String nomeMateria) {
         MateriaCursada ref = null;
-        for (int i = 0; i < historico.size(); i++) {
-            if (historico.get(i).getNome().equals(nomeMateria)) {
-                ref = historico.get(i);
+        for (MateriaCursada auxiliar : historico) {
+            if (auxiliar.getNome().equals(nomeMateria)) {
+                ref = auxiliar;
             }
         }
         return ref;
