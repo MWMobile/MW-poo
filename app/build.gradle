@@ -6,6 +6,7 @@ android {
 
     defaultConfig {
         applicationId "unb.poo.mwmobile"
+        testApplicationId "unb.poo.mwmobileTest"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
