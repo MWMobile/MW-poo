@@ -33,7 +33,24 @@ public class MateriaCursada extends Materia implements Parcelable {
     }
 
     public MateriaCursada(Parcel in) {
-        super(in);
+        //super(in);
+
+        this.professor = new Professor(in.readString());
+        this.codigo = in.readInt();
+        this.turma = in.readString();
+        this.nome = in.readString();
+        this.sala = in.readString();
+        this.creditos = in.readInt();
+        int tam = in.readInt();
+        int[] horarioHora = new int[tam];
+        int[] horarioDia = new int[tam];
+        in.readIntArray(horarioHora);
+        in.readIntArray(horarioDia);
+        this.horarios = new ArrayList<>();
+        for (int i = 0; i < tam; i++) {
+            this.horarios.add(new Horario(horarioHora[i],horarioDia[i]));
+        }
+
         this.obrigatoria = Boolean.parseBoolean(in.readString());
         this.trancada = Boolean.parseBoolean(in.readString());
         this.periodoTerminado = in.readInt();
@@ -70,7 +87,34 @@ public class MateriaCursada extends Materia implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest,int flags) {
-        super.writeToParcel(dest, flags);
+        //super.writeToParcel(dest, flags);
+
+        if (this.professor != null) {
+            dest.writeString(this.professor.getNome());
+        }
+        else {
+            dest.writeString("A DESIGNAR");
+        }
+        dest.writeInt(this.codigo);
+        dest.writeString(this.turma);
+        dest.writeString(this.nome);
+        dest.writeString(this.sala);
+        dest.writeInt(this.creditos);
+        if (this.horarios == null) {
+            this.horarios = new ArrayList<>();
+        }
+        int[] horarioHora = new int[this.horarios.size()];
+        int[] horarioDia = new int[this.horarios.size()];
+        dest.writeInt(this.horarios.size());
+        int i = 0;
+        for (Horario hora : horarios) {
+            horarioHora[i] = hora.getHora();
+            horarioDia[i] = hora.getDia();
+            i++;
+        }
+        dest.writeIntArray(horarioHora);
+        dest.writeIntArray(horarioDia);
+
         dest.writeString(Boolean.toString(this.obrigatoria));
         dest.writeString(Boolean.toString(this.trancada));
         dest.writeInt(this.periodoTerminado);

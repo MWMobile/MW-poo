@@ -9,6 +9,7 @@ import android.provider.SyncStateContract;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import unb.poo.mwmobile.db.DBCore;
 
@@ -39,33 +40,35 @@ public class User implements Parcelable{
 
     public User(int matricula) {
         this.matricula = matricula;
+        this.materias = new ArrayList<>();
+        this.historico = new ArrayList<>();
     }
 
     // Por enquanto, só transmite o nome, o IRA e a matrícula do usuário.
     public User(Parcel in) {
         this.nome = in.readString();
         this.matricula = in.readInt();
+        this.senha = in.readString();
         this.IRA = in.readDouble();
         this.curso = in.readString();
         this.periodo = in.readInt();
         this.materias = new ArrayList<>();
         this.historico = new ArrayList<>();
-        in.readList(this.materias, Materia.class.getClassLoader());
-        in.readList(this.historico,MateriaCursada.class.getClassLoader());
+
+        in.readTypedList(this.materias,Materia.CREATOR);
+        in.readTypedList(this.historico,MateriaCursada.CREATOR);
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(this.getNome());
-        dest.writeInt(this.getMatricula());
-        dest.writeDouble(this.getIRA());
-        dest.writeString(this.getCurso());
-        dest.writeInt(this.getPeriodo());
-        Log.d("TESTE 1 FEITO", "Tentando materias");
+        dest.writeString(this.nome);
+        dest.writeInt(this.matricula);
+        dest.writeString(this.senha);
+        dest.writeDouble(this.IRA);
+        dest.writeString(this.curso);
+        dest.writeInt(this.periodo);
         dest.writeTypedList(this.materias);
-        Log.d("TESTE 2 FEITO", "Tentando historico");
         dest.writeTypedList(this.historico);
-        Log.d("TESTE 3 FEITO", "Fim do parcel");
     }
 
     public int getMatricula() {
@@ -212,9 +215,9 @@ public class User implements Parcelable{
 
     public Materia getMateria(String nomeMateria) {
         Materia ref = null;
-        for (int i = 0; i < materias.size(); i++) {
-            if (materias.get(i).getNome().equals(nomeMateria)) {
-                ref = materias.get(i);
+        for (Materia iterator : materias) {
+            if (iterator.getNome().equals(nomeMateria)) {
+                ref = iterator;
             }
         }
         return ref;

@@ -182,11 +182,20 @@ public class UserTest extends AndroidTestCase {
     @Test
     public void testWriteToParcel() throws Exception {
         Parcel parcel = Parcel.obtain();
-        Log.d("COMECO DO TESTE", "Testando write to parcel");
         u.writeToParcel(parcel,0);
+
         parcel.setDataPosition(0);
+
         User newUser = User.CREATOR.createFromParcel(parcel);
+
         assertEquals(u.getNome(),newUser.getNome());
+        assertEquals(u.getCurso(),newUser.getCurso());
+        assertEquals(u.getIRA(),newUser.getIRA());
+        assertEquals(u.getMatricula(),newUser.getMatricula());
+        assertEquals(u.getPeriodo(),newUser.getPeriodo());
+        assertNotNull(newUser.getHistorico());
+        assertTrue(u.getHistorico().size() > 0);
+        assertTrue(newUser.getHistorico().size() > 0);
     }
 
 }
