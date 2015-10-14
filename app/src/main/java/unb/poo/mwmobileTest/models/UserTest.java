@@ -17,13 +17,17 @@ public class UserTest extends TestCase {
 
     int matricula = 123456789;
     String senha = "1234";
-    String nome = "John Doe";
+    String nome = "Emanuel B.";
+    String curso = "Engenharia Mecatronica";
+    int periodo = 9;
 
     @Before
     public void setUp() throws Exception {
         u = new User(matricula);
         u.setSenha(senha);
         u.setNome(nome);
+        u.setCurso(curso);
+        u.setPeriodo(periodo);
     }
 
     @After
@@ -67,12 +71,26 @@ public class UserTest extends TestCase {
 
     @Test
     public void testGetCurso() throws Exception {
-
+        assertEquals(curso, u.getCurso());
     }
 
     @Test
     public void testSetCurso() throws Exception {
+        String newCurso = "Design";
+        u.setCurso(newCurso);
+        assertEquals(newCurso, u.getCurso());
+    }
 
+    @Test
+    public void testGetPeriodo() throws Exception {
+        assertEquals(periodo, u.getPeriodo());
+    }
+
+    @Test
+    public void testSetPeriodo() throws Exception {
+        int newPeriodo = 10;
+        u.setPeriodo(newPeriodo);
+        assertEquals(newPeriodo, u.getPeriodo());
     }
 
     @Test
