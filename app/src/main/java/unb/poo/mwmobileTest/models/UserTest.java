@@ -74,7 +74,7 @@ public class UserTest extends AndroidTestCase {
     public void tearDown() throws Exception {
 
     }
-/*
+
     @Test
     public void testGetMatricula() throws Exception {
         assertEquals(matricula, u.getMatricula());
@@ -177,7 +177,7 @@ public class UserTest extends AndroidTestCase {
     @Test
     public void testDescribeContents() throws Exception {
 
-    }*/
+    }
 
     @Test
     public void testWriteToParcel() throws Exception {
