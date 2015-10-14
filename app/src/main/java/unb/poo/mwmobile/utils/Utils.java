@@ -22,24 +22,12 @@ import unb.poo.mwmobile.models.User;
  */
 public class Utils {
 
+
+
     public void gradePopulate(GridView gridView, final Context context, User user) {
-        Materia[] materias = new Materia[15];
-        for(int i=0; i< 15; i++) {
-            materias[i] = new Materia();
-            materias[i].setNome("materia " + String.valueOf(i));
-        }
 
 
-//        TODO Usar um ArrayList<Materia> no adapter
-//        TODO user user.getMaterias().get(i).getNome() para pegar o nome da materia do usuario
-
-        String[] nomeMaterias = new String[user.getMaterias().size()];
-        for (int i = 0; i < user.getMaterias().size(); i++) {
-            nomeMaterias[i] = materias[i].getNome();
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, nomeMaterias);
-
+        MateriaAdapter adapter = new MateriaAdapter(context,user);
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,17 +44,75 @@ public class Utils {
         // TODO atualizar assim que as modificacoes nas arraylist de materias forem feitas
         ArrayList<Materia> materias = new ArrayList<Materia>();
         materias.add(createMockMateria("Programacao Orientada a Objetos", 116795, 4));
+        materias.add(createMockMateria("Elementos de Automacao",170798,4));
+        materias.add(createMockMateria("Robotica Industrial",169641,4));
+        materias.add(createMockMateria("Higiene e Seguranca do Trabalho", 168921, 2));
+        materias.add(createMockMateria("Sistemas Digitais Integrados", 117391, 4));
+        materias.add(createMockMateria("Trabalho de Graduacao 1", 167681, 2));
 
         ArrayList<MateriaCursada> materiasCursadas = new ArrayList<MateriaCursada>();
-        materiasCursadas.add(createMockMateriaCursada("Estrutura de Dados", 116034, 4));
+        materiasCursadas.add(createMockMateriaCursada("Calculo 1",113034,6,"SS",true,1));
+        materiasCursadas.add(createMockMateriaCursada("Fisica 1",118001,4,"MM",true,1));
+        materiasCursadas.add(createMockMateriaCursada("Fisica 1 Experimental",118010,2,"MS",true,1));
+        materiasCursadas.add(createMockMateriaCursada("Computacao Basica",116301,6,"MS",true,1));
+        materiasCursadas.add(createMockMateriaCursada("Quimica Geral Teorica",114626,4,"MS",true,1));
+        materiasCursadas.add(createMockMateriaCursada("Quimica Experimental",114634,2,"MS",true,1));
+        materiasCursadas.add(createMockMateriaCursada("Introducao a Engenharia Mecatronica",168891,2,"MS",false,1));
+
+        materiasCursadas.add(createMockMateriaCursada("Calculo 2",113042,6,"SS",true,2));
+        materiasCursadas.add(createMockMateriaCursada("Fisica 2",118028,4,"MS",true,2));
+        materiasCursadas.add(createMockMateriaCursada("Fisica 2 Experimental",118036,4,"MS",true,2));
+        materiasCursadas.add(createMockMateriaCursada("Desenho Mecanico Assistido por Computador 1",168874,6,"MS",true,2));
+        materiasCursadas.add(createMockMateriaCursada("Probabilidade e Estatistica",115045,6,"MS",true,2));
+        materiasCursadas.add(createMockMateriaCursada("Introducao a Algebra Linear",113093,4,"MM",true,2));
+
+        materiasCursadas.add(createMockMateriaCursada("Calculo 3",113051,6,"SS",true,3));
+        materiasCursadas.add(createMockMateriaCursada("Fisica 3",118044,4,"MM",true,3));
+        materiasCursadas.add(createMockMateriaCursada("Fisica 3 Experimental",118052,4,"MM",true,3));
+        materiasCursadas.add(createMockMateriaCursada("Estruturas de Dados", 116034, 4,"MS",true,3));
+        materiasCursadas.add(createMockMateriaCursada("Mecanica 1",168769,4,"SS",true,3));
+
+        materiasCursadas.add(createMockMateriaCursada("Variavel Complexa 1",113069,6,"SS",true,4));
+        materiasCursadas.add(createMockMateriaCursada("Metodos Matematicos da Fisica 1",113522,6,"SS",false,4));
+        materiasCursadas.add(createMockMateriaCursada("Mecanica dos Materiais 1",169510,4,"MM",true,4));
+        materiasCursadas.add(createMockMateriaCursada("Mecanica 2",168777,4,"MM",true,4));
+        materiasCursadas.add(createMockMateriaCursada("Circuitos Eletricos 1",167011,6,"MS",true,4));
+        materiasCursadas.add(createMockMateriaCursada("Circuitos Digitais",116351,6,"MS",true,4));
+
+        materiasCursadas.add(createMockMateriaCursada("Tecnologia de Fabricacao 1",168831,3,"SS",true,5));
+        materiasCursadas.add(createMockMateriaCursada("Calculo Numerico",113417,4,"SS",false,5));
+        materiasCursadas.add(createMockMateriaCursada("Introducao a Ciencia dos Materiais",0,3,"MM",true,5));
+        materiasCursadas.add(createMockMateriaCursada("Circuitos Eletricos 2",167029,6,"MS",true,5));
+        materiasCursadas.add(createMockMateriaCursada("Transporte de Calor e Massa",168840,4,"MM",true,5));
+        materiasCursadas.add(createMockMateriaCursada("Conversao Eletromecanica de Energia",163627,6,"MM",true,5));
+
+        materiasCursadas.add(createMockMateriaCursada("Analise Dinamica Linear",160041,6,"MS",true,6));
+        materiasCursadas.add(createMockMateriaCursada("Organizacao e Arquitetura de Computadores",116394,4,"SS",true,6));
+        materiasCursadas.add(createMockMateriaCursada("Ciencias do Ambiente",122408,2,"MM",true,6));
+        materiasCursadas.add(createMockMateriaCursada("Tecnologias de Comando Numerico",164399,4,"MS",true,6));
+        materiasCursadas.add(createMockMateriaCursada("Sistemas de Medicao",168742,3,"MS",true,6));
+        materiasCursadas.add(createMockMateriaCursada("Dispositivos e Circuitos Eletronicos",170321,6,"MS",true,6));
+
+        materiasCursadas.add(createMockMateriaCursada("Transmissao de Dados",116424,4,"MM",true,7));
+        materiasCursadas.add(createMockMateriaCursada("Software Basico",116432,4,"SS",true,7));
+        materiasCursadas.add(createMockMateriaCursada("Sistemas Integrados de Manufatura",168912,4,"MS",true,7));
+        materiasCursadas.add(createMockMateriaCursada("Sistemas Hidraulicos e Pneumaticos",168238,4,"MS",true,7));
+        materiasCursadas.add(createMockMateriaCursada("Eletronica de Potencia",169421,6,"MS",false,7));
+        materiasCursadas.add(createMockMateriaCursada("Controle Dinamico",160032,6,"MS",true,7));
+
+        materiasCursadas.add(createMockMateriaCursada("Processamento em Tempo Real",116599,4,"MS",true,8));
+        materiasCursadas.add(createMockMateriaCursada("Organizacao Industrial",181315,4,"MM",true,8));
+        materiasCursadas.add(createMockMateriaCursada("Controle Digital",164887,4,"MS",true,8));
+        materiasCursadas.add(createMockMateriaCursada("Instrumentacao de Controle",167347,4,"MS",true,8));
+        materiasCursadas.add(createMockMateriaCursada("Controle para Automacao",167657,4,"MS",true,8));
 
         User user = new User(matricula);
-
-        user.setNome("John Doe");
+        user.setNome("Emanuel B.");
         user.setSenha(password);
-        user.setCurso(19);
+        user.setCurso("Engenharia Mecatronica");
         user.setMaterias(materias);
         user.setHistorico(materiasCursadas);
+        user.setPeriodo(9);
 
         return user;
     };
@@ -86,7 +132,7 @@ public class Utils {
         return materia;
     }
 
-    private MateriaCursada createMockMateriaCursada(String nome, int codigo, int creditos){
+    private MateriaCursada createMockMateriaCursada(String nome, int codigo, int creditos,String nota,boolean obr,int periodo){
 
         ArrayList<Horario> horarios = new ArrayList<Horario>();
         horarios.add(new Horario(2, 1000));
@@ -100,11 +146,11 @@ public class Utils {
         materia.setHorarios(horarios);
 
         ArrayList<String> mencao = new ArrayList<String>();
-        mencao.add("SS");
+        mencao.add(nota);
         materia.setMencao(mencao);
 
-        materia.setObrigatoria(true);
-        materia.setPeriodoCursado(1);
+        materia.setObrigatoria(obr);
+        materia.setPeriodoCursado(periodo);
         materia.setReprovacoes(0);
 
         return materia;

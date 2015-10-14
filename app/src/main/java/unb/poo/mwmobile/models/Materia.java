@@ -8,15 +8,15 @@ import java.util.ArrayList;
  * Created by sousa on 19/09/2015.
  */
 public class Materia {
-    private Professor professor;
-    private ArrayList<Horario> horarios;
-    private int codigo;
-    private String turma;
-    private String nome;
-    private String sala;
+    protected Professor professor;
+    protected ArrayList<Horario> horarios;
+    protected int codigo;
+    protected String turma;
+    protected String nome;
+    protected String sala;
 
-    private int creditos;
-    private int Peso_mencao;
+    protected int creditos;
+    protected int Peso_mencao;
 
     public void setPeso_mencao(String MENCAO){
         switch(MENCAO){

@@ -21,14 +21,15 @@ public class User implements Parcelable{
     private final int matricula;
     private String senha;
     private String nome;
-    private int curso;
+    private String curso;
+    private int periodo;
     private double IRA;
 
   /* em vez de setar uma array list e tal, o certo seria ter um addMateria na arraylist
   * nessa estrutura ele deve poder procurar materias na lista, adicionar e remover
-  * TODO criar um addMateria ou addMateriaCursada
+  * TODO criar um addMateria ou addMateriaCursada (revisar os métodos criados)
   * TODO criar um delMateria ou delMateriaCursada
-  * TODO criar um getMateria ou getMateriaCursada
+  * TODO criar um getMateria ou getMateriaCursada (revisar os métodos criados)
   * */
 
     private ArrayList<Materia> materias = new ArrayList<Materia>();
@@ -45,6 +46,12 @@ public class User implements Parcelable{
         this.matricula = in.readInt();
         this.nome = in.readString();
         this.IRA = in.readDouble();
+        this.curso = in.readString();
+        this.periodo = in.readInt();
+        this.materias = new ArrayList<>();
+        this.historico = new ArrayList<>();
+        in.readList(this.materias,getClass().getClassLoader());
+        in.readList(this.historico,getClass().getClassLoader());
     }
 
     @Override
@@ -52,6 +59,10 @@ public class User implements Parcelable{
         dest.writeInt(this.getMatricula());
         dest.writeString(this.getNome());
         dest.writeDouble(this.getIRA());
+        dest.writeString(this.getCurso());
+        dest.writeInt(this.getPeriodo());
+        dest.writeList(this.materias);
+        dest.writeList(this.historico);
     }
 
     public int getMatricula() {
@@ -74,11 +85,11 @@ public class User implements Parcelable{
         this.nome = nome;
     }
 
-    public int getCurso() {
+    public String getCurso() {
         return curso;
     }
 
-    public void setCurso(int curso) {
+    public void setCurso(String curso) {
         this.curso = curso;
     }
 
@@ -187,4 +198,40 @@ public class User implements Parcelable{
             return new User[size];
         }
     };
+
+    public void addMateria(Materia materia) {
+        materias.add(materia);
+    }
+
+    public void addMateriaCursada(MateriaCursada cursada) {
+        historico.add(cursada);
+    }
+
+    public Materia getMateria(String nomeMateria) {
+        Materia ref = null;
+        for (int i = 0; i < materias.size(); i++) {
+            if (materias.get(i).getNome().equals(nomeMateria)) {
+                ref = materias.get(i);
+            }
+        }
+        return ref;
+    }
+
+    public MateriaCursada getMateriaCursada(String nomeMateria) {
+        MateriaCursada ref = null;
+        for (int i = 0; i < historico.size(); i++) {
+            if (historico.get(i).getNome().equals(nomeMateria)) {
+                ref = historico.get(i);
+            }
+        }
+        return ref;
+    }
+
+    public int getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(int periodo) {
+        this.periodo = periodo;
+    }
 }

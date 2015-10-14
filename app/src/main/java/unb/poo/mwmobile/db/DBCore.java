@@ -26,6 +26,7 @@ public class DBCore extends SQLiteOpenHelper {
 //    private Materia[] materias;
 //    private Materia[] historico;
 //    private double IRA;
+//    TODO adicionar também curso e período
 
     public DBCore(Context context){
         super(context, NOME_DB, null, VERSAO_DB);
@@ -128,25 +129,28 @@ public class DBCore extends SQLiteOpenHelper {
     }
 
 //    UPDATE
-//    ...?
-    public void updUser(User user){}
+//    faz uma atualizacao do banco de dados de acordo com a escolha do controller
+//    como matricula e uma chave que nao se muda, sera usado ela como forma de achar o usuario
+//    assim, o usuario podera alterar sua senha (caso queira) e seu nome (caso errado)
+//    em breve sera adicionado o update relacionado as materias
+    public void updUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String update = "UPDATE " + TABLE_USER + " SET " + KEY_SENHA + " = " + user.getSenha() +
+                " , " + KEY_NOME + " = " + user.getNome() + " WHERE " + KEY_MATRICULA +
+                " = " + user.getMatricula();
+
+        db.execSQL(update);
+    }
 
 //    DELETE
-    public void delUser(User user){}
+    public void delUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String deletar = "DELETE FROM " + TABLE_USER + " WHERE " + KEY_MATRICULA + " = "
+                + user.getMatricula();
+
+        db.execSQL(deletar);
+    }
 //    ========================================================================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
