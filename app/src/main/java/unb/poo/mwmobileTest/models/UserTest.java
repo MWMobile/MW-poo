@@ -183,6 +183,7 @@ public class UserTest extends AndroidTestCase {
 
     }
 
+    /*
     @Test
     public void testWriteToParcel() throws Exception {
         u.writeToParcel(parcel,0);
@@ -201,5 +202,6 @@ public class UserTest extends AndroidTestCase {
         assertNotNull(newUser.getMateriaCursada("ED"));
         assertEquals(newUser.getMateria("POO").getProfessor().getNome(),"Rodrigo Bonifacio");
     }
+    */
 
 }
