@@ -37,6 +37,8 @@ public class UserTest extends AndroidTestCase {
     String curso;
     int periodo;
 
+    Parcel parcel;
+
     @Before
     public void setUp() throws Exception {
         historico = new ArrayList<>();
@@ -68,6 +70,8 @@ public class UserTest extends AndroidTestCase {
         u.setPeriodo(periodo);
         u.setMaterias(materias);
         u.setHistorico(historico);
+
+        parcel = Parcel.obtain();
     }
 
     @After
@@ -181,7 +185,6 @@ public class UserTest extends AndroidTestCase {
 
     @Test
     public void testWriteToParcel() throws Exception {
-        Parcel parcel = Parcel.obtain();
         u.writeToParcel(parcel,0);
 
         parcel.setDataPosition(0);
