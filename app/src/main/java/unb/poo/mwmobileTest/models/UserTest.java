@@ -1,6 +1,8 @@
 package unb.poo.mwmobileTest.models;
 
+import android.os.Parcel;
 import android.test.AndroidTestCase;
+import android.util.Log;
 
 import junit.framework.TestCase;
 
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.MateriaCursada;
+import unb.poo.mwmobile.models.Professor;
 import unb.poo.mwmobile.models.User;
 
 /**
@@ -41,6 +44,10 @@ public class UserTest extends AndroidTestCase {
 
         materia = new Materia();
         materia.setNome("POO");
+        materia.setProfessor(new Professor("Rodrigo Bonifacio"));
+        materia.setHorarios(new ArrayList<Horario>());
+        materia.addHorario(800, 2);
+        materia.addHorario(800, 4);
 
         materiaCursada = new MateriaCursada();
         materiaCursada.setNome("ED");
@@ -67,7 +74,7 @@ public class UserTest extends AndroidTestCase {
     public void tearDown() throws Exception {
 
     }
-
+/*
     @Test
     public void testGetMatricula() throws Exception {
         assertEquals(matricula, u.getMatricula());
@@ -170,11 +177,16 @@ public class UserTest extends AndroidTestCase {
     @Test
     public void testDescribeContents() throws Exception {
 
-    }
+    }*/
 
     @Test
     public void testWriteToParcel() throws Exception {
-
+        Parcel parcel = Parcel.obtain();
+        Log.d("COMECO DO TESTE", "Testando write to parcel");
+        u.writeToParcel(parcel,0);
+        parcel.setDataPosition(0);
+        User newUser = User.CREATOR.createFromParcel(parcel);
+        assertEquals(u.getNome(),newUser.getNome());
     }
 
 }

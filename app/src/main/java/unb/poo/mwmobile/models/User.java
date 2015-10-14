@@ -43,26 +43,29 @@ public class User implements Parcelable{
 
     // Por enquanto, só transmite o nome, o IRA e a matrícula do usuário.
     public User(Parcel in) {
-        this.matricula = in.readInt();
         this.nome = in.readString();
+        this.matricula = in.readInt();
         this.IRA = in.readDouble();
         this.curso = in.readString();
         this.periodo = in.readInt();
         this.materias = new ArrayList<>();
         this.historico = new ArrayList<>();
-        in.readList(this.materias,getClass().getClassLoader());
-        in.readList(this.historico,getClass().getClassLoader());
+        in.readList(this.materias, Materia.class.getClassLoader());
+        in.readList(this.historico,MateriaCursada.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags){
-        dest.writeInt(this.getMatricula());
         dest.writeString(this.getNome());
+        dest.writeInt(this.getMatricula());
         dest.writeDouble(this.getIRA());
         dest.writeString(this.getCurso());
         dest.writeInt(this.getPeriodo());
-        dest.writeList(this.materias);
-        dest.writeList(this.historico);
+        Log.d("TESTE 1 FEITO", "Tentando materias");
+        dest.writeTypedList(this.materias);
+        Log.d("TESTE 2 FEITO", "Tentando historico");
+        dest.writeTypedList(this.historico);
+        Log.d("TESTE 3 FEITO", "Fim do parcel");
     }
 
     public int getMatricula() {

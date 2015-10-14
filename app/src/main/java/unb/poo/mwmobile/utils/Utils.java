@@ -1,6 +1,7 @@
 package unb.poo.mwmobile.utils;
 
 import android.content.Context;
+import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
