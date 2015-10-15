@@ -62,7 +62,7 @@ public class DBCore extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_USER;
-        Cursor cursor = db.rawQuery(query, null);
+            Cursor cursor = db.rawQuery(query, null);
 
         Log.d("Printing DB", " ");
 
