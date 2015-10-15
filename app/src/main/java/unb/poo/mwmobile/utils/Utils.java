@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,9 +33,10 @@ public class Utils {
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(context, ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> a, View v, int pos, long id) {
+                LinearLayout parent = (LinearLayout) v;
+                TextView t = (TextView) parent.findViewById(R.id.grid_materia);
+                Toast.makeText(context, t.getText(), Toast.LENGTH_LONG).show();
             }
         });
 

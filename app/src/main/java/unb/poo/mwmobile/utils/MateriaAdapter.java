@@ -1,6 +1,7 @@
 package unb.poo.mwmobile.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class MateriaAdapter extends BaseAdapter {
             grid = inflater.inflate(R.layout.grid_materias, null);
             TextView textView = (TextView) grid.findViewById(R.id.grid_materia);
             textView.setText(user.getMaterias().get(position).getNome());
+            textView.setTextColor(Color.parseColor("#000000"));
 
 
         } else {
