@@ -22,8 +22,8 @@ public class MateriaAdapter extends BaseAdapter {
     private Context mContext;
     private final User user;
 
-    public MateriaAdapter(Context c, User user) {
-        mContext = c;
+    public MateriaAdapter(Context context, User user) {
+        mContext = context;
         this.user = user;
     }
 
