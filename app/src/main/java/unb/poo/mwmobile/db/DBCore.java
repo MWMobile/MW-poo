@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.User;
 
 public class DBCore extends SQLiteOpenHelper {
@@ -15,16 +16,21 @@ public class DBCore extends SQLiteOpenHelper {
     private static final int VERSAO_DB = 1;
 
     private static final String TABLE_USER = "user";
+    private static final String TABLE_MATERIA = "materia";
+    private static final String TABLE_HIST = "historico";
 
     private static final String KEY_ID= "id";
+    private static final String KEY_IDM = "idM";
     private static final String KEY_MATRICULA = "matricula";
+    private static final String KEY_MATERIA = "materia";
+    private static final String KEY_HIST = "historico";
     private static final String KEY_SENHA = "senha";
     private static final String KEY_NOME = "nome";
     private static SQLiteDatabase db;
 
 //    Campos para adicionar
-//    private Materia[] materias;
-//    private Materia[] historico;
+    private Materia[] materias;
+    private Materia[] historico;
 //    private double IRA;
 //    TODO adicionar também curso e período
 
@@ -38,33 +44,61 @@ public class DBCore extends SQLiteOpenHelper {
         String createDb = "CREATE TABLE IF NOT EXISTS " + TABLE_USER +
                 "("+ KEY_ID + " INTEGER, " + KEY_MATRICULA + " INTEGER, " + KEY_SENHA + " TEXT, " + KEY_NOME + " TEXT)";
         db.execSQL(createDb);
+
+        String createDbM = "CREATE TABLE IF NOT EXISTS " + TABLE_MATERIA +
+                "(" + KEY_MATRICULA + " INTEGER, " + KEY_IDM + " INTEGER, " + KEY_MATERIA + " TEXT)";
+        db.execSQL(createDbM);
+
+        String createDbH = "CREATE TABLE IF NOT EXISTS " + TABLE_HIST +
+                "(" + KEY_MATRICULA + " INTEGER, " + KEY_IDM + " INTEGER, " + KEY_HIST + " TEXT)";
+        db.execSQL(createDbH);
+
+        this.db = db;
     }
 
     /*Caso haja um banco de dados e queira criar um novo, drop table deleta o db anterior
     e chama a função onCreate*/
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS" + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MATERIA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HIST);
         onCreate(db);
+    }
+
+    private void openWrite(){
+        db = this.getWritableDatabase();
+    }
+
+    private void openRead(){
+        db = this.getReadableDatabase();
+    }
+
+    private void closeDB() {
+        db.close();
     }
 
 //    Funcao para testes que dropa a tabela user do DB (onde armazena o usuario logado)
     public void dropDB() {
-        SQLiteDatabase db = this.getReadableDatabase();
+        openWrite();
 
         onCreate(db);
         db.execSQL("DROP TABLE " + TABLE_USER);
+        db.execSQL("DROP TABLE " + TABLE_MATERIA);
+        db.execSQL("DROP TABLE " + TABLE_HIST);
         onCreate(db);
+
+        closeDB();
     }
 
 //    Funcao para testes que imprime o SQLite por inteiro
     public void printDB(){
-        SQLiteDatabase db = this.getReadableDatabase();
+        openRead();
 
         String query = "SELECT * FROM " + TABLE_USER;
-            Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, null);
 
-        Log.d("Printing DB", " ");
+        Log.d("Printing User", " ");
 
         if (cursor.moveToFirst()) {
             do {
@@ -75,6 +109,33 @@ public class DBCore extends SQLiteOpenHelper {
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 
+        String query2 = "SELECT * FROM " + TABLE_MATERIA;
+        Cursor cursor2 = db.rawQuery(query2, null);
+
+        Log.d("Printing Materia", " ");
+
+        if (cursor2.moveToFirst()) {
+            do {
+                Log.d("ID", cursor2.getString(0) + " ");
+                Log.d("MATRICULA", cursor2.getString(1) + " ");
+                Log.d("MATERIA", cursor2.getString(2) + " ");
+            } while (cursor2.moveToNext() || cursor2.isLast() == true);
+        }
+
+        String query3 = "SELECT * FROM " + TABLE_HIST;
+        Cursor cursor3 = db.rawQuery(query3, null);
+
+        Log.d("Printing Historico", " ");
+
+        if (cursor3.moveToFirst()) {
+            do {
+                Log.d("ID", cursor3.getString(0) + " ");
+                Log.d("MATRICULA", cursor3.getString(1) + " ");
+                Log.d("HISTORICO", cursor3.getString(2) + " ");
+            } while (cursor3.moveToNext() || cursor3.isLast() == true);
+        }
+
+        closeDB();
     }
 
 
@@ -112,7 +173,7 @@ public class DBCore extends SQLiteOpenHelper {
     }
 
     private User search(String query) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        openRead();
 
         Cursor cursor = db.rawQuery(query, null);
 
@@ -125,6 +186,7 @@ public class DBCore extends SQLiteOpenHelper {
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 
+        closeDB();
         return  user;
     }
 
@@ -134,23 +196,48 @@ public class DBCore extends SQLiteOpenHelper {
 //    assim, o usuario podera alterar sua senha (caso queira) e seu nome (caso errado)
 //    em breve sera adicionado o update relacionado as materias
     public void updUser(User user){
-        SQLiteDatabase db = this.getWritableDatabase();
+        openWrite();
 
         String update = "UPDATE " + TABLE_USER + " SET " + KEY_SENHA + " = " + user.getSenha() +
                 " , " + KEY_NOME + " = " + user.getNome() + " WHERE " + KEY_MATRICULA +
                 " = " + user.getMatricula();
 
         db.execSQL(update);
+
+        closeDB();
     }
 
 //    DELETE
     public void delUser(User user){
-        SQLiteDatabase db = this.getWritableDatabase();
+        openWrite();
 
         String deletar = "DELETE FROM " + TABLE_USER + " WHERE " + KEY_MATRICULA + " = "
                 + user.getMatricula();
 
         db.execSQL(deletar);
+
+        closeDB();
+    }
+
+    public void delMateria(User user){
+        openWrite();
+
+        String updateH = "UPDATE " + TABLE_HIST + " SET " + KEY_HIST + " = " + materias[0].getNome()
+                + " WHERE " + KEY_MATRICULA + " = " + user.getMatricula();
+        String deletarM = "DELETE * FROM " + TABLE_MATERIA + "WHERE ROWNUM <= 1";
+        db.execSQL(deletarM);
+
+        closeDB();
+    }
+
+    public void updMateria(User user){
+        openWrite();
+
+        String updateM = "UPDATE " + TABLE_MATERIA + " SET " + KEY_MATERIA + " = " + materias[0].getNome()
+                + " WHERE " + KEY_MATRICULA + " = " + user.getMatricula();
+        db.execSQL(updateM);
+
+        closeDB();
     }
 //    ========================================================================================
 }

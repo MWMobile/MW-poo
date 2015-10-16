@@ -46,6 +46,8 @@ public class User implements Parcelable{
 
     // Por enquanto, sÃ³ transmite o nome, o IRA e a matrÃ­cula do usuÃ¡rio.
     public User(Parcel in) {
+        setIRA();
+
         nome = in.readString();
         matricula = in.readInt();
         senha = in.readString();
@@ -117,6 +119,7 @@ public class User implements Parcelable{
     }
 
     public double getIRA() {
+        setIRA();
         return IRA;
     }
 
