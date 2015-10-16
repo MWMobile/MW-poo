@@ -28,9 +28,9 @@ public class User implements Parcelable{
 
   /* em vez de setar uma array list e tal, o certo seria ter um addMateria na arraylist
   * nessa estrutura ele deve poder procurar materias na lista, adicionar e remover
-  * TODO criar um addMateria ou addMateriaCursada (revisar os métodos criados)
+  * TODO criar um addMateria ou addMateriaCursada (revisar os mÃ©todos criados)
   * TODO criar um delMateria ou delMateriaCursada
-  * TODO criar um getMateria ou getMateriaCursada (revisar os métodos criados)
+  * TODO criar um getMateria ou getMateriaCursada (revisar os mÃ©todos criados)
   * */
 
     private ArrayList<Materia> materias = new ArrayList<Materia>();
@@ -44,7 +44,7 @@ public class User implements Parcelable{
         this.historico = new ArrayList<>();
     }
 
-    // Por enquanto, só transmite o nome, o IRA e a matrícula do usuário.
+    // Por enquanto, sÃ³ transmite o nome, o IRA e a matrÃ­cula do usuÃ¡rio.
     public User(Parcel in) {
         nome = in.readString();
         matricula = in.readInt();
@@ -122,22 +122,22 @@ public class User implements Parcelable{
 
     private void setIRA() {
         /**
-        * DTb:disciplinas OBRIGATORIAS trancadas
-        * DTp:disciplinas OPTATIVAS trancadas
-        * DC: disciplinas matriculadas
-        * Pi:peso da mencao
-        * Pei:Periodo em que uma disciplina foi cursada
-        * CRi:créditos de uma disciplina
-        */
+         * DTb:disciplinas OBRIGATORIAS trancadas
+         * DTp:disciplinas OPTATIVAS trancadas
+         * DC: disciplinas matriculadas
+         * Pi:peso da mencao
+         * Pei:Periodo em que uma disciplina foi cursada
+         * CRi:crÃ©ditos de uma disciplina
+         */
         double constante;
-        double disc;
-        double variavel = 0;
+        double disc = 0,disc2 = 0;
+        double variavel;
 
         int Peso_mencao;
         int Periodo_disciplina;
         int Credito_disciplina;
 
-         //--------conta alguns parametros das disciplinas
+        //--------conta alguns parametros das disciplinas
         int DTb = 0;
         int DTp = 0;
         int DC;
@@ -154,16 +154,17 @@ public class User implements Parcelable{
         DC = historico.size();
         constante = 1 - ((0.6 * DTb + 0.4D * DTp)/DC);
         //-----------------------------------------
+
         for(MateriaCursada materia : historico){
             Peso_mencao = materia.getPesoMencao();
             Periodo_disciplina = materia.getPeriodoCursado();
             Credito_disciplina = materia.getCreditos();
 
-            disc = (Periodo_disciplina * Peso_mencao * Credito_disciplina);
-            disc /= (Credito_disciplina * Periodo_disciplina);
-
-            variavel += disc;
+            disc = disc+(Periodo_disciplina * Peso_mencao * Credito_disciplina);
+            disc2 = disc2+(Credito_disciplina * Periodo_disciplina);
         }
+
+        variavel = disc/disc2;
 
         this.IRA = constante * variavel;
     }
