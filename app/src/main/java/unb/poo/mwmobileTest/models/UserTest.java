@@ -1,5 +1,6 @@
 package unb.poo.mwmobileTest.models;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -183,14 +184,12 @@ public class UserTest extends AndroidTestCase {
 
     }
 
-    /*
+
     @Test
     public void testWriteToParcel() throws Exception {
-        u.writeToParcel(parcel,0);
-
-        parcel.setDataPosition(0);
-
-        User newUser = new User(parcel);
+        Bundle bTest = new Bundle();
+        bTest.putParcelable("JUnitUser",u);
+        User newUser = bTest.getParcelable("JUnitUser");
 
         assertEquals(u.getNome(),newUser.getNome());
         assertEquals(u.getCurso(),newUser.getCurso());
@@ -202,6 +201,6 @@ public class UserTest extends AndroidTestCase {
         assertNotNull(newUser.getMateriaCursada("ED"));
         assertEquals(newUser.getMateria("POO").getProfessor().getNome(),"Rodrigo Bonifacio");
     }
-    */
+
 
 }
