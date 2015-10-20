@@ -1,8 +1,14 @@
 package unb.poo.mwmobile.acts;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +19,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 import unb.poo.mwmobile.R;
+import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.services.RegistrationIntentService;
 import unb.poo.mwmobile.utils.Utils;
 
 public class LoginActivity extends AppCompatActivity {
@@ -37,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         Button loginBtn = (Button) findViewById(R.id.loginButton);
         loginBtn.setOnClickListener(login);
     }
+
 
     /**
     * no listener ele pega os valores dos campos da tela de login
@@ -82,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     };
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

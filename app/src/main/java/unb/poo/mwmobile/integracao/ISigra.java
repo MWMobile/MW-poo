@@ -7,7 +7,5 @@ import unb.poo.mwmobile.models.User;
  */
 public interface ISigra {
 
-    public User autentica(String matricula, String senha) {
-        return null;
-    }
+    public User autentica(String matricula, String senha);
 }

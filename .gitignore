@@ -7,4 +7,5 @@
 /captures
 .idea
 *.iml
-app/*.iml	
+app/*.iml
+gcmNode/node_modules
