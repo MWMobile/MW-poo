@@ -15,6 +15,15 @@ app.post('/echo', function (req, res) {
     res.json(req.body)
 })
 
-httpServer.listen(3000)
+app.post('*', function (req, res) {
+    res.sendStatus(200)
+})
 
-console.log('Server running at port 3000')
+app.get('*', function (req, res) {
+    res.sendStatus(200)
+})
+
+
+httpServer.listen(80)
+
+console.log('Server running at port 80')
