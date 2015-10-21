@@ -11,7 +11,7 @@ mwbot.getMe().then(function (me) {
 
 mwbot.onText(/\/sendpush/, function (msg) {
     var chatId = msg.chat.id
-    var text = msg.text.split(' ')[1]
+    var text = msg.text.replace('/sendpush', '')
 
     if (text == undefined)
         mwbot.sendMessage(chatId, "Comando invalido \n/sendPush <suaMensagemAqui>", { reply_to_message_id: msg.message_id })
