@@ -191,7 +191,7 @@ public class User implements Parcelable{
 
     private void saveOnDb(User user, Context context){
         DBCore db = new DBCore(context);
-        db.addUser(user);
+        db.addUser(user, materias, historico);
     }
 
     @Override

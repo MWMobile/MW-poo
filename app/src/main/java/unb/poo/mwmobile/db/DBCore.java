@@ -7,7 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import unb.poo.mwmobile.models.Materia;
+import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
 
 public class DBCore extends SQLiteOpenHelper {
@@ -26,23 +30,29 @@ public class DBCore extends SQLiteOpenHelper {
     private static final String KEY_HIST = "historico";
     private static final String KEY_SENHA = "senha";
     private static final String KEY_NOME = "nome";
+    private static final String KEY_CURSO = "curso";
+    private static final String KEY_PERIODO = "periodo";
     private static SQLiteDatabase db;
 
 //    Campos para adicionar
-    private Materia[] materias;
-    private Materia[] historico;
+//    private Materia[] materias;
+//    private Materia[] historico;
 //    private double IRA;
-//    TODO adicionar também curso e período
+
 
     public DBCore(Context context){
         super(context, NOME_DB, null, VERSAO_DB);
     }
 
-    /*Criação do banco de dados caso não haja nenhum*/
+    /*Criação do banco de dados caso não haja nenhum
+    * Deixei a criacao de varias tables por causa de normalizacao (de DB)
+    * onde separa-se em varias tables para otimizacao e nao colocar uma array
+    * inteira dentro de uma lacuna*/
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createDb = "CREATE TABLE IF NOT EXISTS " + TABLE_USER +
-                "("+ KEY_ID + " INTEGER, " + KEY_MATRICULA + " INTEGER, " + KEY_SENHA + " TEXT, " + KEY_NOME + " TEXT)";
+                "("+ KEY_ID + " INTEGER, " + KEY_MATRICULA + " INTEGER, " + KEY_SENHA + " TEXT, "
+                + KEY_NOME + " TEXT, " + KEY_CURSO + " TEXT, " + KEY_PERIODO + " INTEGER)";
         db.execSQL(createDb);
 
         String createDbM = "CREATE TABLE IF NOT EXISTS " + TABLE_MATERIA +
@@ -106,6 +116,8 @@ public class DBCore extends SQLiteOpenHelper {
                 Log.d("MATRICULA", cursor.getString(1) + " ");
                 Log.d("SENHA", cursor.getString(2) + " ");
                 Log.d("NOME", cursor.getString(3) + " ");
+                Log.d("CURSO", cursor.getString(4) + " ");
+                Log.d("PERIODO", cursor.getString(5) + " ");
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 
@@ -116,8 +128,8 @@ public class DBCore extends SQLiteOpenHelper {
 
         if (cursor2.moveToFirst()) {
             do {
-                Log.d("ID", cursor2.getString(0) + " ");
-                Log.d("MATRICULA", cursor2.getString(1) + " ");
+                Log.d("MATRICULA", cursor2.getString(0) + " ");
+                Log.d("IDM", cursor2.getString(1) + " ");
                 Log.d("MATERIA", cursor2.getString(2) + " ");
             } while (cursor2.moveToNext() || cursor2.isLast() == true);
         }
@@ -129,8 +141,8 @@ public class DBCore extends SQLiteOpenHelper {
 
         if (cursor3.moveToFirst()) {
             do {
-                Log.d("ID", cursor3.getString(0) + " ");
-                Log.d("MATRICULA", cursor3.getString(1) + " ");
+                Log.d("MATRICULA", cursor3.getString(0) + " ");
+                Log.d("IDM", cursor3.getString(1) + " ");
                 Log.d("HISTORICO", cursor3.getString(2) + " ");
             } while (cursor3.moveToNext() || cursor3.isLast() == true);
         }
@@ -144,17 +156,60 @@ public class DBCore extends SQLiteOpenHelper {
 //    CREATE
 //    Adiciona um usuario no db
 //    (usado para logar, o DB so tera 1 usuario por enquando)
-    public void addUser(User user){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+    public void addUser(User user, ArrayList<Materia> materia, ArrayList<MateriaCursada> historico){
+        openWrite();
 
-        values.put(KEY_ID, 0);
-        values.put(KEY_MATRICULA, user.getMatricula());
-        values.put(KEY_SENHA, user.getSenha());
-        values.put(KEY_NOME, user.getNome());
+        ContentValues values0 = new ContentValues();
 
-        db.insert(TABLE_USER, null, values);
-        db.close();
+        values0.put(KEY_ID, 0);
+        values0.put(KEY_MATRICULA, user.getMatricula());
+        values0.put(KEY_SENHA, user.getSenha());
+        values0.put(KEY_NOME, user.getNome());
+        values0.put(KEY_CURSO, user.getCurso());
+        values0.put(KEY_PERIODO, user.getPeriodo());
+
+        db.insert(TABLE_USER, null, values0);
+
+        for (int i = 0; i < user.getMaterias().size(); i++){
+            ContentValues values1 = new ContentValues();
+
+            String materi = materia.get(i).getNome();
+            int code = materia.get(i).getCodigo();
+
+            values1.put(KEY_MATRICULA, user.getMatricula());
+            values1.put(KEY_IDM, code);
+            values1.put(KEY_MATERIA, materi);
+
+            db.insert(TABLE_MATERIA, null, values1);
+        }
+
+        for (int i = 0; i < user.getMaterias().size(); i++){
+            ContentValues values2 = new ContentValues();
+
+            int code = materia.get(i).getCodigo();
+            String materi = materia.get(i).getNome();
+
+            values2.put(KEY_MATRICULA, user.getMatricula());
+            values2.put(KEY_IDM, code);
+            values2.put(KEY_HIST, materi);
+
+            db.insert(TABLE_HIST, null, values2);
+        }
+
+        for (int i = 0; i < user.getHistorico().size(); i++){
+            ContentValues values3 = new ContentValues();
+
+            int codeH = historico.get(i).getCodigo();
+            String hist = historico.get(i).getNome();
+
+            values3.put(KEY_MATRICULA, user.getMatricula());
+            values3.put(KEY_IDM, codeH);
+            values3.put(KEY_HIST, hist);
+
+            db.insert(TABLE_HIST, null, values3);
+        }
+
+        closeDB();
     }
 
 //    READ
@@ -218,11 +273,11 @@ public class DBCore extends SQLiteOpenHelper {
 
         closeDB();
     }
-
-    public void delMateria(User user){
+/*
+    public void delMateria(User user, ArrayList<Materia> materias){
         openWrite();
 
-        String updateH = "UPDATE " + TABLE_HIST + " SET " + KEY_HIST + " = " + materias[0].getNome()
+        String updateH = "UPDATE " + TABLE_HIST + " SET " + KEY_HIST + " = " + materias.get(0).getNome()
                 + " WHERE " + KEY_MATRICULA + " = " + user.getMatricula();
         String deletarM = "DELETE * FROM " + TABLE_MATERIA + "WHERE ROWNUM <= 1";
         db.execSQL(deletarM);
@@ -230,14 +285,14 @@ public class DBCore extends SQLiteOpenHelper {
         closeDB();
     }
 
-    public void updMateria(User user){
+    public void updMateria(User user, ArrayList<Materia> materias){
         openWrite();
 
-        String updateM = "UPDATE " + TABLE_MATERIA + " SET " + KEY_MATERIA + " = " + materias[0].getNome()
+        String updateM = "UPDATE " + TABLE_MATERIA + " SET " + KEY_MATERIA + " = " + materias.get(0).getNome()
                 + " WHERE " + KEY_MATRICULA + " = " + user.getMatricula();
         db.execSQL(updateM);
 
         closeDB();
-    }
+    }*/
 //    ========================================================================================
 }

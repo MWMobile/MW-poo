@@ -1,9 +1,12 @@
 package unb.poo.mwmobile.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+
+import unb.poo.mwmobile.db.DBMat;
 
 /**
  * Created by sousa on 19/09/2015.
@@ -128,7 +131,10 @@ public class Materia implements Parcelable {
         this.horarios.add(new Horario(hora,dia));
     }
 
-
+    /*public void saveOnDbM(Materia materia, Context context){
+        DBMat db = new DBMat(context);
+        db.onCreate(materia, horarios);
+    }*/
     @Override
     public int describeContents() {
         return 0;
