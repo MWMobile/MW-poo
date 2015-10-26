@@ -151,6 +151,7 @@ public class Utils {
         ArrayList<String> mencao = new ArrayList<String>();
         mencao.add(nota);
         materia.setMencao(mencao);
+        materia.setPesoMencao(nota);
 
         materia.setObrigatoria(obr);
         materia.setPeriodoCursado(periodo);

@@ -155,7 +155,7 @@ public class User implements Parcelable{
         }
 
         DC = historico.size();
-        constante = 1 - ((0.6 * DTb + 0.4D * DTp)/DC);
+        constante = 1 - (((0.6 * DTb) + (0.4 * DTp))/DC);
         //-----------------------------------------
 
         for(MateriaCursada materia : historico){
@@ -163,8 +163,8 @@ public class User implements Parcelable{
             Periodo_disciplina = materia.getPeriodoCursado();
             Credito_disciplina = materia.getCreditos();
 
-            disc = disc+(Periodo_disciplina * Peso_mencao * Credito_disciplina);
-            disc2 = disc2+(Credito_disciplina * Periodo_disciplina);
+            disc = disc + (Periodo_disciplina * Peso_mencao * Credito_disciplina);
+            disc2 = disc2 + (Credito_disciplina * Periodo_disciplina);
         }
 
         variavel = disc/disc2;
