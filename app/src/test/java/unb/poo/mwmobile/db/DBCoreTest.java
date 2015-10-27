@@ -1,40 +1,63 @@
 package unb.poo.mwmobile.db;
 
+import android.app.Activity;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.test.AndroidTestCase;
 import android.test.InstrumentationTestCase;
+import android.test.RenamingDelegatingContext;
+import android.test.mock.MockApplication;
 import android.test.mock.MockContext;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+
+import java.io.File;
+
+import unb.poo.mwmobile.acts.HomeActivity;
+import unb.poo.mwmobile.acts.MainActivity;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by sousa on 14/10/2015.
  */
-public class DBCoreTest extends InstrumentationTestCase{
+
+@RunWith(RobolectricTestRunner.class)
+public class DBCoreTest extends AndroidTestCase {
 
     DBCore db;
 
     Context context;
+    Activity main;
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        context = new MockContext();
-        db = new DBCore(context);
+
+        main = Robolectric.setupActivity(Activity.class);
+
+        db = new DBCore(main);
     }
 
 
     @After
     public void tearDown() throws Exception {
-
+        db.close();
+        super.tearDown();
     }
 
     @Test
     public void testOnCreate() throws Exception {
-        DBCore newDB = new DBCore(context);
-        newDB.onCreate(db.getWritableDatabase());
-        assertNotNull(newDB);
+        assertNotNull(db.getWritableDatabase());
+        assertNotNull(db.getReadableDatabase());
     }
 
     @Test
