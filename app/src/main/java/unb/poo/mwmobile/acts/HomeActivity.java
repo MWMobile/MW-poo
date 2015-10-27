@@ -1,17 +1,22 @@
 package unb.poo.mwmobile.acts;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.utils.MateriaAdapter;
 import unb.poo.mwmobile.utils.Utils;
 import unb.poo.mwmobile.R;
 
@@ -43,9 +48,23 @@ public class HomeActivity extends AppCompatActivity {
 
         GridView gridView = (GridView) findViewById(R.id.gradeHoraria);
 
-        Utils utils = new Utils();
-        utils.gradePopulate(gridView, getApplicationContext(), user);
+        gradePopulate(gridView, getApplicationContext(), user);
     }
+
+    public void gradePopulate(GridView gridView, final Context context, User user) {
+
+        MateriaAdapter adapter = new MateriaAdapter(context,user);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> a, View v, int pos, long id) {
+                LinearLayout parent = (LinearLayout) v;
+                TextView t = (TextView) parent.findViewById(R.id.grid_materia);
+                Toast.makeText(context, t.getText(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

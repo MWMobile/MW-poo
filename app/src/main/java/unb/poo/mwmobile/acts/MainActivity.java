@@ -22,6 +22,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.db.DBCore;
+import unb.poo.mwmobile.integracao.MiddleServer;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.Materia;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
+        MiddleServer m = new MiddleServer(this);
+        m.get();
 
         /*
         Activity que checa se ele esta logado ou nao e redireciona para login ou home conforme

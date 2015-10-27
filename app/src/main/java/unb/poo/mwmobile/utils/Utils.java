@@ -24,24 +24,6 @@ import unb.poo.mwmobile.models.User;
  */
 public class Utils {
 
-
-
-    public void gradePopulate(GridView gridView, final Context context, User user) {
-
-
-        MateriaAdapter adapter = new MateriaAdapter(context,user);
-        gridView.setAdapter(adapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> a, View v, int pos, long id) {
-                LinearLayout parent = (LinearLayout) v;
-                TextView t = (TextView) parent.findViewById(R.id.grid_materia);
-                Toast.makeText(context, t.getText(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    };
-
     public User mockUser(int matricula, String password){
 
         // TODO atualizar assim que as modificacoes nas arraylist de materias forem feitas

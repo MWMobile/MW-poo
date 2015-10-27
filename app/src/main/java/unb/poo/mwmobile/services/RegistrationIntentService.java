@@ -20,77 +20,83 @@ import unb.poo.mwmobile.R;
  * Created by sousa on 20/10/2015.
  */
 public class RegistrationIntentService extends IntentService {
-    private static final String TAG = "RegIntentService";
 
-    private static final String[] TOPICS = {"global"};
+    /**
+     * Nome da classe.
+     * Para ser usada em Logs, ou quando precisar de nome desta classe
+     */
+    private static final String TAG = "RegIntentService";
 
     public RegistrationIntentService() {
         super(TAG);
     }
 
+    /**
+     * Lida com a ligacao do applicativo com o GCM (Google Cloud Messaging).
+     * Ela pega o token do google-services.json e deriva um SenderID disso e se registra no GCM para
+     * receber pushs pelo Google Play Services
+     *
+     * @author Andrei Sousa
+     * @param intent a intent do Registro no GCM
+     */
     @Override
     protected void onHandleIntent(Intent intent) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         try {
-            // [START register_for_gcm]
-            // Initially this call goes out to the network to retrieve the token, subsequent calls
-            // are local.
-            // [START get_token]
+
             InstanceID instanceID = InstanceID.getInstance(this);
-            // R.string.gcm_defaultSenderId (the Sender ID) is typically derived from google-services.json.
-            // See https://developers.google.com/cloud-messaging/android/start for details on this file.
+
+            // R.string.gcm_defaultSenderId | ID deste app (sender) derivada de google-services.json.
             String token = instanceID.getToken(getString(R.string.gcm_defaultSenderId),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-            // [END get_token]
             // Log.i(TAG, "GCM Registration Token: " + token);
 
             // TODO: Implement this method to send any registration to your app's servers.
             sendRegistrationToServer(token);
 
-            // Subscribe to topic channels
+            // Se inscreve nos topicos
             subscribeTopics(token);
 
-            // You should store a boolean that indicates whether the generated token has been
-            // sent to your server. If the boolean is false, send the token to your server,
-            // otherwise your server should have already received the token.
+            // Guarda uma boolean que indica se a token foi gerada/enviada pro servidor ou nao
+            // Se for falsa, envia o token pro server, se nao o server ja deveria ter recebido o token
             sharedPreferences.edit().putBoolean(GCMConfig.SENT_TOKEN_TO_SERVER, true).apply();
-            // [END register_for_gcm]
+
         } catch (Exception e) {
-            Log.d(TAG, "Failed to complete token refresh", e);
-            // If an exception happens while fetching the new token or updating our registration data
-            // on a third-party server, this ensures that we'll attempt the update at a later time.
+            Log.d(TAG, "Falhou em renovar a Token", e);
+            //Nao consegue atualizar a token e zera a variavel de estado da token
             sharedPreferences.edit().putBoolean(GCMConfig.SENT_TOKEN_TO_SERVER, false).apply();
         }
-        // Notify UI that registration has completed, so the progress indicator can be hidden.
+        //Notifica a UI que foi registrado com sucesso
         Intent registrationComplete = new Intent(GCMConfig.REGISTRATION_COMPLETE);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
     /**
-     * Persist registration to third-party servers.
+     * Envia o registro para nosso servidor proprio
      *
-     * Modify this method to associate the user's GCM registration token with any server-side account
-     * maintained by your application.
+     * Esse metodo assegura que o token no nosso server e no GCM so o mesmo, mantendo
+     * a unicidade de autenticacao
      *
-     * @param token The new token.
+     * @param token GCM token
      */
     private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
+        //TODO fazer autenticacao com nosso servidor
     }
 
     /**
-     * Subscribe to any GCM topics of interest, as defined by the TOPICS constant.
+     * Se inscreve nos topicos desejados.
+     * Funcao pega os topicos da classe de configuracao do app e se inscreve para receber pushs
+     * de tais topicos
      *
      * @param token GCM token
-     * @throws IOException if unable to reach the GCM PubSub service
+     * @throws IOException se nao conseguir conecao com o GCM
      */
     // [START subscribe_topics]
     private void subscribeTopics(String token) throws IOException {
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
-        for (String topic : TOPICS) {
+        for (String topic : GCMConfig.TOPICS) {
             pubSub.subscribe(token, "/topics/" + topic, null);
         }
     }
-    // [END subscribe_topics]
 }
