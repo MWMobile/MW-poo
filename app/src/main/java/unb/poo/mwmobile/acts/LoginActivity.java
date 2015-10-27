@@ -22,12 +22,12 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.services.RegistrationIntentService;
 import unb.poo.mwmobile.utils.Utils;
+import unb.poo.mwmobile.R;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -1,17 +1,10 @@
-package unb.poo.mwmobileTest.acts;
+package unb.poo.mwmobile.acts;
 
-import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
 import android.test.ActivityUnitTestCase;
-import android.widget.TextView;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import unb.poo.mwmobile.acts.HomeActivity;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by sousa on 14/10/2015.

@@ -1,14 +1,10 @@
-package unb.poo.mwmobileTest.models;
+package unb.poo.mwmobile.models;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import unb.poo.mwmobile.models.Horario;
-import unb.poo.mwmobile.models.Materia;
-import unb.poo.mwmobile.models.Professor;
 
 import static org.junit.Assert.*;
 

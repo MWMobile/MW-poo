@@ -6,7 +6,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "unb.poo.mwmobile"
+        applicationId "unb.poo.unb.poo.mwmobile"
         testApplicationId "unb.poo.mwmobileTest"
         minSdkVersion 16
         targetSdkVersion 23
@@ -34,14 +34,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile "com.google.android.gms:play-services:8.1.0"
 
-    androidTestCompile 'com.android.support.test:runner:0.4'
-    androidTestCompile 'com.android.support.test:rules:0.4'
-    compile 'com.android.support.test:runner:0.4'
-    compile 'com.android.support.test:rules:0.4'
-
-
-
-//    androidTestCompile 'junit:junit:4.12'
-//    testCompile 'junit:junit:4.12'
-//    compile 'junit:junit:4.12'
+    // Unit testing dependencies
+    testCompile 'junit:junit:4.12'
+    // Set this dependency if you want to use Mockito
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    // Set this dependency if you want to use Hamcrest matching
+    testCompile 'org.hamcrest:hamcrest-library:1.1'
 }

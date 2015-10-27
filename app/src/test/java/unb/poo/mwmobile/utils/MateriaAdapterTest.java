@@ -1,8 +1,4 @@
-package unb.poo.mwmobileTest.utils;
-
-import android.content.Context;
-import android.view.View;
-import android.widget.TextView;
+package unb.poo.mwmobile.utils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +6,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.MateriaCursada;

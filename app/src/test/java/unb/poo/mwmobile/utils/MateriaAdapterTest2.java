@@ -1,4 +1,4 @@
-package unb.poo.mwmobileTest.utils;
+package unb.poo.mwmobile.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -25,7 +25,6 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -39,16 +38,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
-import unb.poo.mwmobile.R;
-import unb.poo.mwmobile.models.Horario;
-import unb.poo.mwmobile.models.Materia;
-import unb.poo.mwmobile.models.MateriaCursada;
-import unb.poo.mwmobile.models.Professor;
 import unb.poo.mwmobile.models.User;
-import unb.poo.mwmobile.utils.MateriaAdapter;
-import unb.poo.mwmobile.utils.Utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

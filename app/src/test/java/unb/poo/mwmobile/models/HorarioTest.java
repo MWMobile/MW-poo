@@ -1,10 +1,8 @@
-package unb.poo.mwmobileTest.models;
+package unb.poo.mwmobile.models;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import unb.poo.mwmobile.models.Horario;
 
 import static org.junit.Assert.*;
 

@@ -1,24 +1,12 @@
-package unb.poo.mwmobileTest.db;
+package unb.poo.mwmobile.db;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.AndroidTestCase;
 import android.test.InstrumentationTestCase;
-import android.test.InstrumentationTestRunner;
-import android.test.RenamingDelegatingContext;
 import android.test.mock.MockContext;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import unb.poo.mwmobile.db.DBCore;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by sousa on 14/10/2015.

@@ -1,23 +1,14 @@
-package unb.poo.mwmobileTest.models;
+package unb.poo.mwmobile.models;
 
 import android.os.Bundle;
 import android.os.Parcel;
 import android.test.AndroidTestCase;
-import android.util.Log;
-
-import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import unb.poo.mwmobile.models.Horario;
-import unb.poo.mwmobile.models.Materia;
-import unb.poo.mwmobile.models.MateriaCursada;
-import unb.poo.mwmobile.models.Professor;
-import unb.poo.mwmobile.models.User;
 
 /**
  * Created by sousa on 13/10/2015.

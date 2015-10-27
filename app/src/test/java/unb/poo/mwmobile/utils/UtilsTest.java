@@ -1,11 +1,10 @@
-package unb.poo.mwmobileTest.utils;
+package unb.poo.mwmobile.utils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import unb.poo.mwmobile.models.User;
-import unb.poo.mwmobile.utils.Utils;
 
 import static org.junit.Assert.*;
 

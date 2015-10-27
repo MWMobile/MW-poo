@@ -1,18 +1,12 @@
-package unb.poo.mwmobileTest.db;
+package unb.poo.mwmobile.db;
 
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 import android.test.mock.MockContext;
 
-import junit.framework.TestResult;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.concurrent.ExecutionException;
-
-import unb.poo.mwmobile.db.DBMat;
 
 /**
  * Created by Raphael on 26/10/2015.
