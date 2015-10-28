@@ -7,17 +7,16 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appdatasearch.GetRecentContextCall;
-import com.google.android.gms.location.internal.LocationRequestUpdateData;
 
-import unb.poo.mwmobile.acts.MainActivity;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by sousa on 27/10/2015.
@@ -66,6 +65,49 @@ public class MiddleServer extends Service {
         queue.start();
     }
 
+    public void getIRA(final int matricula){
+
+        stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Log.d(TAG,"IRA" + s);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.d(TAG, "ERRO IRA " + volleyError);
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+
+                params.put(TAG,"IRA");
+                params.put("matricula",matricula+"");
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","post");
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+        queue.start();
+    }
+
+
+
+    public interface PostCommentResponseListener {
+        public void requestStarted();
+        public void requestCompleted();
+        public void requestEndedWithError(VolleyError error);
+    }
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

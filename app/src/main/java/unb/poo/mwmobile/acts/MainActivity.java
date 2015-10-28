@@ -5,16 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.drawable.DrawableContainer;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -24,9 +21,6 @@ import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.integracao.MiddleServer;
 import unb.poo.mwmobile.models.User;
-import unb.poo.mwmobile.models.Horario;
-import unb.poo.mwmobile.models.Materia;
-import unb.poo.mwmobile.models.Professor;
 import unb.poo.mwmobile.services.RegistrationIntentService;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
         MiddleServer m = new MiddleServer(this);
         m.get();
+        m.getIRA(123456);
 
+        
         /*
         Activity que checa se ele esta logado ou nao e redireciona para login ou home conforme
         home > logado
