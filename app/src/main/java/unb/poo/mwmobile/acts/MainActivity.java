@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         m.get();
         m.getIRA(123456);
 
-        
+
         /*
         Activity que checa se ele esta logado ou nao e redireciona para login ou home conforme
         home > logado

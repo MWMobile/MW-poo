@@ -18,10 +18,12 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
+import unb.poo.mwmobile.models.User;
+
 /**
  * Created by sousa on 27/10/2015.
  */
-public class MiddleServer extends Service {
+public class MiddleServer extends Service implements ISigra {
 
     private StringRequest stringRequest;
     private RequestQueue queue;
@@ -65,7 +67,16 @@ public class MiddleServer extends Service {
         queue.start();
     }
 
-    public void getIRA(final int matricula){
+
+    @Override
+    public User autentica(String matricula, String senha) {
+        return null;
+    }
+
+
+    //TODO mudar o retorno para void e passar por evento
+    @Override
+    public double getIRA(final String matricula){
 
         stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -84,7 +95,45 @@ public class MiddleServer extends Service {
                 Map<String,String> params = new HashMap<String, String>();
 
                 params.put(TAG,"IRA");
-                params.put("matricula",matricula+"");
+                params.put("matricula",matricula);
+
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("Content-Type","post");
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+        queue.start();
+
+        return 0;
+    }
+
+    @Override
+    public void getCurso(final String matricula) {
+        stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        Log.d(TAG,"IRA" + s);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.d(TAG, "ERRO IRA " + volleyError);
+            }
+        }){
+            @Override
+            protected Map<String,String> getParams(){
+                Map<String,String> params = new HashMap<String, String>();
+
+                params.put(TAG,"Curso");
+                params.put("matricula",matricula);
 
                 return params;
             }
@@ -100,7 +149,6 @@ public class MiddleServer extends Service {
         queue.add(stringRequest);
         queue.start();
     }
-
 
 
     public interface PostCommentResponseListener {
