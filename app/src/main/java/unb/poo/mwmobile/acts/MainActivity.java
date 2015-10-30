@@ -16,6 +16,9 @@ import android.view.MenuItem;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.db.DBCore;
@@ -59,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
-        MiddleServer m = new MiddleServer(this);
-        m.get("echo");
-
+        
 
 
 

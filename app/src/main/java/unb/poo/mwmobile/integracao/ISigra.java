@@ -8,6 +8,10 @@ import unb.poo.mwmobile.models.User;
 public interface ISigra {
 
     public User autentica(String matricula, String senha);
-    public double getIRA(final String matricula);
-    public void getCurso(final String matricula);
+    public void requestIRA();
+    public void requestCurso();
+    public void requestMaterias();
+    public void requestPeriodo();
+
+
 }

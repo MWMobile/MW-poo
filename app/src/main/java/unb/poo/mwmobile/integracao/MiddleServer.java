@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -14,21 +15,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.Map;
+
 /**
  * Created by sousa on 27/10/2015.
  */
 public class MiddleServer extends Service {
 
-    private StringRequest stringRequest;
-    private RequestQueue queue;
-    private String url;
-    private Context context;
-
+    private static final String URL = "http://104.131.63.41/";
     private static String TAG = "MiddleServer";
 
-    public MiddleServer(Context c) {
-        context = c;
-        url = "http://104.131.63.41/echo";
+    private StringRequest request;
+    private RequestQueue queue;
+    private Context context;
+
+
+    public MiddleServer(Context context) {
+        this.context = context;
         queue = Volley.newRequestQueue(context);
     }
 
@@ -38,27 +41,33 @@ public class MiddleServer extends Service {
         super.onCreate();
     }
 
-    public void get(String header) {
+    public void get(final String header, final Map<String, String > params ) {
 
-        // Request a string response from the provided URL.
-        stringRequest = new StringRequest(Request.Method.GET, url,
+        Log.d("INIT","Get");
+
+        request = new StringRequest(Request.Method.POST,
+                URL + header,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Log.d(TAG, response);
+                        Log.d("TEST", response);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "That didn't work! " + error);
-            }
-        });
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.d("ERRO:" , volleyError.getMessage());
+                    }
+                }){
+                @Override
+                public Map<String, String> getParams() throws AuthFailureError {
+                    return params;
+                }
+        };
 
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-        queue.start();
-        queue.start();
+        request.setTag("tag");
+        queue.add(request);
+
     }
 
 
