@@ -60,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         MiddleServer m = new MiddleServer(this);
-        m.get();
-        m.getIRA(123456);
+        m.get("echo");
+
+
 
 
         /*
