@@ -15,26 +15,31 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import unb.poo.mwmobile.models.User;
+import de.greenrobot.event.EventBus;
+import unb.poo.mwmobile.eventBus.MessageServerEB;
 
 /**
  * Created by sousa on 27/10/2015.
  */
-public class MiddleServer extends Service implements ISigra {
+public class MiddleServer extends Service {
 
-    private StringRequest stringRequest;
-    private RequestQueue queue;
-    private String url;
-    private Context context;
-
+    private static final String URL = "http://104.131.63.41/echo";
     private static String TAG = "MiddleServer";
 
-    public MiddleServer(Context c) {
-        context = c;
-        url = "http://104.131.63.41/echo";
+    private StringRequest request;
+    private RequestQueue queue;
+    private Context context;
+    private String resposta;
+    /**
+     *  Construtor Tem que ser passado o contexto e quem
+     *  vai 'ouvir' o listener
+     *
+     * @param context
+     */
+    public MiddleServer(Context context) {
+        this.context = context;
         queue = Volley.newRequestQueue(context);
     }
 
@@ -42,113 +47,71 @@ public class MiddleServer extends Service implements ISigra {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //EventBus Register
+        EventBus.getDefault().register(MiddleServer.this);
     }
 
-    public void get() {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
-        // Request a string response from the provided URL.
-        stringRequest = new StringRequest(Request.Method.GET, url,
+        //EventBus unRegister
+        EventBus.getDefault().unregister(MiddleServer.this);
+    }
+
+    /**
+     *  Metodo que pega informações do servidor
+     *
+     * @param header
+     * @param params
+     */
+    public void get(final Map<String,String> header, final Map<String, String > params ) {
+
+        Log.d("INIT","Get");
+
+        request = new StringRequest(Request.Method.POST,
+                URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Log.d(TAG, response);
+                        Log.d("TEST", response);
+
+                        MessageServerEB message = new MessageServerEB();
+                        //TODO pegar apenas o value com getValue, nao esta dando
+                        message.setHeader(header);
+                        message.setResponse(response);
+
+                        //Postando Evento
+                        EventBus.getDefault().post(message);
+
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "That didn't work! " + error);
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-        queue.start();
-        queue.start();
-    }
-
-
-    @Override
-    public User autentica(String matricula, String senha) {
-        return null;
-    }
-
-
-    //TODO mudar o retorno para void e passar por evento
-    @Override
-    public double getIRA(final String matricula){
-
-        stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public void onResponse(String s) {
-                        Log.d(TAG,"IRA" + s);
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.d("ERRO:" , volleyError.getMessage());
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Log.d(TAG, "ERRO IRA " + volleyError);
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
+                }){
+                @Override
+                public Map<String, String> getParams() throws AuthFailureError {
+                    return params;
+                }
 
-                params.put(TAG,"IRA");
-                params.put("matricula",matricula);
-
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","post");
-                return params;
-            }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    return header;
+                }
         };
 
-        queue.add(stringRequest);
-        queue.start();
-
-        return 0;
+        request.setTag("tag");
+        queue.add(request);
     }
 
-    @Override
-    public void getCurso(final String matricula) {
-        stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        Log.d(TAG,"IRA" + s);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Log.d(TAG, "ERRO IRA " + volleyError);
-            }
-        }){
-            @Override
-            protected Map<String,String> getParams(){
-                Map<String,String> params = new HashMap<String, String>();
 
-                params.put(TAG,"Curso");
-                params.put("matricula",matricula);
 
-                return params;
-            }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("Content-Type","post");
-                return params;
-            }
-        };
 
-        queue.add(stringRequest);
-        queue.start();
-    }
 
 
     public interface PostCommentResponseListener {
@@ -156,6 +119,7 @@ public class MiddleServer extends Service implements ISigra {
         public void requestCompleted();
         public void requestEndedWithError(VolleyError error);
     }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

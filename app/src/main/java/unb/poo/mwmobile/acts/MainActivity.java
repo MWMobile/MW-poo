@@ -19,7 +19,6 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.db.DBCore;
-import unb.poo.mwmobile.integracao.MiddleServer;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.services.RegistrationIntentService;
 
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     DBCore db = new DBCore(this);
     Intent loginAct;
+
 
     private static final String TAG = "MainActivity";
 
@@ -58,10 +58,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
-
-        MiddleServer m = new MiddleServer(this);
-        m.get();
-        m.getIRA(123456);
 
 
         /*
@@ -119,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(GCMConfig.REGISTRATION_COMPLETE));
+
     }
 
 
