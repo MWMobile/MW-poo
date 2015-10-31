@@ -34,6 +34,10 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile "com.google.android.gms:play-services:8.1.0"
 
+
+    compile 'de.greenrobot:eventbus:2.4.0'
+
+
     // Unit testing dependencies
     testCompile 'junit:junit:4.12'
     // Set this dependency if you want to use Mockito

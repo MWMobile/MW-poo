@@ -17,6 +17,9 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.Map;
 
+import de.greenrobot.event.EventBus;
+import unb.poo.mwmobile.eventBus.MessageServerEB;
+
 /**
  * Created by sousa on 27/10/2015.
  */
@@ -28,9 +31,13 @@ public class MiddleServer extends Service {
     private StringRequest request;
     private RequestQueue queue;
     private Context context;
-
     private String resposta;
-
+    /**
+     *  Construtor Tem que ser passado o contexto e quem
+     *  vai 'ouvir' o listener
+     *
+     * @param context
+     */
     public MiddleServer(Context context) {
         this.context = context;
         queue = Volley.newRequestQueue(context);
@@ -40,9 +47,26 @@ public class MiddleServer extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //EventBus Register
+        EventBus.getDefault().register(MiddleServer.this);
     }
 
-    public String get(final Map<String,String> header, final Map<String, String > params ) {
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        //EventBus unRegister
+        EventBus.getDefault().unregister(MiddleServer.this);
+    }
+
+    /**
+     *  Metodo que pega informações do servidor
+     *
+     * @param header
+     * @param params
+     */
+    public void get(final Map<String,String> header, final Map<String, String > params ) {
 
         Log.d("INIT","Get");
 
@@ -52,7 +76,14 @@ public class MiddleServer extends Service {
                     @Override
                     public void onResponse(String response) {
                         Log.d("TEST", response);
-                        resposta = response;
+
+                        MessageServerEB message = new MessageServerEB();
+                        //TODO pegar apenas o value com getValue, nao esta dando
+                        message.setHeader(header);
+                        message.setResponse(response);
+
+                        //Postando Evento
+                        EventBus.getDefault().post(message);
 
                     }
                 },
@@ -75,9 +106,6 @@ public class MiddleServer extends Service {
 
         request.setTag("tag");
         queue.add(request);
-
-        return resposta;
-
     }
 
 
