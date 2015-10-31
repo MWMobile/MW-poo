@@ -19,9 +19,12 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import unb.poo.mwmobile.acts.HomeActivity;
 import unb.poo.mwmobile.acts.MainActivity;
+import unb.poo.mwmobile.models.MateriaCursada;
+import unb.poo.mwmobile.utils.Utils;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -80,27 +83,38 @@ public class DBCoreTest extends AndroidTestCase {
 
     @Test
     public void testAddUser() throws Exception {
-
+        User user = new User(110115716);                        // Adiciona um User 11/0115716
+        ArrayList<Materia> matList = new ArrayList<>();         //
+        ArrayList<MateriaCursada> hisList = new ArrayList<>();  //
+        matList.add(new Materia());                             //
+        hisList.add(new MateriaCursada());                      // Cria ArrayLists de matérias com uma informação apenas
+        db.addUser(user,matList,hisList);                       //
+        assertNotNull(db.getUser(0));                           // Checa se existe o user recém-criado
+        assertEquals(db.getUser(0).getMatricula(),110115716);   // Checa a matrícula
     }
 
     @Test
     public void testGetUser() throws Exception {
-
+        User user = db.getUser(0);                              // Verifica se há um user no DB
+        assertNotNull(user);                                    //
     }
 
     @Test
     public void testGetUser1() throws Exception {
-
+        User user = db.getUser("110115716");                    // Adicionei um "mock" com 11/0115716
+        assertNotNull(user);
     }
 
     @Test
     public void testUpdUser() throws Exception {
-
+        db.updUser(db.getUser(0));                              // TODO dar um jeito de verificar as informações além do status do objeto
+        assertNotNull(db.getUser(0));                           //
     }
 
     @Test
     public void testDelUser() throws Exception {
-
+        db.delUser(db.getUser(0));
+        assertNull(db.getUser(0));                              // Verifica se a exclusão foi efetuada.
     }
 
 }
