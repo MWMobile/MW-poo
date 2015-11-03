@@ -35,7 +35,7 @@ public class DBMat extends SQLiteOpenHelper {
     private static SQLiteDatabase db;
 
     /**
-     * Construtor do DB de matérias.
+     * Construtor do DB de materias.
      * @param context           Contexto.
      */
     public DBMat(Context context) {
@@ -44,7 +44,7 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * onCreate
-     * Cria um banco de dados de matérias, se não existir.
+     * Cria um banco de dados de materias, se nao existir.
      * @param db                Banco de Dados.
      */
     @Override
@@ -65,8 +65,8 @@ public class DBMat extends SQLiteOpenHelper {
      * onUpgrade
      * Troca o Banco de Dados, dropando o anterior, se existir.
      * @param db                Banco de Dados.
-     * @param oldVersion        Versão antiga do DB.
-     * @param newVersion        Versão nova do DB.
+     * @param oldVersion        Versao antiga do DB.
+     * @param newVersion        Versao nova do DB.
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -114,7 +114,7 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * printDbM
-     * Imprime o banco de dados das matérias.
+     * Imprime o banco de dados das materias.
      */
     public void printDbM(){
         openRead();
@@ -154,10 +154,10 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * addMat
-     * Funcao que adicona as matérias com seus campos nas duas tabelas desse db.
-     * O formato esta do mesmo jeito do db de User (até a explicação de porque duas TABLES)
-     * @param materia               Matéria a ser adicionada.
-     * @param horarios              Horários da matéria.
+     * Funcao que adicona as materias com seus campos nas duas tabelas desse db.
+     * O formato esta do mesmo jeito do db de User (ate a explicação de porque duas TABLES)
+     * @param materia               Materia a ser adicionada.
+     * @param horarios              Horerios da materia.
      */
     public void addMat(Materia materia, ArrayList<Horario> horarios){
         ContentValues values = new ContentValues();
@@ -185,21 +185,26 @@ public class DBMat extends SQLiteOpenHelper {
             db.insert(TABLE_HORARIO, null, values1);
         }
     }
-    // TODO métodos getMateria, delMateria
+    // TODO metodos getMateria, delMateria
 
     /**
-     * Método ainda não descrito, criado apenas para simular o acesso utilizado nos testes.
-     * @param string Nome da matéria a ser pesquisada no DB.
-     * @return retorna a maréria cujo nome foi passado inicialmente.
+     * Metodo ainda nao descrito, criado apenas para simular o acesso utilizado nos testes.
+     * @param string Nome da materia a ser pesquisada no DB.
+     * @return retorna a mareria cujo nome foi passado inicialmente.
      */
   public Materia getMateria(String string){
-        /*  String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string
+          String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string
                 + " OR " + KEY_IDM + " = " + string;
         return search(query);
-    }*/
+    }
 
-    /*Funcao de procura da materia solicitada na funcao acima*/
-    /*public Materia search(String query){
+    /**
+     * Funcao de busca de Materia dentro do DB
+     * @param query string que determina os parametros da busca
+     * @return Retorna a materia caracterizada pelos parametros da busca
+     */
+
+    public Materia search(String query){
         openRead();
 
         Cursor cursor = db.rawQuery(query, null);
@@ -207,17 +212,50 @@ public class DBMat extends SQLiteOpenHelper {
         Materia materias = null;
         if (cursor.moveToFirst()) {
             do {
-                //materias = new Materia(cursor.getString(1));
+                materias = new Materia();
                 materias.setNome(cursor.getString(1));
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 
         closeDB();
         return  materias;
-        */
-      Materia m = new Materia();
-    return m;}
 
+      }
+
+    /**
+     * Metodo que deleta uma materia alvo.
+     * @param materia materia que sera deletada dentro do db.
+     */
+    public void delMateria(Materia materia) {
+        openWrite();
+
+        String deletar = "DELETE FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = "
+                + materia.getNome();
+
+
+        db.execSQL(deletar);
+
+        closeDB();
+
+    }
+
+    /**
+     * Atualiza uma materia no db.  As possiveis atualizacoes sao com
+     * referencia ao nome, codigo ou turma nesse caso, mas podem ser alteradas
+     * para atualizarmos outros dados.
+     * @param materia   materia que devera ser atualizada.
+     */
+    public void updMateria(Materia materia){
+        openWrite();
+
+        String update = "UPDATE " + TABLE_MATERIA + " SET " + KEY_MATERIA + " = " + materia.getNome() +
+                " , " + KEY_IDM + " = " + materia.getCodigo() + " WHERE " + KEY_TURMA +
+                " = " + materia.getTurma();
+
+        db.execSQL(update);
+
+        closeDB();
+    }
 
 
 //    Falta passar o Context para a criacao do banco de dados
