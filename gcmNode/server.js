@@ -11,9 +11,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-app.post('/echo', function (req, res) {
-    res.json(req.body)
-})
+require('./core/routes.js')(app)
 
 app.post('*', function (req, res) {
     res.sendStatus(200)
@@ -22,7 +20,6 @@ app.post('*', function (req, res) {
 app.get('*', function (req, res) {
     res.sendStatus(200)
 })
-
 
 httpServer.listen(80)
 

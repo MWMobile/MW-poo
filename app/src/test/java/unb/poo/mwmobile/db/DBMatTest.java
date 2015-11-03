@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.Materia;
 
@@ -62,12 +64,11 @@ public class DBMatTest extends InstrumentationTestCase {
         ArrayList<Horario> horario = new ArrayList<>();         //
         horario.add(new Horario(10,10));                        // Cria uma array de informação de horario
         materia.setNome("ADL");                                 //
-        materia.setCodigo(1122)                                 //
+        materia.setCodigo(1122);                                 //
         materia.setHorarios(horario);                           //
         db.addMat(materia, horario);                            //
 
-
-        assertNotNull(db.getMateria(String s = "ADL"));         // Checa se existe o materia recém-criada
+        assertNotNull(db.getMateria("ADL"));         // Checa se existe o materia recém-criada
         assertEquals(db.getMateria("ADL").getCodigo(), 1122);    // Checa o código
     }
 
@@ -77,11 +78,11 @@ public class DBMatTest extends InstrumentationTestCase {
         ArrayList<Horario> horario = new ArrayList<>();         //
         horario.add(new Horario(10, 10));                        // Cria uma array de informação de horario
         materia.setNome("ADL");                                 //
-        materia.setCodigo(1122)                                 //
+        materia.setCodigo(1122);                                 //
         materia.setHorarios(horario);                           //
         db.addMat(materia, horario);                            //
 
-        Materia matNew = db.getMateria("ADL")                   //
+        Materia matNew = db.getMateria("ADL");                   //
         assertNotNull(matNew);                                  //Checa se o DB possui a materia
     }
 
@@ -91,7 +92,7 @@ public class DBMatTest extends InstrumentationTestCase {
         ArrayList<Horario> horario = new ArrayList<>();         //
         horario.add(new Horario(10, 10));                        // Cria uma array de informação de horario
         materia.setNome("ADL");                                 //
-        materia.setCodigo(1122)                                 //
+        materia.setCodigo(1122);                                 //
         materia.setHorarios(horario);                           //
         db.addMat(materia, horario);                            //
 
@@ -105,13 +106,13 @@ public class DBMatTest extends InstrumentationTestCase {
         ArrayList<Horario> horario = new ArrayList<>();         //
         horario.add(new Horario(10,10));                        // Cria uma array de informação de horario
         materia.setNome("ADL");                                 //
-        materia.setCodigo(1122)                                 //
+        materia.setCodigo(1122);                                 //
         materia.setHorarios(horario);                           //
         db.addMat(materia, horario);                            //
 
 
         db.delMateria(db.getMateria("ADL"));
-        assertNull(db.getMAteria("ADL"));                        // Verifica se a exclusão foi efetuada.
+        assertNull(db.getMateria("ADL"));                        // Verifica se a exclusão foi efetuada.
    }
 
 }
