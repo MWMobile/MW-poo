@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.Materia;
+import unb.poo.mwmobile.models.Professor;
 
 /**
  * Created by Raphael on 25/10/2015.
@@ -119,7 +120,7 @@ public class DBMat extends SQLiteOpenHelper {
     public void printDbM(){
         openRead();
 
-        String query = "SELECT * FROM "+ TABLE_MATERIA;
+        String query = "SELECT * FROM " + TABLE_MATERIA;
         Cursor cursor = db.rawQuery(query, null);
 
         Log.d("Printint Materia", " ");
@@ -198,9 +199,14 @@ public class DBMat extends SQLiteOpenHelper {
      * @param string Nome da materia a ser pesquisada no DB.
      * @return retorna a mareria cujo nome foi passado inicialmente.
      */
-  public Materia getMateria(String string){
-          String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string
-                + " OR " + KEY_IDM + " = " + string;
+    public Materia getMateria(String string){
+        String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = '" + string
+                + "'";
+        return search(query);
+    }
+
+    public Materia getMateria(int codigo){
+        String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_IDM + " = " + codigo;
         return search(query);
     }
 
@@ -219,7 +225,12 @@ public class DBMat extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 materias = new Materia();
+                materias.setCodigo(cursor.getInt(0));
                 materias.setNome(cursor.getString(1));
+                materias.setCreditos(cursor.getInt(2));
+                materias.setProfessor(new Professor(cursor.getString(3)));
+                materias.setTurma(cursor.getString(4));
+                materias.setSala(cursor.getString(5));
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 
@@ -235,8 +246,8 @@ public class DBMat extends SQLiteOpenHelper {
     public void delMateria(Materia materia) {
         openWrite();
 
-        String deletar = "DELETE FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = "
-                + materia.getNome();
+        String deletar = "DELETE FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = '"
+                + materia.getNome() + "'";
 
 
         db.execSQL(deletar);
@@ -254,9 +265,9 @@ public class DBMat extends SQLiteOpenHelper {
     public void updMateria(Materia materia){
         openWrite();
 
-        String update = "UPDATE " + TABLE_MATERIA + " SET " + KEY_MATERIA + " = " + materia.getNome() +
-                " , " + KEY_IDM + " = " + materia.getCodigo() + " WHERE " + KEY_TURMA +
-                " = " + materia.getTurma();
+        String update = "UPDATE " + TABLE_MATERIA + " SET " + KEY_MATERIA + " = '" + materia.getNome() +
+                "', " + KEY_IDM + " = '" + materia.getCodigo() + "' WHERE " + KEY_TURMA +
+                " = '" + materia.getTurma() + "'";
 
         db.execSQL(update);
 

@@ -92,7 +92,6 @@ public class RegistrationIntentService extends IntentService {
      * @param token GCM token
      * @throws IOException se nao conseguir conecao com o GCM
      */
-    // [START subscribe_topics]
     private void subscribeTopics(String token) throws IOException {
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
         for (String topic : GCMConfig.getTopics()) {
