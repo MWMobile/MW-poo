@@ -40,14 +40,23 @@ public class SigraTest extends AndroidTestCase {
     private ArrayList<MateriaCursada> materiasCursadas;
 
 
-
+    /**
+     * Seta todas as dependeicias necessarias
+     * para fazer os testes
+     *
+     * da um mock manual nos mesmos dados que
+     * estao no servidor para testar se o dado
+     * recebido é o esperado
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         super.setUp();
         ArrayList<Materia> materias = new ArrayList<Materia>();
         ArrayList<MateriaCursada> materiasCursadas = new ArrayList<MateriaCursada>();
 
-
+        //Mock nas materias
         materias.add(createMockMateria("Programacao Orientada a Objetos", 116795, 4));
         materias.add(createMockMateria("Elementos de Automacao",170798,4));
         materias.add(createMockMateria("Robotica Industrial",169641,4));
@@ -57,6 +66,7 @@ public class SigraTest extends AndroidTestCase {
 
 
 
+        //Mock no historico
         materiasCursadas.add(createMockMateriaCursada("Calculo 1",113034,6,"SS",true,1));
         materiasCursadas.add(createMockMateriaCursada("Fisica 1",118001,4,"MM",true,1));
         materiasCursadas.add(createMockMateriaCursada("Fisica 1 Experimental",118010,2,"MS",true,1));
@@ -115,18 +125,24 @@ public class SigraTest extends AndroidTestCase {
 
 
 
-
+        //setando a activity para
+        //passar o context para o contrutor
+        //da classe a ser testada
         activity = Robolectric.setupActivity(Activity.class);
         sigra = new Sigra(activity);
 
+        //registrando-se no evento
         EventBus.getDefault().register(SigraTest.this);
 
+
+        //Logando com o usuario
         sigra.autentica("123456789", "1234");
     }
 
     @After
     public void tearDown() throws Exception {
 
+        //Excluindo o registro do EventBus
         EventBus.getDefault().unregister(SigraTest.this);
         super.tearDown();
     }
@@ -135,9 +151,13 @@ public class SigraTest extends AndroidTestCase {
     @Test
     public void requestNomeTest() throws Exception{
 
+
+        //Testa se teve un token enviado
         if(token == null)
             assertTrue(false);
 
+        //Pede um requeste do nome
+        //Sera verifica nos onEvent
         sigra.requestNome(token);
     }
 
@@ -156,7 +176,14 @@ public class SigraTest extends AndroidTestCase {
         sigra.requestHistorico(token);
     }
 
-
+    /**
+     * Os onEvent estao "ouvindo" o evento que a
+     * classe que se conecta com o servidor envia
+     * neles que estao definidos os asserts
+     * pos é a partir deles que tenho assesso aos
+     * dados do servidor
+     *
+     */
     public void onEvent(MessageServerEB message){
         if(message.getHeader() != "login")
             return;
@@ -186,6 +213,13 @@ public class SigraTest extends AndroidTestCase {
 
         assertEquals(materiasCursadas,message.getResponse());
     }
+
+    /**
+     * Metodos para criar o mock
+     * que fara a comparacao com os
+     * dados do servidor
+     *
+     */
 
 
     private Materia createMockMateria(String nome, int codigo, int creditos){
