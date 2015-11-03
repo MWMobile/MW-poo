@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class UserTest extends AndroidTestCase {
 
     User u;
+    //Parcel in;
 
     ArrayList<Materia> materias;
     ArrayList<MateriaCursada> historico;
@@ -29,7 +30,7 @@ public class UserTest extends AndroidTestCase {
     String curso;
     int periodo;
 
-    Parcel parcel;
+    //Parcel parcel;
 
     @Before
     public void setUp() throws Exception {
@@ -63,7 +64,7 @@ public class UserTest extends AndroidTestCase {
         u.setMaterias(materias);
         u.setHistorico(historico);
 
-        parcel = Parcel.obtain();
+        //parcel = Parcel.obtain();
     }
 
     @After
@@ -178,9 +179,15 @@ public class UserTest extends AndroidTestCase {
 
     @Test
     public void testWriteToParcel() throws Exception {
-        Bundle bTest = new Bundle();
-        bTest.putParcelable("JUnitUser",u);
-        User newUser = bTest.getParcelable("JUnitUser");
+        //Bundle bTest = new Bundle();
+        //bTest.putParcelable("JUnitUser",u);
+        //User newUser = bTest.getParcelable("JUnitUser");
+
+        Parcel in = Parcel.obtain();
+        assertNotNull(in);
+        u.writeToParcel(in,0);
+        in.setDataPosition(0);
+        User newUser = User.CREATOR.createFromParcel(in);
 
         assertNotNull(newUser);
         assertEquals(u.getNome(),newUser.getNome());
@@ -188,10 +195,11 @@ public class UserTest extends AndroidTestCase {
         assertEquals(u.getIRA(),newUser.getIRA());
         assertEquals(u.getMatricula(),newUser.getMatricula());
         assertEquals(u.getPeriodo(),newUser.getPeriodo());
-        assertEquals(u.getSenha(),newUser.getSenha());
+        assertEquals(u.getSenha(), newUser.getSenha());
         assertNotNull(newUser.getMateria("POO"));
         assertNotNull(newUser.getMateriaCursada("ED"));
-        assertEquals(newUser.getMateria("POO").getProfessor().getNome(),"Rodrigo Bonifacio");
+        assertEquals(newUser.getMateria("POO").getProfessor().getNome(), "Rodrigo Bonifacio");
+        in.recycle();
     }
 
 

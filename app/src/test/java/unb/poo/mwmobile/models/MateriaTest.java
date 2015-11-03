@@ -169,9 +169,14 @@ public class MateriaTest {
 
     @Test
     public void testWriteToParcel() throws Exception {
-        Bundle bTest = new Bundle();
-        bTest.putParcelable("JUnitMateria", m);
-        Materia newMateria = bTest.getParcelable("JUnitMateria");
+        //Bundle bTest = new Bundle();
+        //bTest.putParcelable("JUnitMateria", m);
+        //Materia newMateria = bTest.getParcelable("JUnitMateria");
+        Parcel in = Parcel.obtain();
+        assertNotNull(in);
+        m.writeToParcel(in,m.describeContents());
+        in.setDataPosition(0);
+        Materia newMateria = Materia.CREATOR.createFromParcel(in);
 
         assertNotNull(newMateria);
         assertEquals(m.getCodigo(), newMateria.getCodigo());
@@ -181,5 +186,6 @@ public class MateriaTest {
         assertNotNull(newMateria.getHorarios());
         assertEquals(m.getSala(),newMateria.getSala());
         assertEquals(m.getTurma(),newMateria.getTurma());
+        in.recycle();
     }
 }

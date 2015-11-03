@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
         /*
         Activity que checa se ele esta logado ou nao e redireciona para login ou home conforme
         home > logado
@@ -72,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
             depois esta activity se mata
         */
 
+
         //User user = db.getUser(0);
+
 
         DBCore db = new DBCore(this);
         db.printDB();
@@ -142,4 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }
