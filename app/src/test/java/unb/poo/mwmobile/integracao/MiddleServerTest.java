@@ -9,24 +9,28 @@ import android.util.Log;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
+import unb.poo.mwmobile.acts.MainActivity;
 import unb.poo.mwmobile.eventBus.MessageServerEB;
 
 /**
  * Created by Eduardo Scartezini on 02/11/2015.
  */
+
+@RunWith(RobolectricTestRunner.class)
 public class MiddleServerTest extends AndroidTestCase {
     private static final String TAG = "MiddleServerTest";
 
 
     private MiddleServer middleServer;
     private Activity activity;
-    private Context context;
-
 
     private Map<String, String> header;
     private Map<String, String> params;
@@ -36,11 +40,10 @@ public class MiddleServerTest extends AndroidTestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-       // activity = Robolectric.setupActivity(MainActivity.class);
-        context = new MockContext();
 
-        middleServer = new MiddleServer(getContext());
+        activity = Robolectric.setupActivity(Activity.class);
 
+        middleServer = new MiddleServer(activity);
 
         header = new HashMap<String ,String>();
         params = new HashMap<String ,String>();
