@@ -296,6 +296,31 @@ public class DBCore extends SQLiteOpenHelper {
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
 
+        String query2 = "SELECT * FROM " + TABLE_MATERIA;
+        Cursor cursor2 = db.rawQuery(query2, null);
+
+        if (cursor2.moveToFirst()) {
+            do {
+                Materia m = new Materia();
+                m.setCodigo(cursor2.getInt(1));
+                m.setNome(cursor2.getString(2));
+            } while (cursor2.moveToNext() || cursor2.isLast() == true);
+        }
+
+        String query3 = "SELECT * FROM " + TABLE_HIST;
+        Cursor cursor3 = db.rawQuery(query3, null);
+
+        Log.d("Printing Historico", " ");
+
+        if (cursor3.moveToFirst()) {
+            do {
+                MateriaCursada m = new MateriaCursada();
+                m.setCodigo(cursor2.getInt(1));
+                m.setNome(cursor2.getString(2));
+            } while (cursor3.moveToNext() || cursor3.isLast() == true);
+        }
+
+
         closeDB();
         return  user;
     }
