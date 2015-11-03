@@ -41,9 +41,6 @@ public class User implements Parcelable{
 
   /* em vez de setar uma array list e tal, o certo seria ter um addMateria na arraylist
   * nessa estrutura ele deve poder procurar materias na lista, adicionar e remover
-  * TODO criar um addMateria ou addMateriaCursada (revisar os mÃ©todos criados)
-  * TODO criar um delMateria ou delMateriaCursada
-  * TODO criar um getMateria ou getMateriaCursada (revisar os mÃ©todos criados)
   * */
 
     /**

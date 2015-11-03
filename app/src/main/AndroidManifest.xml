@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="unb.poo.mwmobile">
 
     <!-- To access Google+ APIs: -->
@@ -20,11 +21,19 @@
     <permission android:name="unb.poo.mwmobile.permission.C2D_MESSAGE" android:protectionLevel="signature" />
     <uses-permission android:name="unb.poo.mwmobile.permission.C2D_MESSAGE" />
 
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+         <meta-data
+            android:name="com.google.android.gms.version"
+            tools:replace="android:value"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".acts.MainActivity"
             android:label="@string/app_name" >
@@ -34,10 +43,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-            <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".acts.LoginActivity"
