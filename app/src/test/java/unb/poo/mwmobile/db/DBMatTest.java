@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import unb.poo.mwmobile.models.Horario;
+
 /**
  * Created by Raphael on 26/10/2015.
  */
@@ -55,6 +57,14 @@ public class DBMatTest extends InstrumentationTestCase {
 
     @Test
     public void testAddMat() throws Exception{
-
+        Materia materia = new Materia();                        // Adiciona uma materia
+        ArrayList<Horario> horario = new ArrayList<>();         //
+        horario.add(new Horario(10,10));                        // Cria uma array de informação de horario
+        materia.setNome("ADL");                                 //
+        materia.setCodigo(1122)                                 //
+        materia.setHorarios(horario);                           //
+        db.addMat(materia, horario);                            //
+        assertNotNull(db.getMateria(String s = "ADL"));         // Checa se existe o materia recém-criada
+        assertEquals(db.getMateria("ADL").getCodigo(),1122);    // Checa o código
     }
 }

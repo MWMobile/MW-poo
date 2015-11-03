@@ -186,9 +186,14 @@ public class DBMat extends SQLiteOpenHelper {
         }
     }
     // TODO métodos getMateria, delMateria
-    
-    /*public Materia getMateria(String string){
-        String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string
+
+    /**
+     * Método ainda não descrito, criado apenas para simular o acesso utilizado nos testes.
+     * @param string Nome da matéria a ser pesquisada no DB.
+     * @return retorna a maréria cujo nome foi passado inicialmente.
+     */
+  public Materia getMateria(String string){
+        /*  String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string
                 + " OR " + KEY_IDM + " = " + string;
         return search(query);
     }*/
@@ -209,7 +214,14 @@ public class DBMat extends SQLiteOpenHelper {
 
         closeDB();
         return  materias;
-    }*/
+        */
+      Materia m = new Materia();
+    return m;}
+
+
 
 //    Falta passar o Context para a criacao do banco de dados
+
+
+
 }
