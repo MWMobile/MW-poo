@@ -38,11 +38,6 @@ public class Materia implements Parcelable {
     protected String sala;
     protected int creditos;
 
-    public Materia () {
-
-    }
-
-
     /**
      *Metodo de leitura das informacoes da materia pelo Parcel.
      * @param in classe: Parcel
@@ -70,6 +65,10 @@ public class Materia implements Parcelable {
         for (int i = 0; i < tam; i++) {
             horarios.add(new Horario(horarioHora[i],horarioDia[i]));
         }
+    }
+
+    public Materia() {
+        
     }
 
     /**

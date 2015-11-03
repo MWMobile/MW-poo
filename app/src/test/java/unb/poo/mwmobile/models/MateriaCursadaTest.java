@@ -1,11 +1,7 @@
 package unb.poo.mwmobile.models;
 
 import android.os.Bundle;
-<<<<<<< HEAD
 import android.os.Parcel;
-=======
->>>>>>> cbaf0be8806fb9d6f1aa0119578a1aff753b2c2b
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
