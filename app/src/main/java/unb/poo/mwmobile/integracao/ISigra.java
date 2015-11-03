@@ -34,35 +34,50 @@ public interface ISigra {
 
     /**
      * Pede o ira de um usuario a partir
-     * da matricula do mesmo como parametro
+     * da token do mesmo como parametro
      *
-     * @param matricula
+     * @param token
      */
-    public void requestIRA(String matricula);
+    public void requestIRA(String token);
 
     /**
      * Pede o curso de um usuario a partir
-     * da matricula do mesmo como parametro
+     * da token do mesmo como parametro
      *
-     * @param matricula
+     * @param token
      */
-    public void requestCurso(String matricula);
+    public void requestCurso(String token);
 
     /**
      * Pede as materia de um usuario a partir
-     * da matricula do mesmo como parametro
+     * da token do mesmo como parametro
      *
-     * @param matricula
+     * @param token
      */
-    public void requestMaterias(String matricula);
+    public void requestMaterias(String token);
 
     /**
      * Pede o periodo/semestre de um usuario a partir
-     * da matricula do mesmo como parametro
+     * da token do mesmo como parametro
      *
-     * @param matricula
+     * @param token
      */
-    public void requestPeriodo(String matricula);
+    public void requestPeriodo(String token);
+
+    /**
+     *  Pede o Historico de um usuario a partir
+     * da token do mesmo como parametro
+     *
+     * @param token
+     */
+    public void requestHistorico(String token);
 
 
+    /**
+     * Pede O nome de um usuario a partir
+     * da token do mesmo como parametro
+     *
+     * @param token
+     */
+    public void requestNome(String token);
 }
