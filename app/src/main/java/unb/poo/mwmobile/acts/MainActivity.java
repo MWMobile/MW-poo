@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+
         /*
         Activity que checa se ele esta logado ou nao e redireciona para login ou home conforme
         home > logado
@@ -140,4 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

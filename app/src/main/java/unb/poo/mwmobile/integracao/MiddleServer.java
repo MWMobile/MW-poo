@@ -21,7 +21,11 @@ import de.greenrobot.event.EventBus;
 import unb.poo.mwmobile.eventBus.MessageServerEB;
 
 /**
- * Created by sousa on 27/10/2015.
+ * Classe para fazer o request ao server
+ * que faz o intermedio entre a aplicação e
+ * o CPD.
+ *
+ * Created by scartezini on 27/10/2015.
  */
 public class MiddleServer extends Service {
 
@@ -32,6 +36,7 @@ public class MiddleServer extends Service {
     private RequestQueue queue;
     private Context context;
     private String resposta;
+
     /**
      *  Construtor Tem que ser passado o contexto e quem
      *  vai 'ouvir' o listener
@@ -64,7 +69,9 @@ public class MiddleServer extends Service {
      *  Metodo que pega informações do servidor
      *
      * @param header
+     *      paramentro para verificar o que esta sendo pedido
      * @param params
+     *      paramntro que deve ser enviado para qualquer push do servidor
      */
     public void get(final Map<String,String> header, final Map<String, String > params ) {
 
@@ -110,15 +117,6 @@ public class MiddleServer extends Service {
 
 
 
-
-
-
-
-    public interface PostCommentResponseListener {
-        public void requestStarted();
-        public void requestCompleted();
-        public void requestEndedWithError(VolleyError error);
-    }
 
     @Nullable
     @Override
