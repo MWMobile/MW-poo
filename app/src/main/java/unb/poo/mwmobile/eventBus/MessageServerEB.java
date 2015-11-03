@@ -19,8 +19,6 @@ public class MessageServerEB {
     //Na classe que ouvir o evento sera melhor explicado
     private Map<String,String> header;
 
-
-
     public String getResponse() {
         return response;
     }

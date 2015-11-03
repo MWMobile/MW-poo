@@ -1,9 +1,7 @@
 package unb.poo.mwmobile.integracao;
 
 import android.app.Activity;
-import android.content.Context;
 import android.test.AndroidTestCase;
-import android.test.mock.MockContext;
 import android.util.Log;
 
 import org.junit.After;
@@ -17,7 +15,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
-import unb.poo.mwmobile.acts.MainActivity;
 import unb.poo.mwmobile.eventBus.MessageServerEB;
 
 /**
