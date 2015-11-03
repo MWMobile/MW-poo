@@ -14,6 +14,11 @@ import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
 
+// TODO modificar o autor e verificar a documentação Javadoc.
+
+/**
+ * @author Raphael Queiroz
+ */
 public class DBCore extends SQLiteOpenHelper {
 
     private static final String NOME_DB = "userStorage";
@@ -33,21 +38,28 @@ public class DBCore extends SQLiteOpenHelper {
     private static final String KEY_CURSO = "curso";
     private static final String KEY_PERIODO = "periodo";
     private static SQLiteDatabase db;
-
+//    TODO verificar estes campos a adicionar
 //    Campos para adicionar
 //    private Materia[] materias;
 //    private Materia[] historico;
 //    private double IRA;
 
-
+    /**
+     * Construtor do Banco de Dados
+     * @param context       Contexto.
+     */
     public DBCore(Context context){
         super(context, NOME_DB, null, VERSAO_DB);
     }
 
-    /*Criação do banco de dados caso não haja nenhum
-    * Deixei a criacao de varias tables por causa de normalizacao (de DB)
-    * onde separa-se em varias tables para otimizacao e nao colocar uma array
-    * inteira dentro de uma lacuna*/
+    /**
+     * ON_CREATE
+     * Criação do banco de dados caso não haja nenhum
+     * Deixei a criacao de varias tables por causa de normalizacao (de DB)
+     * onde separa-se em varias tables para otimizacao e nao colocar uma array
+     * inteira dentro de uma lacuna
+     * @param db            Banco de Dados a ser criado.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createDb = "CREATE TABLE IF NOT EXISTS " + TABLE_USER +
@@ -66,8 +78,15 @@ public class DBCore extends SQLiteOpenHelper {
         this.db = db;
     }
 
-    /*Caso haja um banco de dados e queira criar um novo, drop table deleta o db anterior
-    e chama a função onCreate*/
+    /**
+     * ON_UPGRADE
+     * Substitui um eventual Banco de Dados anterior.
+     * Caso haja um banco de dados e queira criar um novo, drop table deleta o db anterior
+     * e chama a função onCreate().
+     * @param db                Banco de Dados.
+     * @param oldVersion        Versão antiga do DB.
+     * @param newVersion        Versão nova do DB.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
@@ -76,19 +95,34 @@ public class DBCore extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * OPEN_WRITE
+     * Abre o Banco de Dados (escrita).
+     */
     private void openWrite(){
         db = this.getWritableDatabase();
     }
 
+    /**
+     * OPEN_READ
+     * Abre o Banco de Dados (leitura).
+     */
     private void openRead(){
         db = this.getReadableDatabase();
     }
 
+    /**
+     * CLOSE_DB
+     * Fecha o banco de dados.
+     */
     private void closeDB() {
         db.close();
     }
 
-//    Funcao para testes que dropa a tabela user do DB (onde armazena o usuario logado)
+    /**
+     * DROP_DB
+     * Funcao para testes que dropa a tabela user do DB (onde armazena o usuario logado)
+     */
     public void dropDB() {
         openWrite();
 
@@ -101,7 +135,10 @@ public class DBCore extends SQLiteOpenHelper {
         closeDB();
     }
 
-//    Funcao para testes que imprime o SQLite por inteiro
+    /**
+     * PRINT_DB
+     * Imprime o Banco de Dados inteiro.
+     */
     public void printDB(){
         openRead();
 
@@ -151,11 +188,14 @@ public class DBCore extends SQLiteOpenHelper {
     }
 
 
-//    CRUD
-//    ========================================================================================
-//    CREATE
-//    Adiciona um usuario no db
-//    (usado para logar, o DB so tera 1 usuario por enquando)
+    /**
+     * ADD_USER
+     * Adiciona um User ao Banco de Dados. (utilizado para o login)
+     * O DB tera 1 usuario, por enquanto.
+     * @param user              Usuario a ser adicionado.
+     * @param materia           Materias atuais do usuario.
+     * @param historico         Historico do usuario.
+     */
     public void addUser(User user, ArrayList<Materia> materia, ArrayList<MateriaCursada> historico){
         openWrite();
 
@@ -212,21 +252,36 @@ public class DBCore extends SQLiteOpenHelper {
         closeDB();
     }
 
-//    READ
-//    faz pesquisa no db por um usuario dado seu index
-//    sempre sera usado 0 pois so um usuario estara presente no DB, o unico logado
-//    por motivos futuros o metodo de procura por string (matricula ou nome) foi adicionado
+    /**
+     * GET_USER
+     * faz pesquisa no db por um usuario dado seu index; sempre sera usado 0 pois so um usuario estara
+     * presente no DB (o unico logado).
+     * @param index         Indice do usuario a ser pesquisado.
+     * @return              Resultado da busca.
+     */
     public User getUser(int index){
         String query = "SELECT * FROM " + TABLE_USER + " WHERE " + KEY_ID + " = " + index;
         return search(query);
     }
 
+    /**
+     * GET_USER
+     * Procura por um usuario utilizando uma string (matricula ou nome) como chave.
+     * @param string        Matricula ou nome do usuario.
+     * @return              Resultado da busca.
+     */
     public User getUser(String string){
         String query = "SELECT * FROM " + TABLE_USER + " WHERE " + KEY_MATRICULA + " = " + string +
                 " OR " + KEY_NOME + " = " + string;
         return search(query);
     }
 
+    /**
+     * SEARCH
+     * Funcao que, dada uma query, busca um User no Banco de Dados.
+     * @param query         String de comando de busca no Banco de Dados.
+     * @return              Usuario a ser encontrado, ou null se o mesmo nao existir.
+     */
     private User search(String query) {
         openRead();
 
@@ -245,11 +300,14 @@ public class DBCore extends SQLiteOpenHelper {
         return  user;
     }
 
-//    UPDATE
-//    faz uma atualizacao do banco de dados de acordo com a escolha do controller
-//    como matricula e uma chave que nao se muda, sera usado ela como forma de achar o usuario
-//    assim, o usuario podera alterar sua senha (caso queira) e seu nome (caso errado)
-//    em breve sera adicionado o update relacionado as materias
+    /**
+     * UPDATE
+     * Funcao que atualiza o usuario no banco de dados. faz uma atualizacao do banco de dados de acordo com a escolha
+     * do controller como matricula e uma chave que nao se muda, sera usado ela como forma de achar o usuario;
+     * assim, o usuario podera alterar sua senha (caso queira) e seu nome (caso errado)
+     * TODO adicionar update relacionando as materias
+     * @param user      Usuario a ser atualizado.
+     */
     public void updUser(User user){
         openWrite();
 
@@ -262,7 +320,11 @@ public class DBCore extends SQLiteOpenHelper {
         closeDB();
     }
 
-//    DELETE
+    /**
+     * DELETE
+     * Funcao que deleta um User do DB, procurando pela matricula.
+     * @param user      Usuario a ser deletado.
+     */
     public void delUser(User user){
         openWrite();
 
