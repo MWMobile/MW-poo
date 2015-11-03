@@ -14,8 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.db.DBCore;
+import unb.poo.mwmobile.integracao.MiddleServer;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.utils.MateriaAdapter;
 import unb.poo.mwmobile.utils.Utils;
@@ -37,10 +42,9 @@ public class HomeActivity extends AppCompatActivity {
         //aqui verifico se esta funcionando aconexao com servidor
 /*
         EventBus.getDefault().register(HomeActivity.this);
-        Map<String ,String> header = new HashMap<String ,String>();
+        String header = new String();
         Map<String ,String> params = new HashMap<String ,String>();
         params.put("arroz", "arroz");
-        header.put("teste", "testando");
         MiddleServer middleServer = new MiddleServer(HomeActivity.this);
         middleServer.get(header, params);
 */

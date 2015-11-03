@@ -13,11 +13,7 @@ import java.util.Map;
 public class MessageServerEB {
     private String response;
 
-    //TODO mudar apenas para string
-    //TODO problema em usar header.getValue()
-    //Server para definir quando cada evento deve ser ouvido
-    //Na classe que ouvir o evento sera melhor explicado
-    private Map<String,String> header;
+    private String header;
 
     public String getResponse() {
         return response;
@@ -27,11 +23,11 @@ public class MessageServerEB {
         this.response = response;
     }
 
-    public Map<String, String> getHeader() {
+    public String getHeader() {
         return header;
     }
 
-    public void setHeader(Map<String, String> header) {
+    public void setHeader(String header) {
         this.header = header;
     }
 }

@@ -20,12 +20,12 @@ import java.util.Map;
 public class Sigra implements ISigra {
 
     private MiddleServer server;
-    private Map<String, String> header;
+    private String header;
     private Map<String, String> params;
 
     public Sigra(Context context) {
         server = new MiddleServer(context);
-        header = new  HashMap<String, String>();
+        header = new  String();
         params  = new  HashMap<String, String>();
     }
 
@@ -33,7 +33,8 @@ public class Sigra implements ISigra {
     public void autentica(String matricula, String senha) {
 
 
-        header.put("header","login");
+        header = "login";
+
         params.put("matricula",matricula);
         params.put("senha",senha);
 
@@ -41,33 +42,50 @@ public class Sigra implements ISigra {
     }
 
     @Override
-    public void requestIRA(String matricula) {
-        header.put("header","IRA");
-        params.put("matricula",matricula);
+    public void requestIRA(String token) {
+
+        header = "getIra";
+        params.put("token", token);
 
         server.get(header, params);
     }
 
     @Override
-    public void requestCurso(String matricula) {
-        header.put("header","curso");
-        params.put("matricula",matricula);
+    public void requestCurso(String token) {
+        header = "getCurso";
+        params.put("token", token);
 
         server.get(header,params);
     }
 
     @Override
-    public void requestMaterias(String matricula) {
-        header.put("header","materias");
-        params.put("matricula",matricula);
+    public void requestMaterias(String token) {
+        header = "getMaterias";
+        params.put("token", token);
 
         server.get(header,params);
     }
 
     @Override
-    public void requestPeriodo(String matricula) {
-        header.put("header","periodo");
-        params.put("matricula",matricula);
+    public void requestPeriodo(String token) {
+        header = "getPeriodo";
+        params.put("token", token);
+
+        server.get(header,params);
+    }
+
+    @Override
+    public void requestHistorico(String token) {
+        header = "getHistorico";
+        params.put("token", token);
+
+        server.get(header,params);
+    }
+
+    @Override
+    public void requestNome(String token) {
+        header = "getNome";
+        params.put("token", token);
 
         server.get(header,params);
     }
