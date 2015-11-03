@@ -54,10 +54,10 @@ public class DBCore extends SQLiteOpenHelper {
 
     /**
      * ON_CREATE
-     * Criação do banco de dados caso não haja nenhum
+     * Criacao do banco de dados caso nao haja nenhum.
      * Deixei a criacao de varias tables por causa de normalizacao (de DB)
      * onde separa-se em varias tables para otimizacao e nao colocar uma array
-     * inteira dentro de uma lacuna
+     * inteira dentro de uma lacuna.
      * @param db            Banco de Dados a ser criado.
      */
     @Override
@@ -84,8 +84,8 @@ public class DBCore extends SQLiteOpenHelper {
      * Caso haja um banco de dados e queira criar um novo, drop table deleta o db anterior
      * e chama a função onCreate().
      * @param db                Banco de Dados.
-     * @param oldVersion        Versão antiga do DB.
-     * @param newVersion        Versão nova do DB.
+     * @param oldVersion        Versao antiga do DB.
+     * @param newVersion        Versao nova do DB.
      */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -172,7 +172,7 @@ public class UserTest extends AndroidTestCase {
 
     @Test
     public void testDescribeContents() throws Exception {
-
+        assertEquals(u.describeContents(),0);
     }
 
 
@@ -182,6 +182,7 @@ public class UserTest extends AndroidTestCase {
         bTest.putParcelable("JUnitUser",u);
         User newUser = bTest.getParcelable("JUnitUser");
 
+        assertNotNull(newUser);
         assertEquals(u.getNome(),newUser.getNome());
         assertEquals(u.getCurso(),newUser.getCurso());
         assertEquals(u.getIRA(),newUser.getIRA());

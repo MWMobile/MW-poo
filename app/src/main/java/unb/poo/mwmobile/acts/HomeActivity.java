@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.utils.MateriaAdapter;
@@ -28,6 +29,21 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+
+        //TODO teste do Scartezini
+        //Problema com teste unitario para passar o  contexto, mas
+        //aqui verifico se esta funcionando aconexao com servidor
+/*
+        EventBus.getDefault().register(HomeActivity.this);
+        Map<String ,String> header = new HashMap<String ,String>();
+        Map<String ,String> params = new HashMap<String ,String>();
+        params.put("arroz", "arroz");
+        header.put("teste", "testando");
+        MiddleServer middleServer = new MiddleServer(HomeActivity.this);
+        middleServer.get(header, params);
+*/
 
         /*
         o codigo aqui pega sua propria intent e extrai dela o objeto de usuario que lhe foi passado
@@ -115,4 +131,22 @@ public class HomeActivity extends AppCompatActivity {
         }, 2000);
     }
 
+
+
+    //TODO teste do Scartezini
+    //Problema com teste unitario para passar o  contexto, mas
+    //aqui verifico se esta funcionando aconexao com servidor
+/**
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        EventBus.getDefault().unregister(HomeActivity.this);
+    }
+
+    public void onEventMainThread(MessageServerEB message){
+        Toast.makeText(this, message.getResponse()+"!!!", Toast.LENGTH_SHORT).show();
+        Log.d("TEST",message.getResponse());
+    }
+ **/
 }

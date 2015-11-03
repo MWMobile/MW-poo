@@ -158,6 +158,7 @@ public class DBMat extends SQLiteOpenHelper {
      * O formato esta do mesmo jeito do db de User (ate a explicação de porque duas TABLES)
      * @param materia               Materia a ser adicionada.
      * @param horarios              Horerios da materia.
+     * @param horarios              Horarios da materia.
      */
     public void addMat(Materia materia, ArrayList<Horario> horarios){
         ContentValues values = new ContentValues();
@@ -186,6 +187,7 @@ public class DBMat extends SQLiteOpenHelper {
         }
     }
     // TODO metodos getMateria, delMateria
+
 
     /**
      * Metodo ainda nao descrito, criado apenas para simular o acesso utilizado nos testes.
