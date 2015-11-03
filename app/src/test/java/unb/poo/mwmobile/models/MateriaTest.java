@@ -1,10 +1,18 @@
 package unb.poo.mwmobile.models;
 
+import android.os.Bundle;
+import android.os.Parcel;
+
+import junit.framework.Assert;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.Exception;
 import java.util.ArrayList;
+
+import dalvik.annotation.TestTargetClass;
 
 import static org.junit.Assert.*;
 
@@ -152,5 +160,26 @@ public class MateriaTest {
         int newCreditos = 6;
         m.setCreditos(newCreditos);
         assertEquals(newCreditos, m.getCreditos());
+    }
+
+    @Test
+    public void testDescribeContents() throws Exception {
+        assertEquals(m.describeContents(),0);
+    }
+
+    @Test
+    public void testWriteToParcel() throws Exception {
+        Bundle bTest = new Bundle();
+        bTest.putParcelable("JUnitMateria", m);
+        Materia newMateria = bTest.getParcelable("JUnitMateria");
+
+        assertNotNull(newMateria);
+        assertEquals(m.getCodigo(), newMateria.getCodigo());
+        assertEquals(m.getNome(),newMateria.getNome());
+        assertEquals(m.getCreditos(),newMateria.getCreditos());
+        assertEquals(m.getProfessor().getNome(),newMateria.getProfessor().getNome());
+        assertNotNull(newMateria.getHorarios());
+        assertEquals(m.getSala(),newMateria.getSala());
+        assertEquals(m.getTurma(),newMateria.getTurma());
     }
 }

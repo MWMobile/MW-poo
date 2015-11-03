@@ -72,10 +72,12 @@ public class MainActivity extends AppCompatActivity {
             depois esta activity se mata
         */
 
-        User user = db.getUser(0);
+        //User user = db.getUser(0);
 
         DBCore db = new DBCore(this);
         db.printDB();
+
+        User user = db.getUser(0);
 
         if(user == null)
             loginAct = new Intent(this, LoginActivity.class);

@@ -181,4 +181,29 @@ public class MateriaCursadaTest {
         assertEquals(0, m.getPesoMencao());
 
     }
+
+    @Test
+    public void testDescribeContents() throws Exception {
+        assertEquals(m.describeContents(),0);
+    }
+
+    @Test
+    public void testWriteToParcel() throws Exception {
+        Bundle bTest = new Bundle();
+        bTest.putParcelable("JUnitCursada", m);
+        MateriaCursada newMateria = bTest.getParcelable("JUnitCursada");
+
+        assertNotNull(newMateria);
+        assertEquals(m.getCodigo(), newMateria.getCodigo());
+        assertEquals(m.getNome(),newMateria.getNome());
+        assertEquals(m.getCreditos(), newMateria.getCreditos());
+        assertEquals(m.getProfessor().getNome(),newMateria.getProfessor().getNome());
+        assertNotNull(newMateria.getHorarios());
+        assertEquals(m.getSala(), newMateria.getSala());
+        assertEquals(m.getTurma(),newMateria.getTurma());
+        assertEquals(m.getObrigatoria(),newMateria.getObrigatoria());
+        assertEquals(m.getPeriodoCursado(),newMateria.getPeriodoCursado());
+        assertNotNull(newMateria.getPeriodosCursados());
+        assertNotNull(newMateria.getMencao());
+    }
 }

@@ -35,7 +35,7 @@ public class DBMat extends SQLiteOpenHelper {
     private static SQLiteDatabase db;
 
     /**
-     * Construtor do DB de matérias.
+     * Construtor do DB de materias.
      * @param context           Contexto.
      */
     public DBMat(Context context) {
@@ -44,7 +44,7 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * onCreate
-     * Cria um banco de dados de matérias, se não existir.
+     * Cria um banco de dados de materias, se nao existir.
      * @param db                Banco de Dados.
      */
     @Override
@@ -114,7 +114,7 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * printDbM
-     * Imprime o banco de dados das matérias.
+     * Imprime o banco de dados das materias.
      */
     public void printDbM(){
         openRead();
@@ -154,10 +154,10 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * addMat
-     * Funcao que adicona as matérias com seus campos nas duas tabelas desse db.
-     * O formato esta do mesmo jeito do db de User (até a explicação de porque duas TABLES)
-     * @param materia               Matéria a ser adicionada.
-     * @param horarios              Horários da matéria.
+     * Funcao que adicona as materias com seus campos nas duas tabelas desse db.
+     * O formato esta do mesmo jeito do db de User (ate a explicação de porque duas TABLES)
+     * @param materia               Materia a ser adicionada.
+     * @param horarios              Horarios da materia.
      */
     public void addMat(Materia materia, ArrayList<Horario> horarios){
         ContentValues values = new ContentValues();
@@ -185,8 +185,8 @@ public class DBMat extends SQLiteOpenHelper {
             db.insert(TABLE_HORARIO, null, values1);
         }
     }
-    // TODO métodos getMateria, delMateria
-    
+    // TODO metodos getMateria, delMateria
+
     /*public Materia getMateria(String string){
         String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string
                 + " OR " + KEY_IDM + " = " + string;

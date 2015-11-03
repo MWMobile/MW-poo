@@ -172,7 +172,7 @@ public class UserTest extends AndroidTestCase {
 
     @Test
     public void testDescribeContents() throws Exception {
-
+        assertEquals(u.describeContents(),0);
     }
 
 
