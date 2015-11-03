@@ -38,11 +38,6 @@ public class Materia implements Parcelable {
     protected String sala;
     protected int creditos;
 
-    public Materia () {
-
-    }
-
-
     /**
      *Metodo de leitura das informacoes da materia pelo Parcel.
      * @param in classe: Parcel
