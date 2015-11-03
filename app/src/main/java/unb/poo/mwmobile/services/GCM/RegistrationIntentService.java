@@ -1,4 +1,4 @@
-package unb.poo.mwmobile.services;
+package unb.poo.mwmobile.services.GCM;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -60,15 +60,15 @@ public class RegistrationIntentService extends IntentService {
 
             // Guarda uma boolean que indica se a token foi gerada/enviada pro servidor ou nao
             // Se for falsa, envia o token pro server, se nao o server ja deveria ter recebido o token
-            sharedPreferences.edit().putBoolean(GCMConfig.SENT_TOKEN_TO_SERVER, true).apply();
+            sharedPreferences.edit().putBoolean(GCMConfig.getSentTokenToServer(), true).apply();
 
         } catch (Exception e) {
             Log.d(TAG, "Falhou em renovar a Token", e);
             //Nao consegue atualizar a token e zera a variavel de estado da token
-            sharedPreferences.edit().putBoolean(GCMConfig.SENT_TOKEN_TO_SERVER, false).apply();
+            sharedPreferences.edit().putBoolean(GCMConfig.getSentTokenToServer(), false).apply();
         }
         //Notifica a UI que foi registrado com sucesso
-        Intent registrationComplete = new Intent(GCMConfig.REGISTRATION_COMPLETE);
+        Intent registrationComplete = new Intent(GCMConfig.getRegistrationComplete());
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
@@ -95,7 +95,7 @@ public class RegistrationIntentService extends IntentService {
     // [START subscribe_topics]
     private void subscribeTopics(String token) throws IOException {
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
-        for (String topic : GCMConfig.TOPICS) {
+        for (String topic : GCMConfig.getTopics()) {
             pubSub.subscribe(token, "/topics/" + topic, null);
         }
     }

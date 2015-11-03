@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -32,11 +34,13 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile 'com.android.support:appcompat-v7:23.0.0'
-    compile "com.google.android.gms:play-services:8.1.0"
-
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
 
     compile 'de.greenrobot:eventbus:2.4.0'
 
+    androidTestCompile 'com.android.support.test:runner:0.2'
+    androidTestCompile 'com.android.support:support-annotations:23.0.0'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
 
     // Unit testing dependencies
     testCompile 'junit:junit:4.12'
@@ -46,4 +50,6 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-library:1.1'
     // roboeletric para teste
     testCompile "org.robolectric:robolectric:3.0"
+
 }
+

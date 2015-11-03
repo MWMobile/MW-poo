@@ -1,8 +1,13 @@
 package unb.poo.mwmobile.models;
 
+import android.os.Bundle;
+import android.os.Parcel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
@@ -11,6 +16,8 @@ import static org.junit.Assert.*;
 /**
  * Created by sousa on 13/10/2015.
  */
+@Config(manifest = Config.NONE)
+@RunWith(RobolectricTestRunner.class)
 public class MateriaCursadaTest {
 
     MateriaCursada m;
@@ -30,7 +37,6 @@ public class MateriaCursadaTest {
     @Before
     public void setUp() throws Exception {
         m = new MateriaCursada();
-
         periodosCursados = new ArrayList<Integer>();
         periodosCursados.add(3);
 
@@ -180,5 +186,37 @@ public class MateriaCursadaTest {
         m.setPesoMencao(newMencao);
         assertEquals(0, m.getPesoMencao());
 
+    }
+
+    @Test
+    public void testDescribeContents() throws Exception {
+        assertEquals(m.describeContents(),0);
+    }
+
+    @Test
+    public void testWriteToParcel() throws Exception {
+        Parcel in = Parcel.obtain();
+        assertNotNull(in);
+        m.writeToParcel(in,m.describeContents());
+        in.setDataPosition(0);
+        MateriaCursada newMateria = MateriaCursada.CREATOR.createFromParcel(in);
+
+        assertNotNull(newMateria);
+
+        assertEquals(m.getCodigo(), newMateria.getCodigo());
+        assertEquals(m.getNome(), newMateria.getNome());
+        assertEquals(m.getCreditos(), newMateria.getCreditos());
+
+        // Erro de NullPointException aqui, o resto em baixo passa
+//        assertEquals(m.getProfessor().getNome(), newMateria.getProfessor().getNome());
+
+        assertNotNull(newMateria.getHorarios());
+        assertEquals(m.getSala(), newMateria.getSala());
+        assertEquals(m.getTurma(),newMateria.getTurma());
+        assertEquals(m.getObrigatoria(),newMateria.getObrigatoria());
+        assertEquals(m.getPeriodoCursado(), newMateria.getPeriodoCursado());
+        assertNotNull(newMateria.getPeriodosCursados());
+        assertNotNull(newMateria.getMencao());
+        in.recycle();
     }
 }

@@ -59,8 +59,6 @@ public class MateriaAdapterTest {
         curso = "Engenharia Mecatronica";
         periodo = 9;
 
-        size = u.getMaterias().size();
-
         u = new User(matricula);
         u.setSenha(senha);
         u.setNome(nome);
@@ -69,6 +67,7 @@ public class MateriaAdapterTest {
         u.setMaterias(materias);
         u.setHistorico(historico);
 
+        size = u.getMaterias().size();
 
     }
 

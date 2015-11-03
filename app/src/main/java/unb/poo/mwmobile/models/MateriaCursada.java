@@ -28,6 +28,7 @@ public class MateriaCursada extends Materia implements Parcelable {
     private int pesoMencao;
 
     public MateriaCursada() {
+        super();
         this.mencao = new ArrayList<>();
         this.periodosCursados = new ArrayList<>();
     }

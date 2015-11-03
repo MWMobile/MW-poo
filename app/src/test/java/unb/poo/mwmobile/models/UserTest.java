@@ -1,5 +1,6 @@
 package unb.poo.mwmobile.models;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.test.AndroidTestCase;
@@ -7,15 +8,22 @@ import android.test.AndroidTestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
 /**
  * Created by sousa on 13/10/2015.
  */
+@Config(manifest = Config.NONE)
+@RunWith(RobolectricTestRunner.class)
 public class UserTest extends AndroidTestCase {
 
     User u;
+    //Parcel in;
 
     ArrayList<Materia> materias;
     ArrayList<MateriaCursada> historico;
@@ -29,10 +37,14 @@ public class UserTest extends AndroidTestCase {
     String curso;
     int periodo;
 
-    Parcel parcel;
+    //Parcel parcel;
+
+    Activity main;
 
     @Before
     public void setUp() throws Exception {
+        main = Robolectric.setupActivity(Activity.class);
+
         historico = new ArrayList<>();
         materias = new ArrayList<>();
 
@@ -62,12 +74,6 @@ public class UserTest extends AndroidTestCase {
         u.setPeriodo(periodo);
         u.setMaterias(materias);
         u.setHistorico(historico);
-
-        parcel = Parcel.obtain();
-    }
-
-    @After
-    public void tearDown() throws Exception {
 
     }
 
@@ -168,29 +174,64 @@ public class UserTest extends AndroidTestCase {
     @Test
     public void testLogin() throws Exception {
 //        TODO FIX DBTest para fazer login
+        assertTrue(u.login(main));
+        u.setSenha("123");
+        assertFalse(u.login(main));
+
+        u = new User(123456788);
+        u.setSenha("1234");
+        assertFalse(u.login(main));
     }
 
     @Test
     public void testDescribeContents() throws Exception {
+        assertEquals(u.describeContents(), 0);
+    }
 
+    @Test
+    public void testAddMateria() throws Exception{
+        Materia newMateria = new Materia();
+        newMateria.setNome("Materia");
+        u.addMateria(newMateria);
+
+        assertNotNull(u.getMateria("Materia"));
+        assertEquals(newMateria, u.getMateria("Materia"));
+    }
+
+    @Test
+    public void testAddMateriaCursada() throws Exception{
+        MateriaCursada newMateria = new MateriaCursada();
+        newMateria.setNome("Materia");
+        u.addMateriaCursada(newMateria);
+
+        assertNotNull(u.getMateriaCursada("Materia"));
+        assertEquals(newMateria, u.getMateriaCursada("Materia"));
     }
 
 
     @Test
     public void testWriteToParcel() throws Exception {
-        Bundle bTest = new Bundle();
-        bTest.putParcelable("JUnitUser",u);
-        User newUser = bTest.getParcelable("JUnitUser");
+        //Bundle bTest = new Bundle();
+        //bTest.putParcelable("JUnitUser",u);
+        //User newUser = bTest.getParcelable("JUnitUser");
 
+        Parcel in = Parcel.obtain();
+        assertNotNull(in);
+        u.writeToParcel(in,0);
+        in.setDataPosition(0);
+        User newUser = User.CREATOR.createFromParcel(in);
+
+        assertNotNull(newUser);
         assertEquals(u.getNome(),newUser.getNome());
         assertEquals(u.getCurso(),newUser.getCurso());
         assertEquals(u.getIRA(),newUser.getIRA());
         assertEquals(u.getMatricula(),newUser.getMatricula());
         assertEquals(u.getPeriodo(),newUser.getPeriodo());
-        assertEquals(u.getSenha(),newUser.getSenha());
+        assertEquals(u.getSenha(), newUser.getSenha());
         assertNotNull(newUser.getMateria("POO"));
         assertNotNull(newUser.getMateriaCursada("ED"));
-        assertEquals(newUser.getMateria("POO").getProfessor().getNome(),"Rodrigo Bonifacio");
+        assertEquals(newUser.getMateria("POO").getProfessor().getNome(), "Rodrigo Bonifacio");
+        in.recycle();
     }
 
 

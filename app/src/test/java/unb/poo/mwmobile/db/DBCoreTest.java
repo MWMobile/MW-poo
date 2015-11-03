@@ -17,13 +17,16 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import unb.poo.mwmobile.acts.HomeActivity;
 import unb.poo.mwmobile.acts.MainActivity;
+import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.MateriaCursada;
+import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.utils.Utils;
 
 import static org.mockito.Mockito.mock;
@@ -32,13 +35,12 @@ import static org.mockito.Mockito.when;
 /**
  * Created by sousa on 14/10/2015.
  */
-
+@Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner.class)
 public class DBCoreTest extends AndroidTestCase {
 
     DBCore db;
 
-    Context context;
     Activity main;
 
     @Before
@@ -65,7 +67,7 @@ public class DBCoreTest extends AndroidTestCase {
 
     @Test
     public void testOnUpgrade() throws Exception {
-        DBCore newDB = new DBCore(context);
+        DBCore newDB = new DBCore(main);
         newDB.onUpgrade(db.getWritableDatabase(), 0, 1);
         assertNotNull(newDB);
     }
@@ -95,24 +97,52 @@ public class DBCoreTest extends AndroidTestCase {
 
     @Test
     public void testGetUser() throws Exception {
-        User user = db.getUser(0);                              // Verifica se há um user no DB
-        assertNotNull(user);                                    //
+        User user = new User(110115716);                        // Adiciona um User 11/0115716
+        ArrayList<Materia> matList = new ArrayList<>();         //
+        ArrayList<MateriaCursada> hisList = new ArrayList<>();  //
+        matList.add(new Materia());                             //
+        hisList.add(new MateriaCursada());                      // Cria ArrayLists de matérias com uma informação apenas
+        db.addUser(user,matList,hisList);
+
+        User userNew = db.getUser(0);                              // Verifica se há um user no DB
+        assertNotNull(userNew);                                    //
     }
 
     @Test
     public void testGetUser1() throws Exception {
-        User user = db.getUser("110115716");                    // Adicionei um "mock" com 11/0115716
+        User user = new User(110115716);                        // Adiciona um User 11/0115716
+        ArrayList<Materia> matList = new ArrayList<>();         //
+        ArrayList<MateriaCursada> hisList = new ArrayList<>();  //
+        matList.add(new Materia());                             //
+        hisList.add(new MateriaCursada());                      // Cria ArrayLists de matérias com uma informação apenas
+        db.addUser(user,matList,hisList);
+
+        User userNew = db.getUser("110115716");                    // Adicionei um "mock" com 11/0115716
         assertNotNull(user);
     }
 
     @Test
     public void testUpdUser() throws Exception {
+        User user = new User(110115716);                        // Adiciona um User 11/0115716
+        ArrayList<Materia> matList = new ArrayList<>();         //
+        ArrayList<MateriaCursada> hisList = new ArrayList<>();  //
+        matList.add(new Materia());                             //
+        hisList.add(new MateriaCursada());                      // Cria ArrayLists de matérias com uma informação apenas
+        db.addUser(user,matList,hisList);
+
         db.updUser(db.getUser(0));                              // TODO dar um jeito de verificar as informações além do status do objeto
         assertNotNull(db.getUser(0));                           //
     }
 
     @Test
     public void testDelUser() throws Exception {
+        User user = new User(110115716);                        // Adiciona um User 11/0115716
+        ArrayList<Materia> matList = new ArrayList<>();         //
+        ArrayList<MateriaCursada> hisList = new ArrayList<>();  //
+        matList.add(new Materia());                             //
+        hisList.add(new MateriaCursada());                      // Cria ArrayLists de matérias com uma informação apenas
+        db.addUser(user,matList,hisList);
+
         db.delUser(db.getUser(0));
         assertNull(db.getUser(0));                              // Verifica se a exclusão foi efetuada.
     }
