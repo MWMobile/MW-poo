@@ -19,6 +19,12 @@ import de.greenrobot.event.EventBus;
 import unb.poo.mwmobile.eventBus.MessageServerEB;
 
 /**
+ * Esse teste é apenas para testar a conexao
+ * com o servidor o caminho usado é o de
+ * echo entao o servidor apenas retorna
+ * o parametro ennviado
+ *
+ *
  * Created by Eduardo Scartezini on 02/11/2015.
  */
 @Config(manifest = Config.NONE)
@@ -62,13 +68,15 @@ public class MiddleServerTest extends AndroidTestCase {
 
     @Test
     public void testGet(){
-
         middleServer.get(header, params);
-
-
     }
 
-
+    /**
+     * evento para receber o dado que sera mandado
+     * pelo sercidor
+     * 
+     * @param message
+     */
     public void onEvent(MessageServerEB message){
         assertEquals(message.getHeader(),header);
         Log.d(TAG,message.getResponse());
