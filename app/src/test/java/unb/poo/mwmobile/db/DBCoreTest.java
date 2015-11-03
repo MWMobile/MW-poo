@@ -41,7 +41,6 @@ public class DBCoreTest extends AndroidTestCase {
 
     DBCore db;
 
-    Context context;
     Activity main;
 
     @Before
@@ -68,7 +67,7 @@ public class DBCoreTest extends AndroidTestCase {
 
     @Test
     public void testOnUpgrade() throws Exception {
-        DBCore newDB = new DBCore(context);
+        DBCore newDB = new DBCore(main);
         newDB.onUpgrade(db.getWritableDatabase(), 0, 1);
         assertNotNull(newDB);
     }

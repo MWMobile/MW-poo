@@ -20,7 +20,7 @@ public class DBMat extends SQLiteOpenHelper {
     private static final String NOME_DB = "materiaStorage";
     private static final int VERSAO_DB = 2;
 
-    private static final String TABLE_MATERIA = "materia";
+    private static final String TABLE_MATERIA = "materiaDB";
     private static final String TABLE_HORARIO = "horario";
 
     private static final String KEY_IDM = "idM";
@@ -49,12 +49,12 @@ public class DBMat extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createDb = "(CREATE TABLE IF NOT EXISTS " + TABLE_MATERIA + "(" + KEY_IDM + " INTEGER, "
+        String createDb = "CREATE TABLE IF NOT EXISTS " + TABLE_MATERIA + "(" + KEY_IDM + " INTEGER, "
                 + KEY_MATERIA + " TEXT, " + KEY_CREDITO + " INTEGER, " + KEY_PROFESSOR + " TEXT, "
                 + KEY_TURMA + " TEXT, " + KEY_SALA + " TEXT)";
         db.execSQL(createDb);
 
-        String createDbH = "(CREATE TABLE IF NOT EXISTS " + TABLE_HORARIO + "(" + KEY_IDM + " INTEGER, "
+        String createDbH = "CREATE TABLE IF NOT EXISTS " + TABLE_HORARIO + "(" + KEY_IDM + " INTEGER, "
                 + KEY_MATERIA + " TEXT, " + KEY_HORARIO + " INTEGER, " + KEY_DIA + " INTEGER)";
         db.execSQL(createDbH);
 
@@ -161,6 +161,8 @@ public class DBMat extends SQLiteOpenHelper {
      * @param horarios              Horarios da materia.
      */
     public void addMat(Materia materia, ArrayList<Horario> horarios){
+        openWrite();
+
         ContentValues values = new ContentValues();
 
         values.put(KEY_IDM, materia.getCodigo());
@@ -185,6 +187,8 @@ public class DBMat extends SQLiteOpenHelper {
 
             db.insert(TABLE_HORARIO, null, values1);
         }
+
+        closeDB();
     }
     // TODO metodos getMateria, delMateria
 

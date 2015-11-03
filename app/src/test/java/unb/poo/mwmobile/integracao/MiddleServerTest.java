@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ import unb.poo.mwmobile.eventBus.MessageServerEB;
 /**
  * Created by Eduardo Scartezini on 02/11/2015.
  */
-
+@Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner.class)
 public class MiddleServerTest extends AndroidTestCase {
     private static final String TAG = "MiddleServerTest";

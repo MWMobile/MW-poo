@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="unb.poo.mwmobile" >
+    package="unb.poo.mwmobile">
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -17,8 +17,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="unb.poo.unb.poo.mwmobile.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="unb.poo.unb.poo.mwmobile.permission.C2D_MESSAGE" />
+    <permission android:name="unb.poo.mwmobile.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="unb.poo.mwmobile.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
@@ -55,22 +55,22 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="unb.poo.unb.poo.mwmobile" />
+                <category android:name="unb.poo.mwmobile" />
             </intent-filter>
         </receiver>
 
         <!-- Services do GCM -->
         <service
-            android:name="unb.poo.unb.poo.mwmobile.services.GCMListenerService"
+            android:name=".services.GCM.GCMListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="unb.poo.unb.poo.mwmobile" />
+                <category android:name="unb.poo.mwmobile" />
             </intent-filter>
         </service>
 
         <service
-            android:name="unb.poo.unb.poo.mwmobile.services.InstanceIDListenerService"
+            android:name=".services.GCM.InstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -78,7 +78,7 @@
         </service>
 
         <service
-            android:name="unb.poo.unb.poo.mwmobile.services.RegistrationIntentService"
+            android:name=".services.GCM.RegistrationIntentService"
             android:exported="false">
         </service>
 

@@ -1,5 +1,6 @@
 package unb.poo.mwmobile.acts;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,11 +20,11 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.models.User;
-import unb.poo.mwmobile.services.RegistrationIntentService;
+import unb.poo.mwmobile.services.GCM.RegistrationIntentService;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
-    DBCore db = new DBCore(this);
+    DBCore db;
     Intent loginAct;
 
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(context);
                 boolean sentToken = sharedPreferences
-                        .getBoolean(GCMConfig.SENT_TOKEN_TO_SERVER, false);
+                        .getBoolean(GCMConfig.getSentTokenToServer(), false);
                 if (sentToken) {
                     Log.d(TAG, "R.string.gcm_send_message)");
                 } else {
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         //User user = db.getUser(0);
 
 
-        DBCore db = new DBCore(this);
+        db = new DBCore(this);
         db.printDB();
 
         User user = db.getUser(0);
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(GCMConfig.REGISTRATION_COMPLETE));
+                new IntentFilter(GCMConfig.getRegistrationComplete()));
 
     }
 

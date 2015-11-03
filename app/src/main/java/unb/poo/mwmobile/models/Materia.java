@@ -68,7 +68,7 @@ public class Materia implements Parcelable {
     }
 
     public Materia() {
-        
+
     }
 
     /**

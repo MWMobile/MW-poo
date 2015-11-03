@@ -8,6 +8,9 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.lang.Exception;
 import java.util.ArrayList;
@@ -19,6 +22,8 @@ import static org.junit.Assert.*;
 /**
  * Created by sousa on 13/10/2015.
  */
+@Config(manifest = Config.NONE)
+@RunWith(RobolectricTestRunner.class)
 public class MateriaTest {
 
     Materia m;
@@ -173,6 +178,7 @@ public class MateriaTest {
         //bTest.putParcelable("JUnitMateria", m);
         //Materia newMateria = bTest.getParcelable("JUnitMateria");
         Parcel in = Parcel.obtain();
+
         assertNotNull(in);
         m.writeToParcel(in,m.describeContents());
         in.setDataPosition(0);

@@ -5,8 +5,20 @@ package unb.poo.mwmobile.config;
  */
 public class GCMConfig {
 
-    public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
-    public static final String REGISTRATION_COMPLETE = "registrationComplete";
-    public static final String[] TOPICS = {"global"};
+    private static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
+    private static final String REGISTRATION_COMPLETE = "registrationComplete";
+    private static final String[] TOPICS = {"global"};
+
+    public static String getSentTokenToServer() {
+        return SENT_TOKEN_TO_SERVER;
+    }
+
+    public static String getRegistrationComplete(){
+        return REGISTRATION_COMPLETE;
+    }
+
+    public static String[] getTopics(){
+        return TOPICS;
+    }
 
 }
