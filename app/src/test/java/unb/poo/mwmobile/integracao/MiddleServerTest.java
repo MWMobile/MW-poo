@@ -30,7 +30,7 @@ public class MiddleServerTest extends AndroidTestCase {
     private MiddleServer middleServer;
     private Activity activity;
 
-    private Map<String, String> header;
+    private String header;
     private Map<String, String> params;
 
 
@@ -43,11 +43,11 @@ public class MiddleServerTest extends AndroidTestCase {
 
         middleServer = new MiddleServer(activity);
 
-        header = new HashMap<String ,String>();
+        header = new String();
         params = new HashMap<String ,String>();
 
         params.put("arroz","arroz");
-        header.put("teste", "testando");
+        header = "echo";
 
 
         EventBus.getDefault().register(MiddleServerTest.this);

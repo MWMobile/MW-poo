@@ -29,8 +29,8 @@ public class MessageServerEBTest {
     @Test
     public void headerTest(){
 
-        Map<String ,String> header = new HashMap<String,String>();
-        header.put("key","value");
+        String header = new String();
+        header = "teste";
 
         messageServerEB.setHeader(header);
         assertEquals(header,messageServerEB.getHeader());

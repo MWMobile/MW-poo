@@ -15,9 +15,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
+import unb.poo.mwmobile.eventBus.ArrayMessageServerEB;
 import unb.poo.mwmobile.eventBus.MessageServerEB;
 
 /**
@@ -29,7 +32,7 @@ import unb.poo.mwmobile.eventBus.MessageServerEB;
  */
 public class MiddleServer extends Service {
 
-    private static final String URL = "http://104.131.63.41/echo";
+    private static final String URL = "http://104.131.63.41/";
     private static String TAG = "MiddleServer";
 
     private StringRequest request;
@@ -73,19 +76,28 @@ public class MiddleServer extends Service {
      * @param params
      *      paramntro que deve ser enviado para qualquer push do servidor
      */
-    public void get(final Map<String,String> header, final Map<String, String > params ) {
+    public void get(final String header, final Map<String, String > params ) {
 
         Log.d("INIT","Get");
 
         request = new StringRequest(Request.Method.POST,
-                URL,
+                URL + header,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("TEST", response);
-
                         MessageServerEB message = new MessageServerEB();
-                        //TODO pegar apenas o value com getValue, nao esta dando
+
+
+                        message.setHeader(header);
+                        message.setResponse(response);
+
+                        //Postando Evento
+                        EventBus.getDefault().post(message);
+                    }
+                    public void onResponse(ArrayList<String> response) {
+                        ArrayMessageServerEB message = new ArrayMessageServerEB();
+
+
                         message.setHeader(header);
                         message.setResponse(response);
 
@@ -105,10 +117,6 @@ public class MiddleServer extends Service {
                     return params;
                 }
 
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    return header;
-                }
         };
 
         request.setTag("tag");
