@@ -67,6 +67,10 @@ public class Materia implements Parcelable {
         }
     }
 
+    public Materia() {
+        
+    }
+
     /**
      * Metodo de serializacao de todas as
      * informacoes da materia com o uso de Parcel.
