@@ -1,5 +1,8 @@
 package unb.poo.mwmobile.models;
 
+import android.os.Bundle;
+import android.os.Parcel;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +33,6 @@ public class MateriaCursadaTest {
     @Before
     public void setUp() throws Exception {
         m = new MateriaCursada();
-
         periodosCursados = new ArrayList<Integer>();
         periodosCursados.add(3);
 
@@ -189,21 +191,25 @@ public class MateriaCursadaTest {
 
     @Test
     public void testWriteToParcel() throws Exception {
-        Bundle bTest = new Bundle();
-        bTest.putParcelable("JUnitCursada", m);
-        MateriaCursada newMateria = bTest.getParcelable("JUnitCursada");
+        Parcel in = Parcel.obtain();
+        assertNotNull(in);
+        m.writeToParcel(in,m.describeContents());
+        in.setDataPosition(0);
+        MateriaCursada newMateria = MateriaCursada.CREATOR.createFromParcel(in);
 
         assertNotNull(newMateria);
+
         assertEquals(m.getCodigo(), newMateria.getCodigo());
-        assertEquals(m.getNome(),newMateria.getNome());
+        assertEquals(m.getNome(), newMateria.getNome());
         assertEquals(m.getCreditos(), newMateria.getCreditos());
-        assertEquals(m.getProfessor().getNome(),newMateria.getProfessor().getNome());
+        assertEquals(m.getProfessor().getNome(), newMateria.getProfessor().getNome());
         assertNotNull(newMateria.getHorarios());
         assertEquals(m.getSala(), newMateria.getSala());
         assertEquals(m.getTurma(),newMateria.getTurma());
         assertEquals(m.getObrigatoria(),newMateria.getObrigatoria());
-        assertEquals(m.getPeriodoCursado(),newMateria.getPeriodoCursado());
+        assertEquals(m.getPeriodoCursado(), newMateria.getPeriodoCursado());
         assertNotNull(newMateria.getPeriodosCursados());
         assertNotNull(newMateria.getMencao());
+        in.recycle();
     }
 }

@@ -54,8 +54,8 @@ public class User implements Parcelable{
         IRA = in.readDouble();
         curso = in.readString();
         periodo = in.readInt();
-        //materias = new ArrayList<>();
-        //historico = new ArrayList<>();
+        materias = new ArrayList<>();
+        historico = new ArrayList<>();
 
         in.readTypedList(materias,Materia.CREATOR);
         in.readTypedList(historico, MateriaCursada.CREATOR);
