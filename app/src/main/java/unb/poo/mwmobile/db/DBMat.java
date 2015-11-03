@@ -34,10 +34,19 @@ public class DBMat extends SQLiteOpenHelper {
 
     private static SQLiteDatabase db;
 
+    /**
+     * Construtor do DB de matérias.
+     * @param context           Contexto.
+     */
     public DBMat(Context context) {
         super(context, NOME_DB, null, VERSAO_DB);
     }
 
+    /**
+     * onCreate
+     * Cria um banco de dados de matérias, se não existir.
+     * @param db                Banco de Dados.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createDb = "(CREATE TABLE IF NOT EXISTS " + TABLE_MATERIA + "(" + KEY_IDM + " INTEGER, "
@@ -52,24 +61,47 @@ public class DBMat extends SQLiteOpenHelper {
         this.db = db;
     }
 
+    /**
+     * onUpgrade
+     * Troca o Banco de Dados, dropando o anterior, se existir.
+     * @param db                Banco de Dados.
+     * @param oldVersion        Versão antiga do DB.
+     * @param newVersion        Versão nova do DB.
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MATERIA);
         onCreate(db);
     }
 
+    /**
+     * openWrite
+     * Abre o Banco de Dados (escrita).
+     */
     private void openWrite(){
         db = this.getWritableDatabase();
     }
 
+    /**
+     * openRead
+     * Abre o Banco de Dados (leitura).
+     */
     private void openRead(){
         db = this.getReadableDatabase();
     }
 
+    /**
+     * closeDB
+     * Fecha o banco de dados.
+     */
     private void closeDB() {
         db.close();
     }
 
+    /**
+     * dropDB
+     * Dropa o Banco de Dados.
+     */
     public void dropDB() {
         openWrite();
 
@@ -80,6 +112,10 @@ public class DBMat extends SQLiteOpenHelper {
         closeDB();
     }
 
+    /**
+     * printDbM
+     * Imprime o banco de dados das matérias.
+     */
     public void printDbM(){
         openRead();
 
@@ -116,9 +152,13 @@ public class DBMat extends SQLiteOpenHelper {
         closeDB();
     }
 
-    /*Funcao que adicona as materia com seus campos nas duas tabelas desse db.
-    * O formato esta do mesmo jeito do db de User (ate a explicacao de
-    * pq duas TABLES)*/
+    /**
+     * addMat
+     * Funcao que adicona as matérias com seus campos nas duas tabelas desse db.
+     * O formato esta do mesmo jeito do db de User (até a explicação de porque duas TABLES)
+     * @param materia               Matéria a ser adicionada.
+     * @param horarios              Horários da matéria.
+     */
     public void addMat(Materia materia, ArrayList<Horario> horarios){
         ContentValues values = new ContentValues();
 
@@ -145,7 +185,8 @@ public class DBMat extends SQLiteOpenHelper {
             db.insert(TABLE_HORARIO, null, values1);
         }
     }
-
+    // TODO métodos getMateria, delMateria
+    
     /*public Materia getMateria(String string){
         String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string
                 + " OR " + KEY_IDM + " = " + string;
@@ -170,5 +211,5 @@ public class DBMat extends SQLiteOpenHelper {
         return  materias;
     }*/
 
-//    Falta passar o Context para a criacao do vando de dados
+//    Falta passar o Context para a criacao do banco de dados
 }
