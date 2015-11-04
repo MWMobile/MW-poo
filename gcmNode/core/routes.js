@@ -40,13 +40,13 @@ module.exports = function (app) {
 
 	app.get('/getNome', function (req, res) {
 		res.json({
-			materias: user.nome
+			nome: user.nome
 		})
 	})
 
 	app.get('/getPeriodo', function (req, res) {
 		res.json({
-			materias: user.periodo
+			periodo: user.periodo
 		})
 	})
 	
@@ -58,7 +58,13 @@ module.exports = function (app) {
 	
 	app.get('/getHistorico', function (req, res) {
 		res.json({
-			materias: user.historico
+			historico: user.historico
+		})
+	})
+	
+	app.get('/getUser', function (req, res) {
+		res.json({
+			user: user
 		})
 	})
 
