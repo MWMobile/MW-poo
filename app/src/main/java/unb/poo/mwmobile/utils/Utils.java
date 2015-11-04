@@ -26,7 +26,7 @@ public class Utils {
 
     public User mockUser(int matricula, String password){
 
-        // TODO atualizar assim que as modificacoes nas arraylist de materias forem feitas
+        // TODO Scartezini: acabar com o UTILS
         ArrayList<Materia> materias = new ArrayList<Materia>();
         materias.add(createMockMateria("Programacao Orientada a Objetos", 116795, 4));
         materias.add(createMockMateria("Elementos de Automacao",170798,4));

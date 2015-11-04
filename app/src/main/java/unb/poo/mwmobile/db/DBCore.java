@@ -32,11 +32,13 @@ public class DBCore extends SQLiteOpenHelper {
     private static final String KEY_IDM = "idM";
     private static final String KEY_MATRICULA = "matricula";
     private static final String KEY_MATERIA = "materia";
-    private static final String KEY_HIST = "historico";
     private static final String KEY_SENHA = "senha";
     private static final String KEY_NOME = "nome";
     private static final String KEY_CURSO = "curso";
     private static final String KEY_PERIODO = "periodo";
+    private static final String KEY_CREDITO = "creditos";
+    private static final String KEY_MENCAO = "mencao";
+    private static final String KEY_OBRIG = "obrigatoria";
     private static SQLiteDatabase db;
 //    TODO verificar estes campos a adicionar
 //    Campos para adicionar
@@ -68,11 +70,14 @@ public class DBCore extends SQLiteOpenHelper {
         db.execSQL(createDb);
 
         String createDbM = "CREATE TABLE IF NOT EXISTS " + TABLE_MATERIA +
-                "(" + KEY_MATRICULA + " INTEGER, " + KEY_IDM + " INTEGER, " + KEY_MATERIA + " TEXT)";
+                "(" + KEY_MATRICULA + " INTEGER, " + KEY_IDM + " INTEGER, " + KEY_MATERIA + " TEXT, "
+                + KEY_CREDITO + " INTEGER)";
         db.execSQL(createDbM);
 
         String createDbH = "CREATE TABLE IF NOT EXISTS " + TABLE_HIST +
-                "(" + KEY_MATRICULA + " INTEGER, " + KEY_IDM + " INTEGER, " + KEY_HIST + " TEXT)";
+                "(" + KEY_MATRICULA + " INTEGER, " + KEY_IDM + " INTEGER, " + KEY_MATERIA + " TEXT, "
+                + KEY_MENCAO + " TEXT, " + KEY_OBRIG + " INTEGER, " + KEY_PERIODO + " INTEGER, "
+                + KEY_CREDITO + " INTEGER)";
         db.execSQL(createDbH);
 
         this.db = db;
@@ -150,7 +155,7 @@ public class DBCore extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 Log.d("ID", cursor.getString(0) + " ");
-                Log.d("MATRICULA", cursor.getString(1) + " ");
+                Log.d("MATRICULA", cursor.getInt(1) + " ");
                 Log.d("SENHA", cursor.getString(2) + " ");
                 Log.d("NOME", cursor.getString(3) + " ");
                 Log.d("CURSO", cursor.getString(4) + " ");
@@ -166,8 +171,9 @@ public class DBCore extends SQLiteOpenHelper {
         if (cursor2.moveToFirst()) {
             do {
                 Log.d("MATRICULA", cursor2.getString(0) + " ");
-                Log.d("IDM", cursor2.getString(1) + " ");
+                Log.d("IDM", cursor2.getInt(1) + " ");
                 Log.d("MATERIA", cursor2.getString(2) + " ");
+                Log.d("CREDITOS", cursor2.getInt(3) + " ");
             } while (cursor2.moveToNext() || cursor2.isLast() == true);
         }
 
@@ -179,8 +185,12 @@ public class DBCore extends SQLiteOpenHelper {
         if (cursor3.moveToFirst()) {
             do {
                 Log.d("MATRICULA", cursor3.getString(0) + " ");
-                Log.d("IDM", cursor3.getString(1) + " ");
-                Log.d("HISTORICO", cursor3.getString(2) + " ");
+                Log.d("IDM", cursor3.getInt(1) + " ");
+                Log.d("MATERIA", cursor3.getString(2) + " ");
+                Log.d("MENCAO", cursor3.getString(3) + " ");
+                Log.d("OBRIGATORIA", cursor3.getString(4) + " ");
+                Log.d("PERIODO", cursor3.getInt(5) + " ");
+                Log.d("CREDITOS", cursor3.getInt(6) + " ");
             } while (cursor3.moveToNext() || cursor3.isLast() == true);
         }
 
@@ -215,38 +225,58 @@ public class DBCore extends SQLiteOpenHelper {
 
             String materi = materia.get(i).getNome();
             int code = materia.get(i).getCodigo();
+            int cred = materia.get(i).getCreditos();
 
             values1.put(KEY_MATRICULA, user.getMatricula());
             values1.put(KEY_IDM, code);
             values1.put(KEY_MATERIA, materi);
+            values1.put(KEY_CREDITO, cred);
 
             db.insert(TABLE_MATERIA, null, values1);
         }
 
-        for (int i = 0; i < user.getMaterias().size(); i++){
-            ContentValues values2 = new ContentValues();
-
-            int code = materia.get(i).getCodigo();
-            String materi = materia.get(i).getNome();
-
-            values2.put(KEY_MATRICULA, user.getMatricula());
-            values2.put(KEY_IDM, code);
-            values2.put(KEY_HIST, materi);
-
-            db.insert(TABLE_HIST, null, values2);
-        }
-
         for (int i = 0; i < user.getHistorico().size(); i++){
-            ContentValues values3 = new ContentValues();
+            ContentValues values2 = new ContentValues();
 
             int codeH = historico.get(i).getCodigo();
             String hist = historico.get(i).getNome();
+            int credm = historico.get(i).getCreditos();
+            String mencao = historico.get(i).getMencao().toString();
+            boolean obrig = historico.get(i).getObrigatoria();
+            int perio = historico.get(i).getPeriodoCursado();
+            String menc;
 
-            values3.put(KEY_MATRICULA, user.getMatricula());
-            values3.put(KEY_IDM, codeH);
-            values3.put(KEY_HIST, hist);
+            switch(mencao){
+                default:
+                case "[SR]":
+                    menc = "SR";
+                    break;
+                case "[II]":
+                    menc = "II";
+                    break;
+                case "[MI]":
+                    menc = "MI";
+                    break;
+                case "[MM]":
+                    menc = "MM";
+                    break;
+                case "[MS]":
+                    menc = "MS";
+                    break;
+                case "[SS]":
+                    menc = "SS";
+                    break;
+            }
 
-            db.insert(TABLE_HIST, null, values3);
+            values2.put(KEY_MATRICULA, user.getMatricula());
+            values2.put(KEY_IDM, codeH);
+            values2.put(KEY_MATERIA, hist);
+            values2.put(KEY_MENCAO, menc);
+            values2.put(KEY_OBRIG, obrig);
+            values2.put(KEY_PERIODO, perio);
+            values2.put(KEY_CREDITO, credm);
+
+            db.insert(TABLE_HIST, null, values2);
         }
 
         closeDB();
@@ -295,6 +325,66 @@ public class DBCore extends SQLiteOpenHelper {
                 user.setNome(cursor.getString(3));
             } while (cursor.moveToNext() || cursor.isLast() == true);
         }
+
+        String query2 = "SELECT * FROM " + TABLE_MATERIA;
+        Cursor cursor2 = db.rawQuery(query2, null);
+
+        if (cursor2.moveToFirst()) {
+            ArrayList<Materia> m = new ArrayList<Materia>();
+
+            do {
+                Materia mat = new Materia();
+
+                int codigo = cursor2.getInt(1);
+                String nome = cursor2.getString(2);
+                int credit = cursor2.getInt(3);
+
+                mat.setCodigo(codigo);
+                mat.setNome(nome);
+                mat.setCreditos(credit);
+
+                m.add(mat);
+            } while (cursor2.moveToNext() || cursor2.isLast() == true);
+            user.setMaterias(m);
+        }
+
+        String query3 = "SELECT * FROM " + TABLE_HIST;
+        Cursor cursor3 = db.rawQuery(query3, null);
+
+        if (cursor3.moveToFirst()) {
+            ArrayList<MateriaCursada> h = new ArrayList<MateriaCursada>();
+            do {
+                ArrayList<String> menc2 = new ArrayList<String>();
+                MateriaCursada mat2 = new MateriaCursada();
+
+                String nomeM = cursor3.getString(2);
+                int codigoM = cursor3.getInt(1);
+                int creditM = cursor3.getInt(6);
+                menc2.add(cursor3.getString(3));
+                String mencaoM = cursor3.getString(3);
+                int obrigatoria = cursor3.getInt(4);
+                int period = cursor3.getInt(5);
+
+                if (obrigatoria == 1){
+                    boolean obrig = true;
+                    mat2.setObrigatoria(obrig);
+                } else{
+                    boolean obrig = false;
+                    mat2.setObrigatoria(obrig);
+                }
+
+                mat2.setCodigo(codigoM);
+                mat2.setNome(nomeM);
+                mat2.setCreditos(creditM);
+                mat2.setMencao(menc2);
+                mat2.setPesoMencao(mencaoM);
+                mat2.setPeriodoCursado(period);
+
+                h.add(mat2);
+            } while (cursor3.moveToNext() || cursor3.isLast() == true);
+            user.setHistorico(h);
+        }
+
 
         closeDB();
         return  user;

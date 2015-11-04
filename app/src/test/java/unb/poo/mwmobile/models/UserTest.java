@@ -173,7 +173,6 @@ public class UserTest extends AndroidTestCase {
 
     @Test
     public void testLogin() throws Exception {
-//        TODO FIX DBTest para fazer login
         assertTrue(u.login(main));
         u.setSenha("123");
         assertFalse(u.login(main));

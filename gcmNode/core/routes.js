@@ -62,7 +62,7 @@ module.exports = function (app) {
 		})
 	})
 
-	// TODO
+	// TODO Andrei: implementar getIra
 	// app.get('/getIra', function(req, res){
 	// ...		 
 	// }) 

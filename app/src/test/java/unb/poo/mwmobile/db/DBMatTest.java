@@ -92,7 +92,7 @@ public class DBMatTest extends InstrumentationTestCase {
         db.addMat(materia, horario);                            //
 
         assertNotNull(db.getMateria("ADL"));         // Checa se existe o materia recém-criada
-        assertEquals(db.getMateria("ADL").getCodigo(), 1122);    // Checa o código
+        assertEquals(1122, db.getMateria("ADL").getCodigo());    // Checa o código
     }
 
     @Test

@@ -1,11 +1,13 @@
 package unb.poo.mwmobile.models;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -32,10 +34,11 @@ public class MateriaCursadaTest {
     int reprovacoes;
     int avaliacaoMateria;
     int pesoMencao;
-
+    Activity main;
 
     @Before
     public void setUp() throws Exception {
+        main = Robolectric.setupActivity(Activity.class);
         m = new MateriaCursada();
         periodosCursados = new ArrayList<Integer>();
         periodosCursados.add(3);

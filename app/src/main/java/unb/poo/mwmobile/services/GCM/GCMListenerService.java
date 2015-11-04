@@ -39,9 +39,9 @@ public class GCMListenerService extends GcmListenerService {
         Log.d(TAG, "Message: " + message);
 
         if (from.startsWith("/topics/")) {
-            // message received from some topic.
+            // recebe mensagem no topico /topics/?
         } else {
-            // normal downstream message.
+            // qualquer outra mensagem
         }
 
         /**

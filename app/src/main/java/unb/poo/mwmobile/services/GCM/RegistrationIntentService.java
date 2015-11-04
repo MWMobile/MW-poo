@@ -52,7 +52,6 @@ public class RegistrationIntentService extends IntentService {
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             // Log.i(TAG, "GCM Registration Token: " + token);
 
-            // TODO: Implement this method to send any registration to your app's servers.
             sendRegistrationToServer(token);
 
             // Se inscreve nos topicos
@@ -81,7 +80,7 @@ public class RegistrationIntentService extends IntentService {
      * @param token GCM token
      */
     private void sendRegistrationToServer(String token) {
-        //TODO fazer autenticacao com nosso servidor
+        //TODO Andrei: fazer autenticacao com nosso servidor
     }
 
     /**
@@ -92,7 +91,6 @@ public class RegistrationIntentService extends IntentService {
      * @param token GCM token
      * @throws IOException se nao conseguir conecao com o GCM
      */
-    // [START subscribe_topics]
     private void subscribeTopics(String token) throws IOException {
         GcmPubSub pubSub = GcmPubSub.getInstance(this);
         for (String topic : GCMConfig.getTopics()) {
