@@ -75,6 +75,17 @@ public class DBMatTest extends InstrumentationTestCase {
 
     @Test
     public void testPrinDB() throws Exception{
+        Materia materia = new Materia();                        // Adiciona uma materia
+        ArrayList<Horario> horario = new ArrayList<>();         //
+        horario.add(new Horario(10, 10));                        // Cria uma array de informação de horario
+        materia.setNome("ADL");                                 //
+        materia.setCodigo(1122);                                 //
+        materia.setHorarios(horario);
+        materia.setProfessor(new Professor("ProfessorTeste"));
+        materia.setTurma("A");
+        materia.setSala("Sala");
+        db.addMat(materia, horario);                            //
+
         db.printDbM();
     }
 
@@ -110,6 +121,8 @@ public class DBMatTest extends InstrumentationTestCase {
 
         Materia matNew = db.getMateria("ADL");                   //
         assertNotNull(matNew);                                  //Checa se o DB possui a materia
+        matNew = db.getMateria(1122);                   //
+        assertNotNull(matNew);
     }
 
     @Test

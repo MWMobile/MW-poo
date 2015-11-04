@@ -127,12 +127,12 @@ public class DBMat extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Log.d("ID", cursor.getString(1) + " ");
-                Log.d("MATERIA", cursor.getString(2) + " ");
-                Log.d("CREDITO", cursor.getString(3) + " ");
-                Log.d("PROFESSOR", cursor.getString(4) + " ");
-                Log.d("TURMA", cursor.getString(5) + " ");
-                Log.d("SALA", cursor.getString(6) + " ");
+                Log.d("ID", cursor.getString(0) + " ");
+                Log.d("MATERIA", cursor.getString(1) + " ");
+                Log.d("CREDITO", cursor.getString(2) + " ");
+                Log.d("PROFESSOR", cursor.getString(3) + " ");
+                Log.d("TURMA", cursor.getString(4) + " ");
+                Log.d("SALA", cursor.getString(5) + " ");
             } while(cursor.moveToNext() || cursor.isLast() == true);
         }
 
@@ -143,10 +143,10 @@ public class DBMat extends SQLiteOpenHelper {
 
         if (cursor2.moveToFirst()) {
             do {
-                Log.d("ID", cursor2.getString(1) + " ");
-                Log.d("MATERIA", cursor2.getString(2) + " ");
-                Log.d("HORARIO", cursor2.getString(3) + " ");
-                Log.d("DIA", cursor2.getString(4) + " ");
+                Log.d("ID", cursor2.getString(0) + " ");
+                Log.d("MATERIA", cursor2.getString(1) + " ");
+                Log.d("HORARIO", cursor2.getString(2) + " ");
+                Log.d("DIA", cursor2.getString(3) + " ");
             } while(cursor2.moveToNext() || cursor2.isLast() == true);
         }
 
