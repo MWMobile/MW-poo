@@ -104,15 +104,13 @@ public class Utils {
     };
 
     private Materia createMockMateria(String nome, int codigo, int creditos, String professor, String turma, String sala, int hora, int dia){
-        ArrayList<Horario> horarios = new ArrayList<Horario>();
-        horarios.add(new Horario(dia, hora));
-
         Materia materia = new Materia();
 
         materia.setNome(nome);
         materia.setCodigo(codigo);
         materia.setCreditos(creditos);
-        materia.setHorarios(horarios);
+        materia.setHora(hora);
+        materia.setDia(dia);
         materia.setProfessor(new Professor(professor));
         materia.setSala(sala);
         materia.setTurma(turma);
@@ -121,17 +119,11 @@ public class Utils {
     }
 
     private MateriaCursada createMockMateriaCursada(String nome, int codigo, int creditos,String nota,boolean obr,int periodo){
-
-        ArrayList<Horario> horarios = new ArrayList<Horario>();
-        horarios.add(new Horario(2, 1000));
-        horarios.add(new Horario(4, 1000));
-
         MateriaCursada materia = new MateriaCursada();
 
         materia.setNome(nome);
         materia.setCodigo(codigo);
         materia.setCreditos(creditos);
-        materia.setHorarios(horarios);
 
         ArrayList<String> mencao = new ArrayList<String>();
         mencao.add(nota);

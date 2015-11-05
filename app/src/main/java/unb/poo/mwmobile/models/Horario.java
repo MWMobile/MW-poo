@@ -16,19 +16,22 @@ public class Horario {
      * Os parametros dessa classe sao privados e constantes.
      */
 
-    private final int hora;
-    private final int dia;
+    private int hora;
+    private int dia;
 
     /**
      * Metodo de definicao de valor dos parametros privados da classe Horario.
      * @param hora tipo: int
-     * @param dia tipo: int
      */
 
-    public Horario(int hora, int dia) {
+    public void setHora (int hora){
         this.hora = hora;
+    }
+
+    public void setDia (int dia){
         this.dia = dia;
     }
+
 
     /**
      * Metodo de retorno das horas das aulas de uma materia.
