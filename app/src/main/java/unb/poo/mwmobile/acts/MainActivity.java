@@ -19,12 +19,15 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.config.GCMConfig;
 import unb.poo.mwmobile.db.DBCore;
+import unb.poo.mwmobile.db.DBMat;
+import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.services.GCM.RegistrationIntentService;
 
 public class MainActivity extends Activity {
 
     DBCore db;
+    DBMat dbM;
     Intent loginAct;
 
 
@@ -78,9 +81,12 @@ public class MainActivity extends Activity {
 
 
         db = new DBCore(this);
+        dbM = new DBMat(this);
         db.printDB();
+        dbM.printDbM();
 
         User user = db.getUser(0);
+        Materia materia = dbM.getMateria();
 
         if(user == null)
             loginAct = new Intent(this, LoginActivity.class);

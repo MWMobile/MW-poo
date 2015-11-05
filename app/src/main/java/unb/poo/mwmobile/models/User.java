@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import unb.poo.mwmobile.db.DBCore;
+import unb.poo.mwmobile.db.DBMat;
 
 /**
  * @author Andrei Sousa
@@ -300,6 +301,8 @@ public class User implements Parcelable{
 
     private void saveOnDb(User user, Context context){
         DBCore db = new DBCore(context);
+        DBMat dbMat = new DBMat(context);
+        dbMat.addMat(materias);
         db.addUser(user, materias, historico);
     }
 
