@@ -19,7 +19,7 @@ import unb.poo.mwmobile.models.Professor;
 public class DBMat extends SQLiteOpenHelper {
 
     private static final String NOME_DB = "materiaStorage";
-    private static final int VERSAO_DB = 2;
+    private static final int VERSAO_DB = 3;
 
     private static final String TABLE_MATERIA = "materiaDB";
     private static final String TABLE_HORARIO = "horario";
@@ -72,6 +72,7 @@ public class DBMat extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MATERIA);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HORARIO);
         onCreate(db);
     }
 
@@ -108,6 +109,7 @@ public class DBMat extends SQLiteOpenHelper {
 
         onCreate(db);
         db.execSQL("DROP TABLE " + TABLE_MATERIA);
+        db.execSQL("DROP TABLE " + TABLE_HORARIO);
         onCreate(db);
 
         closeDB();
@@ -123,30 +125,30 @@ public class DBMat extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_MATERIA;
         Cursor cursor = db.rawQuery(query, null);
 
-        Log.d("Printint Materia", " ");
+        Log.d("Printing Materia", " ");
 
         if (cursor.moveToFirst()) {
             do {
-                Log.d("ID", cursor.getString(1) + " ");
-                Log.d("MATERIA", cursor.getString(2) + " ");
-                Log.d("CREDITO", cursor.getString(3) + " ");
-                Log.d("PROFESSOR", cursor.getString(4) + " ");
-                Log.d("TURMA", cursor.getString(5) + " ");
-                Log.d("SALA", cursor.getString(6) + " ");
+                Log.d("ID", cursor.getString(0) + " ");
+                Log.d("MATERIA", cursor.getString(1) + " ");
+                Log.d("CREDITO", cursor.getString(2) + " ");
+                Log.d("PROFESSOR", cursor.getString(3) + " ");
+                Log.d("TURMA", cursor.getString(4) + " ");
+                Log.d("SALA", cursor.getString(5) + " ");
             } while(cursor.moveToNext() || cursor.isLast() == true);
         }
 
         String query2 = "SELECT * FROM "+ TABLE_HORARIO;
         Cursor cursor2 = db.rawQuery(query2, null);
 
-        Log.d("Printint Horario", " ");
+        Log.d("Printing Horario", " ");
 
         if (cursor2.moveToFirst()) {
             do {
-                Log.d("ID", cursor2.getString(1) + " ");
-                Log.d("MATERIA", cursor2.getString(2) + " ");
-                Log.d("HORARIO", cursor2.getString(3) + " ");
-                Log.d("DIA", cursor2.getString(4) + " ");
+                Log.d("ID", cursor2.getString(0) + " ");
+                Log.d("MATERIA", cursor2.getString(1) + " ");
+                Log.d("HORARIO", cursor2.getString(2) + " ");
+                Log.d("DIA", cursor2.getString(3) + " ");
             } while(cursor2.moveToNext() || cursor2.isLast() == true);
         }
 
@@ -158,33 +160,38 @@ public class DBMat extends SQLiteOpenHelper {
      * Funcao que adicona as materias com seus campos nas duas tabelas desse db.
      * O formato esta do mesmo jeito do db de User (ate a explicação de porque duas TABLES)
      * @param materia               Materia a ser adicionada.
-     * @param horarios              Horerios da materia.
-     * @param horarios              Horarios da materia.
      */
-    public void addMat(Materia materia, ArrayList<Horario> horarios){
+    public void addMat(ArrayList<Materia> materia){
         openWrite();
 
-        ContentValues values = new ContentValues();
+        for (int i = 0; i < materia.size(); i++) {
+            ContentValues values = new ContentValues();
 
-        values.put(KEY_IDM, materia.getCodigo());
-        values.put(KEY_MATERIA, materia.getNome());
-        values.put(KEY_CREDITO, materia.getCreditos());
-        values.put(KEY_PROFESSOR, materia.getProfessor().getNome());
-        values.put(KEY_TURMA, materia.getTurma());
-        values.put(KEY_SALA, materia.getSala());
+            int codeM = materia.get(i).getCodigo();
+            String nomeM = materia.get(i).getNome();
+            int credM = materia.get(i).getCreditos();
+            String nomeP = materia.get(i).getProfessor().getNome();
+            String turmaM = materia.get(i).getTurma();
+            String salaM = materia.get(i).getSala();
 
-        db.insert(TABLE_MATERIA, null, values);
+            values.put(KEY_IDM, codeM);
+            values.put(KEY_MATERIA, nomeM);
+            values.put(KEY_CREDITO, credM);
+            values.put(KEY_PROFESSOR, nomeP);
+            values.put(KEY_TURMA, turmaM);
+            values.put(KEY_SALA, salaM);
 
-        for (int i = 0; i < materia.getHorarios().size(); i++){
+            db.insert(TABLE_MATERIA, null, values);
+
             ContentValues values1 = new ContentValues();
 
-            int hora = horarios.get(i).getHora();
-            int dia = horarios.get(i).getDia();
+            int horaM = materia.get(i).getHora();
+            int diaM = materia.get(i).getDia();
 
-            values1.put(KEY_IDM, materia.getCodigo());
-            values1.put(KEY_MATERIA, materia.getNome());
-            values1.put(KEY_HORARIO, hora);
-            values1.put(KEY_DIA, dia);
+            values1.put(KEY_IDM, codeM);
+            values1.put(KEY_MATERIA, nomeM);
+            values1.put(KEY_HORARIO, horaM);
+            values1.put(KEY_DIA, diaM);
 
             db.insert(TABLE_HORARIO, null, values1);
         }
@@ -196,12 +203,15 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * Metodo ainda nao descrito, criado apenas para simular o acesso utilizado nos testes.
-     * @param string Nome da materia a ser pesquisada no DB.
      * @return retorna a mareria cujo nome foi passado inicialmente.
      */
+    public Materia getMateria(){
+        String query = "SELECT * FROM " + TABLE_MATERIA;
+        return search(query);
+    }
+
     public Materia getMateria(String string){
-        String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = '" + string
-                + "'";
+        String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string;
         return search(query);
     }
 
@@ -212,17 +222,18 @@ public class DBMat extends SQLiteOpenHelper {
 
     /**
      * Funcao de busca de Materia dentro do DB
-     * @param query string que determina os parametros da busca
      * @return Retorna a materia caracterizada pelos parametros da busca
      */
 
     public Materia search(String query){
         openRead();
 
+        String query2 = "SELECT * FROM " + TABLE_HORARIO;
+        Cursor cursor2 = db.rawQuery(query2, null);
         Cursor cursor = db.rawQuery(query, null);
 
         Materia materias = null;
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst() && cursor2.moveToFirst()) {
             do {
                 materias = new Materia();
                 materias.setCodigo(cursor.getInt(0));
@@ -231,12 +242,13 @@ public class DBMat extends SQLiteOpenHelper {
                 materias.setProfessor(new Professor(cursor.getString(3)));
                 materias.setTurma(cursor.getString(4));
                 materias.setSala(cursor.getString(5));
-            } while (cursor.moveToNext() || cursor.isLast() == true);
+                materias.setDia(cursor2.getInt(3));
+                materias.setHora(cursor2.getInt(2));
+            } while (cursor.moveToNext() || cursor.isLast() == true && cursor2.moveToNext() || cursor2.isLast() == true);
         }
 
         closeDB();
         return  materias;
-
       }
 
     /**

@@ -12,7 +12,18 @@ module.exports = function (app) {
 	function createToken() {
 		return crypto.createHash('md5').update(user.toString()).digest('hex')
 	}
+	var globalToken = createToken();
+	console.log(globalToken)
 	// Fim do mock do db
+
+	//Funcao de autenticacao provisoria
+	function auth(req, res, next){
+		console.log(req.headers)
+		if(req.headers.token == globalToken)
+			next()
+		else
+			res.sendStatus(401)
+	}
 
 	//Rota que retorna o que lhe foi enviado, para teste
 	app.post('/echo', function (req, res) {
@@ -24,7 +35,7 @@ module.exports = function (app) {
 	app.post('/login', function (req, res) {
 		if (req.body.matricula == user.matricula)
 			if (req.body.senha == user.senha)
-				res.json({ token: createToken() })
+				res.json({ token: globalToken })
 			else
 				res.sendStatus(401)
 		else
@@ -32,33 +43,39 @@ module.exports = function (app) {
 
 	})
 
-	app.get('/getCurso', function (req, res) {
+	app.get('/getCurso', auth, function (req, res) {
 		res.json({
 			curso: user.curso
 		})
 	})
 
-	app.get('/getNome', function (req, res) {
+	app.get('/getNome', auth, function (req, res) {
 		res.json({
-			materias: user.nome
+			nome: user.nome
 		})
 	})
 
-	app.get('/getPeriodo', function (req, res) {
+	app.get('/getPeriodo', auth, function (req, res) {
 		res.json({
-			materias: user.periodo
+			periodo: user.periodo
 		})
 	})
 	
-	app.get('/getMaterias', function (req, res) {
+	app.get('/getMaterias', auth, function (req, res) {
 		res.json({
 			materias: user.materias
 		})
 	})
 	
-	app.get('/getHistorico', function (req, res) {
+	app.get('/getHistorico', auth, function (req, res) {
 		res.json({
-			materias: user.historico
+			historico: user.historico
+		})
+	})
+	
+	app.get('/getUser', auth, function (req, res) {
+		res.json({
+			user: user
 		})
 	})
 

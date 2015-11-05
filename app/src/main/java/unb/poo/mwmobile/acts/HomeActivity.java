@@ -20,6 +20,7 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.db.DBCore;
+import unb.poo.mwmobile.db.DBMat;
 import unb.poo.mwmobile.integracao.MiddleServer;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.utils.MateriaAdapter;
@@ -117,7 +118,10 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             DBCore db = new DBCore(this);
+            DBMat dbMat = new DBMat(this);
+
             db.dropDB();
+            dbMat.dropDB();
 
             super.onBackPressed();
             return;

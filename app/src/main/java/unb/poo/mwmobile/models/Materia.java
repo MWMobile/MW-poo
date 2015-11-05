@@ -24,7 +24,7 @@ import unb.poo.mwmobile.db.DBMat;
  * turmas e salas disponiveis, quantos creditos valem. Ela utiliza
  * a interface Parcelable.
  */
-public class Materia implements Parcelable {
+public class Materia extends Horario implements Parcelable {
 
     /**
      * Os parametros sao definidos como protected
@@ -50,21 +50,6 @@ public class Materia implements Parcelable {
         nome = in.readString();
         sala = in.readString();
         creditos = in.readInt();
-
-        /**
-         * Como o vetor horarios contem dois
-         * atributos: hora e dia, ambos serao lidos.
-         */
-
-        int tam = in.readInt();
-        int[] horarioHora = new int[tam];
-        int[] horarioDia = new int[tam];
-        in.readIntArray(horarioHora);
-        in.readIntArray(horarioDia);
-        horarios = new ArrayList<>();
-        for (int i = 0; i < tam; i++) {
-            horarios.add(new Horario(horarioHora[i],horarioDia[i]));
-        }
     }
 
     public Materia() {
@@ -97,26 +82,6 @@ public class Materia implements Parcelable {
         dest.writeString(nome);
         dest.writeString(sala);
         dest.writeInt(creditos);
-
-        /**
-         * Como o vetor horarios contem dois atributos: hora e dia, foi necessario
-         * definir um vetor de hora e outro de dia antes de serializa-los.
-         */
-
-        if (horarios == null) {
-            horarios = new ArrayList<>();
-        }
-        int[] horarioHora = new int[horarios.size()];
-        int[] horarioDia = new int[horarios.size()];
-        dest.writeInt(horarios.size());
-        int i = 0;
-        for (Horario hora : horarios) {
-            horarioHora[i] = hora.getHora();
-            horarioDia[i] = hora.getDia();
-            i++;
-        }
-        dest.writeIntArray(horarioHora);
-        dest.writeIntArray(horarioDia);
     }
 
     /**
@@ -244,15 +209,6 @@ public class Materia implements Parcelable {
         this.creditos = creditos;
     }
 
-    /**
-     * Metodo de adicao de novos horarios a uma materia.
-     * @param hora tipo: int
-     * @param dia tipo: int
-     */
-
-    public void addHorario(int hora,int dia) {
-        this.horarios.add(new Horario(hora,dia));
-    }
 
     /*public void saveOnDbM(Materia materia, Context context){
         DBMat db = new DBMat(context);

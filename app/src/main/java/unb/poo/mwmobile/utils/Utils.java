@@ -17,6 +17,7 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.MateriaCursada;
+import unb.poo.mwmobile.models.Professor;
 import unb.poo.mwmobile.models.User;
 
 /**
@@ -28,12 +29,12 @@ public class Utils {
 
         // TODO Scartezini: acabar com o UTILS
         ArrayList<Materia> materias = new ArrayList<Materia>();
-        materias.add(createMockMateria("Programacao Orientada a Objetos", 116795, 4));
-        materias.add(createMockMateria("Elementos de Automacao",170798,4));
-        materias.add(createMockMateria("Robotica Industrial",169641,4));
-        materias.add(createMockMateria("Higiene e Seguranca do Trabalho", 168921, 2));
-        materias.add(createMockMateria("Sistemas Digitais Integrados", 117391, 4));
-        materias.add(createMockMateria("Trabalho de Graduacao 1", 167681, 2));
+        materias.add(createMockMateria("Programacao Orientada a Objetos", 116795, 4, "Rodrigo Bonifacio", "A", "PAT-AT 029", 10, 2));
+        materias.add(createMockMateria("Elementos de Automacao",170798,4, "Guilherme Caribe de Carvalho", "A", "GRACO Lab. Rockwell", 10, 2));
+        materias.add(createMockMateria("Robotica Industrial",169641,4, "Walter de Britto Vidal Filho", "A", "GRACO 1", 16, 2));
+        materias.add(createMockMateria("Higiene e Seguranca do Trabalho", 168921, 2, "Luciana Morais de Freitas", "B", "ENM DT 34/15", 14, 2));
+        materias.add(createMockMateria("Sistemas Digitais Integrados", 117391, 4, "Carlos Humberto Llanos Quintero/Ricardo Pezzuol Jacobi", "A", "LINF 2", 8, 3));
+        materias.add(createMockMateria("Trabalho de Graduacao 1", 167681, 2, "Eugenio Liborio Feitosa Fortaleza/Eduardo Stockler Togrett", "G", "Lab. Auto.", 12, 5));
 
         ArrayList<MateriaCursada> materiasCursadas = new ArrayList<MateriaCursada>();
         materiasCursadas.add(createMockMateriaCursada("Calculo 1",113034,6,"SS",true,1));
@@ -102,33 +103,27 @@ public class Utils {
         return user;
     };
 
-    private Materia createMockMateria(String nome, int codigo, int creditos){
-        ArrayList<Horario> horarios = new ArrayList<Horario>();
-        horarios.add(new Horario(2, 1000));
-        horarios.add(new Horario(4, 1000));
-
+    private Materia createMockMateria(String nome, int codigo, int creditos, String professor, String turma, String sala, int hora, int dia){
         Materia materia = new Materia();
 
         materia.setNome(nome);
         materia.setCodigo(codigo);
         materia.setCreditos(creditos);
-        materia.setHorarios(horarios);
+        materia.setHora(hora);
+        materia.setDia(dia);
+        materia.setProfessor(new Professor(professor));
+        materia.setSala(sala);
+        materia.setTurma(turma);
 
         return materia;
     }
 
     private MateriaCursada createMockMateriaCursada(String nome, int codigo, int creditos,String nota,boolean obr,int periodo){
-
-        ArrayList<Horario> horarios = new ArrayList<Horario>();
-        horarios.add(new Horario(2, 1000));
-        horarios.add(new Horario(4, 1000));
-
         MateriaCursada materia = new MateriaCursada();
 
         materia.setNome(nome);
         materia.setCodigo(codigo);
         materia.setCreditos(creditos);
-        materia.setHorarios(horarios);
 
         ArrayList<String> mencao = new ArrayList<String>();
         mencao.add(nota);

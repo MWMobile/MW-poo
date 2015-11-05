@@ -21,6 +21,8 @@ import unb.poo.mwmobile.models.User;
  */
 public class DBCore extends SQLiteOpenHelper {
 
+    private static final String TAG = "DBCORE";
+
     private static final String NOME_DB = "userStorage";
     private static final int VERSAO_DB = 1;
 
