@@ -80,4 +80,13 @@ public interface ISigra {
      * @param token
      */
     public void requestNome(String token);
+
+    /**
+     * pede para o servidor dodo o
+     * o usuario a partir do token
+     * como parametro
+     *
+     * @param token
+     */
+    public void mockUser(String token);
 }

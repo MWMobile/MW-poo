@@ -6,88 +6,103 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *      Classe que faz a interface com o get no MiddleServer
- *  toda vez que user um metodo dessa classe fica na reposabilidade
- *  de quem usa implementar o listener do EventBus pois por
- *  uma questao de thread é por ele que sera enviado o dado pedido,
- *  sera eviado atravez da classe MessageServerEB que é um POJO
- *
- *  Para o uso do eventBus segue a referencia:
- *      https://github.com/greenrobot/EventBus
- *
+
  * Created by Eduardo Scartezini on 30/10/2015.
  */
 public class Sigra implements ISigra {
 
+    private static final String AUTENTICA = "login";
+    private static final String IRA = "getIra";
+    private static final String USER = "getUser";
+    private static final String HISTORICO = "getHistorico";
+    private static final String PERIODO = "getPreriodo";
+    private static final String NOME = "getNome";
+    private static final String CURSO = "getCurso";
+    private static final String MATERIAS = "getMaterias";
+
+
+
     private MiddleServer server;
     private String header;
-    private Map<String, String> params;
+    private String tag;
+    private Transaction transaction;
+    private WrapObjToNetwork obj;
 
-    public Sigra(Context context) {
-        server = new MiddleServer(context);
+    public Sigra(Context context, Transaction transaction, String tag) {
+        server = MiddleServer.getInstance(context);
+        this.tag = tag;
+        this.transaction = transaction;
         header = new  String();
-        params  = new  HashMap<String, String>();
     }
+
 
     @Override
     public void autentica(String matricula, String senha) {
+        obj = new WrapObjToNetwork();
+        obj.setMatricula(matricula);
+        obj.setSenha(senha);
 
-
-        header = "login";
-
-        params.put("matricula",matricula);
-        params.put("senha",senha);
-
-        server.get(header,params);
+        server.execute(transaction,tag,Sigra.AUTENTICA,obj);
     }
 
     @Override
     public void requestIRA(String token) {
+        obj = new WrapObjToNetwork();
+        obj.setToken(token);
 
-        header = "getIra";
-        params.put("token", token);
-
-        server.get(header, params);
+        server.execute(transaction,tag,Sigra.IRA,obj);
     }
 
     @Override
     public void requestCurso(String token) {
-        header = "getCurso";
-        params.put("token", token);
+        obj = new WrapObjToNetwork();
+        obj.setToken(token);
 
-        server.get(header,params);
+        server.execute(transaction,tag,Sigra.CURSO,obj);
+
     }
 
     @Override
     public void requestMaterias(String token) {
-        header = "getMaterias";
-        params.put("token", token);
+        obj = new WrapObjToNetwork();
+        obj.setToken(token);
 
-        server.get(header,params);
+        server.execute(transaction,tag,Sigra.MATERIAS,obj);
     }
 
     @Override
     public void requestPeriodo(String token) {
-        header = "getPeriodo";
-        params.put("token", token);
+        obj = new WrapObjToNetwork();
+        obj.setToken(token);
 
-        server.get(header,params);
+        server.execute(transaction,tag,Sigra.PERIODO,obj);
+
     }
 
     @Override
     public void requestHistorico(String token) {
-        header = "getHistorico";
-        params.put("token", token);
 
-        server.get(header,params);
+        obj = new WrapObjToNetwork();
+        obj.setToken(token);
+
+        server.execute(transaction,tag,Sigra.HISTORICO,obj);
+
     }
 
     @Override
     public void requestNome(String token) {
-        header = "getNome";
-        params.put("token", token);
+        obj = new WrapObjToNetwork();
+        obj.setToken(token);
 
-        server.get(header,params);
+        server.execute(transaction,tag,Sigra.NOME,obj);
+
     }
 
+    @Override
+    public void mockUser(String token) {
+        obj = new WrapObjToNetwork();
+        obj.setToken(token);
+
+        server.execute(transaction,tag,Sigra.USER,obj);
+    }
 }
