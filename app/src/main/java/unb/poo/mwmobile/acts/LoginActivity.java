@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,12 +12,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.integracao.MiddleServer;
+import unb.poo.mwmobile.integracao.Sigra;
+import unb.poo.mwmobile.integracao.Transaction;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.utils.Utils;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Transaction{
 
     boolean doubleBackToExitPressedOnce = false;
     User user;
@@ -50,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     View.OnClickListener login = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
+
 
             EditText matriculaField = (EditText) findViewById(R.id.matriculaField);
             EditText passwordField = (EditText) findViewById(R.id.passwordField);
@@ -59,18 +67,15 @@ public class LoginActivity extends AppCompatActivity {
                 if(!passwordField.getText().toString().trim().equals("")){
 
                     try {
-                        int matricula = Integer.parseInt(String.valueOf(matriculaField.getText()));
-
+                        String matricula = String.valueOf(matriculaField.getText());
                         String password = String.valueOf(passwordField.getText());
 
-                        user = utils.mockUser(matricula, password);
 
-                        if (user.login(getApplicationContext())) {
-                            homeAct.putExtra("user", user);
-                            startActivity(homeAct);
-                            finish();
-                        } else
-                            Toast.makeText(getApplicationContext(), "Informacoes Incorretas", Toast.LENGTH_SHORT).show();
+                        Sigra sigra = new Sigra(LoginActivity.this.getApplicationContext(),
+                                LoginActivity.this,
+                                LoginActivity.class+"");
+
+                        sigra.autentica(matricula,password);
 
                     } catch (NumberFormatException e) {
                         Toast.makeText(getApplicationContext(), "O campo matricula so aceita numeros", Toast.LENGTH_LONG).show();
@@ -131,5 +136,35 @@ public class LoginActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 2000);
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        MiddleServer.getInstance(LoginActivity.this.getApplicationContext())
+                .getRequestQueue()
+                .cancelAll(LoginActivity.class+"");
+    }
+
+    @Override
+    public void doAfter(JSONArray jsonArray) {
+        if( jsonArray != null){
+            Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
+            Gson gson = new Gson();
+
+            try {
+                User user = gson.fromJson(jsonArray.getJSONObject(0).toString(), User.class);
+                homeAct.putExtra("user", user);
+                startActivity(homeAct);
+                finish();
+
+            } catch (JSONException e) {
+                Log.d("LOG", "doAfter(): " + e.getMessage());
+            }
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Falha no Login", Toast.LENGTH_SHORT).show();
+        }
     }
 }

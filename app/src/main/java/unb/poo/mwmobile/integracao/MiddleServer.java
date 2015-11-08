@@ -80,11 +80,12 @@ public class MiddleServer {
 
         final CustomRequest request = new CustomRequest(
                 Request.Method.POST,
-                TAG + header,
+                URL + header,
                 params,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.d(TAG, "String" + response);
                         transaction.doAfter(response);
                     }
                 },
