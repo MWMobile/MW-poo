@@ -6,11 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-
+ * Classe que faz a interface entre quem pede
+ * o requeste é a classe que se comunica com o servidor
+ *
  * Created by Eduardo Scartezini on 30/10/2015.
  */
 public class Sigra implements ISigra {
 
+    //Constantes
     private static final String AUTENTICA = "login";
     private static final String IRA = "getIra";
     private static final String USER = "getUser";
@@ -28,6 +31,19 @@ public class Sigra implements ISigra {
     private Transaction transaction;
     private WrapObjToNetwork obj;
 
+
+    /**
+     * Construtor padrao do Sigra
+     *
+     * @param context
+     *      contexto da aplicacao
+     * @param transaction
+     *      Quem implementa Transaction que vai ouvir o evento
+     *      de chegada de dados do servidor
+     * @param tag
+     *      Tag para parrar o request caso o app entre no
+     *      onStop
+     */
     public Sigra(Context context, Transaction transaction, String tag) {
         server = MiddleServer.getInstance(context);
         this.tag = tag;
