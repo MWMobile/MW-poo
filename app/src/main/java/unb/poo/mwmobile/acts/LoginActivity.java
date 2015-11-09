@@ -157,7 +157,6 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
 
             Log.d("JSON",String.valueOf(jsonObject));
             User user = gson.fromJson(String.valueOf(jsonObject), User.class);
-            Log.d("USER", user.getNome());
             homeAct.putExtra("user", user);
             startActivity(homeAct);
             finish();
