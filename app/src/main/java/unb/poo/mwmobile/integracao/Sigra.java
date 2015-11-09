@@ -30,7 +30,7 @@ public class Sigra implements ISigra {
     private String tag;
     private Transaction transaction;
     private WrapObjToNetwork obj;
-
+    private HashMap<String,String> params;
 
     /**
      * Construtor padrao do Sigra
@@ -54,71 +54,70 @@ public class Sigra implements ISigra {
 
     @Override
     public void autentica(String matricula, String senha) {
-        obj = new WrapObjToNetwork();
-        obj.setMatricula(matricula);
-        obj.setSenha(senha);
+        params = new HashMap<>();
+        params.put("matricula",matricula);
+        params.put("senha",senha);
 
-        server.execute(transaction,tag,Sigra.AUTENTICA,obj);
+        server.execute(transaction,tag,Sigra.AUTENTICA,params);
     }
 
     @Override
     public void requestIRA(String token) {
-        obj = new WrapObjToNetwork();
-        obj.setToken(token);
+        params = new HashMap<>();
+        params.put("token",token);
 
-        server.execute(transaction,tag,Sigra.IRA,obj);
+        server.execute(transaction,tag,Sigra.IRA,params);
     }
 
     @Override
     public void requestCurso(String token) {
-        obj = new WrapObjToNetwork();
-        obj.setToken(token);
+        params = new HashMap<>();
+        params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.CURSO,obj);
+        server.execute(transaction,tag,Sigra.CURSO,params);
 
     }
 
     @Override
     public void requestMaterias(String token) {
-        obj = new WrapObjToNetwork();
-        obj.setToken(token);
+        params = new HashMap<>();
+        params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.MATERIAS,obj);
+        server.execute(transaction,tag,Sigra.MATERIAS,params);
     }
 
     @Override
     public void requestPeriodo(String token) {
-        obj = new WrapObjToNetwork();
-        obj.setToken(token);
+        params = new HashMap<>();
+        params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.PERIODO,obj);
+        server.execute(transaction,tag,Sigra.PERIODO,params);
 
     }
 
     @Override
     public void requestHistorico(String token) {
+        params = new HashMap<>();
+        params.put("token", token);
 
-        obj = new WrapObjToNetwork();
-        obj.setToken(token);
-
-        server.execute(transaction,tag,Sigra.HISTORICO,obj);
+        server.execute(transaction,tag,Sigra.HISTORICO,params);
 
     }
 
     @Override
     public void requestNome(String token) {
-        obj = new WrapObjToNetwork();
-        obj.setToken(token);
+        params = new HashMap<>();
+        params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.NOME,obj);
+        server.execute(transaction,tag,Sigra.NOME,params);
 
     }
 
     @Override
     public void mockUser(String token) {
-        obj = new WrapObjToNetwork();
-        obj.setToken(token);
+        params = new HashMap<>();
+        params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.USER,obj);
+        server.execute(transaction,tag,Sigra.USER,params);
     }
 }

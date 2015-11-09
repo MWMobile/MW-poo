@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+
+import org.json.JSONObject;
 
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.integracao.MiddleServer;
@@ -148,20 +148,20 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
     }
 
     @Override
-    public void doAfter(JSONArray jsonArray) {
-        if( jsonArray != null){
+    public void doAfter(JSONObject jsonObject) {
+        if( jsonObject != null){
             Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
             Gson gson = new Gson();
 
-            try {
-                User user = gson.fromJson(jsonArray.getJSONObject(0).toString(), User.class);
-                homeAct.putExtra("user", user);
-                startActivity(homeAct);
-                finish();
 
-            } catch (JSONException e) {
-                Log.d("LOG", "doAfter(): " + e.getMessage());
-            }
+
+            Log.d("JSON",String.valueOf(jsonObject));
+            User user = gson.fromJson(String.valueOf(jsonObject), User.class);
+            Log.d("USER", user.getNome());
+            homeAct.putExtra("user", user);
+            startActivity(homeAct);
+            finish();
+
         }
         else {
             Toast.makeText(getApplicationContext(), "Falha no Login", Toast.LENGTH_SHORT).show();
