@@ -21,6 +21,7 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.integracao.MiddleServer;
 import unb.poo.mwmobile.integracao.Sigra;
 import unb.poo.mwmobile.integracao.Transaction;
+import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.utils.Utils;
 
@@ -157,6 +158,9 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
 
             Log.d("JSON",String.valueOf(jsonObject));
             User user = gson.fromJson(String.valueOf(jsonObject), User.class);
+            for(MateriaCursada m: user.getHistorico()){
+                m.setPesoMencao(m.getMencaoTag());
+            }
             homeAct.putExtra("user", user);
             startActivity(homeAct);
             finish();

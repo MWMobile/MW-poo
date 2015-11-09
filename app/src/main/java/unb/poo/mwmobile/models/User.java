@@ -244,6 +244,8 @@ public class User implements Parcelable{
          * CRi: creditos de uma disciplina
          *
          */
+
+
         double constante;
         double disc = 0,disc2 = 0;
         double variavel;
