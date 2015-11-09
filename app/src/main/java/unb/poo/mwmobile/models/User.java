@@ -33,12 +33,13 @@ import unb.poo.mwmobile.db.DBMat;
 
 public class User implements Parcelable{
 
-    private final int matricula;
+    private int matricula;
     private String senha;
     private String nome;
     private String curso;
     private int periodo;
     private double IRA;
+    private String token;
 
   /* em vez de setar uma array list e tal, o certo seria ter um addMateria na arraylist
   * nessa estrutura ele deve poder procurar materias na lista, adicionar e remover
@@ -203,6 +204,20 @@ public class User implements Parcelable{
         setIRA();
         this.historico = historico;
     }
+
+    public void setIRA(double IRA) {
+        this.IRA = IRA;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+
 
     /**
      * Metodo de retorno do valor do IRA do usuario

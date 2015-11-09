@@ -6,8 +6,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
@@ -19,13 +19,13 @@ import java.util.Map;
  *
  * Created by Scartezini on 05/11/2015.
  */
-public class CustomRequest extends Request<JSONArray> {
+public class CustomRequest extends Request<JSONObject> {
 
-    private Response.Listener<JSONArray> listener;
+    private Response.Listener<JSONObject> listener;
     private Map<String, String> params;
 
     public CustomRequest(int method, String url, Map<String, String> params,
-                         Response.Listener<JSONArray> reponseListener, Response.ErrorListener errorListener) {
+                         Response.Listener<JSONObject> reponseListener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         this.listener = reponseListener;
         this.params = params;
@@ -37,11 +37,11 @@ public class CustomRequest extends Request<JSONArray> {
     }
 
     @Override
-    protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
+    protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
         try {
             String jsonString = new String(response.data,
                     HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(new JSONArray(jsonString),
+            return Response.success(new JSONObject(jsonString),
                     HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             return Response.error(new ParseError(e));
@@ -51,7 +51,7 @@ public class CustomRequest extends Request<JSONArray> {
     }
 
     @Override
-    protected void deliverResponse(JSONArray response) {
+    protected void deliverResponse(JSONObject response) {
         listener.onResponse(response);
     }
 }

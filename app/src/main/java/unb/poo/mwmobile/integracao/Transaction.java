@@ -1,6 +1,7 @@
 package unb.poo.mwmobile.integracao;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import unb.poo.mwmobile.models.User;
 
@@ -19,7 +20,7 @@ public interface Transaction {
      * JsonArray para quem deu o requeste
      * nesse array vai esta a resposta do servidor
      *
-     * @param jsonArray
+     * @param jsonObject
      */
-    public void doAfter(JSONArray jsonArray);
+    public void doAfter(JSONObject jsonObject);
 }
