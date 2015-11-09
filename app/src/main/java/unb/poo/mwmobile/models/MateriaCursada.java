@@ -26,6 +26,15 @@ public class MateriaCursada extends Materia implements Parcelable {
     private int reprovacoes;                                                                        //Número de vezes que o aluno reprovou
     private int avaliacaoMateria;                                                                   //Avaliação numérica de 0 a 100% da qualidade da matéria(envolve desde
     private int pesoMencao;
+    private String mencaoTag;
+
+    public String getMencaoTag() {
+        return mencaoTag;
+    }
+
+    public void setMencaoTag(String mencaoTag) {
+        this.mencaoTag = mencaoTag;
+    }
 
     public MateriaCursada() {
         super();
