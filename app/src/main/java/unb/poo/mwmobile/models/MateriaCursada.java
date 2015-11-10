@@ -31,6 +31,8 @@ public class MateriaCursada extends Materia implements Parcelable {
         this.mencao = mencao;
     }
 
+    public MateriaCursada() {
+    }
 
     public MateriaCursada(Parcel in) {
         super(in);
