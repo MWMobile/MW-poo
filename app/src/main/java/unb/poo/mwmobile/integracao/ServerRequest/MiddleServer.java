@@ -16,6 +16,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import unb.poo.mwmobile.config.MiddleServerConfig;
+
 /**
  * Classe para fazer o request ao server
  * que faz o intermedio entre a aplicação e
@@ -26,9 +28,6 @@ import java.util.HashMap;
 public class MiddleServer {
 
     private static final String TAG = "MiddleServer";
-
-
-    private static final String URL = "http://104.131.63.41/";
     private static MiddleServer instance;
 
 
@@ -75,7 +74,7 @@ public class MiddleServer {
 
         final CustomRequest request = new CustomRequest(
                 Request.Method.POST,
-                URL + header,
+                MiddleServerConfig.URL + header,
                 params,
                 new Response.Listener<JSONObject>() {
                     @Override
