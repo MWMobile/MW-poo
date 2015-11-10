@@ -23,6 +23,7 @@ import unb.poo.mwmobile.db.DBMat;
 import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.services.GCM.RegistrationIntentService;
+import unb.poo.mwmobile.singleton.SingletonUser;
 
 public class MainActivity extends Activity {
 
@@ -92,7 +93,8 @@ public class MainActivity extends Activity {
             loginAct = new Intent(this, LoginActivity.class);
         else {
             loginAct = new Intent(this, HomeActivity.class);
-            loginAct.putExtra("user", user);
+            SingletonUser singletonUser = SingletonUser.getINSTANCE();
+            singletonUser.setUser(user);
         }
 
         startActivity(loginAct);
