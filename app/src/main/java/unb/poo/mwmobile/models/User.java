@@ -6,11 +6,10 @@ package unb.poo.mwmobile.models;
  */
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.ArrayList;
 
+import unb.poo.mwmobile.config.MencaoConfig;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.db.DBMat;
 
@@ -158,11 +157,11 @@ public class User{
      */
 
     public void setHistorico(ArrayList<MateriaCursada> historico) {
-        setIRA();
+        calculaIRA();
         this.historico = historico;
     }
 
-    public void setIRA(double IRA) {
+    public void calculaIRA(double IRA) {
         this.IRA = IRA;
     }
 
@@ -182,7 +181,7 @@ public class User{
      */
 
     public double getIRA() {
-        setIRA();
+        calculaIRA();
         return IRA;
     }
 
@@ -190,7 +189,7 @@ public class User{
      * Metodo do calculo do IRA
      */
 
-    private void setIRA() {
+    private void calculaIRA() {
         /**
          * Parametros da formula do IRA:
          * DTb: disciplinas OBRIGATORIAS trancadas
@@ -215,6 +214,10 @@ public class User{
         int DTp = 0;
         int DC;
 
+
+        MencaoConfig mencaoConfig = new MencaoConfig();
+
+
         for (MateriaCursada materia : historico) {
             if (materia.obrigatoriaTrancada()) {
                 DTp++;
@@ -229,7 +232,7 @@ public class User{
         //-----------------------------------------
 
         for(MateriaCursada materia : historico){
-            Peso_mencao = materia.getPesoMencao();
+            Peso_mencao = mencaoConfig.pesoMencao(materia.getMencao());
             Periodo_disciplina = materia.getPeriodoCursado();
             Credito_disciplina = materia.getCreditos();
 

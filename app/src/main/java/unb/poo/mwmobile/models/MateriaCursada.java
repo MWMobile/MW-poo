@@ -19,8 +19,7 @@ public class MateriaCursada extends Materia{
     private boolean trancada = false;                                                               // Verifica se a matéria foi trancada.
     private int periodoTerminado;                                                                   //Período em que a matéria foi concluída
     private int reprovacoes;                                                                        //Número de vezes que o aluno reprovou
-    private int avaliacaoMateria;                                                                   //Avaliação numérica de 0 a 100% da qualidade da matéria(envolve desde
-    private int pesoMencao;
+    private int avaliacaoMateria;
     private String mencao;
 
     public String getMencao() {
@@ -31,37 +30,6 @@ public class MateriaCursada extends Materia{
         this.mencao = mencao;
     }
 
-    public MateriaCursada() {
-    }
-
-    
-    public void setPesoMencao(String MENCAO){
-        switch(MENCAO){
-            default:
-            case "SR":
-                this.pesoMencao = 0;
-                break;
-            case "II":
-                this.pesoMencao = 1;
-                break;
-            case "MI":
-                this.pesoMencao = 2;
-                break;
-            case "MM":
-                this.pesoMencao = 3;
-                break;
-            case "MS":
-                this.pesoMencao = 4;
-                break;
-            case "SS":
-                this.pesoMencao = 5;
-                break;
-        }
-    }
-
-    public int getPesoMencao(){
-        return pesoMencao;
-    }
 
     public int getReprovacoes() {
         return reprovacoes;
