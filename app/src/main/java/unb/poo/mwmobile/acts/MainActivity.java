@@ -17,7 +17,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
 import unb.poo.mwmobile.R;
-import unb.poo.mwmobile.config.GCMConfig;
+import unb.poo.mwmobile.config.GCM;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.db.DBMat;
 import unb.poo.mwmobile.models.Materia;
@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
                 SharedPreferences sharedPreferences =
                         PreferenceManager.getDefaultSharedPreferences(context);
                 boolean sentToken = sharedPreferences
-                        .getBoolean(GCMConfig.getSentTokenToServer(), false);
+                        .getBoolean(GCM.getSentTokenToServer(), false);
                 if (sentToken) {
                     Log.d(TAG, "R.string.gcm_send_message)");
                 } else {
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
     public void onResume(){
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(GCMConfig.getRegistrationComplete()));
+                new IntentFilter(GCM.getRegistrationComplete()));
 
     }
 

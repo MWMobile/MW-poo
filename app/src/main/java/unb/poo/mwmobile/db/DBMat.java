@@ -211,7 +211,7 @@ public class DBMat extends SQLiteOpenHelper {
     }
 
     public Materia getMateria(String string){
-        String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = " + string;
+        String query = "SELECT * FROM " + TABLE_MATERIA + " WHERE " + KEY_MATERIA + " = '" + string + "'";
         return search(query);
     }
 
@@ -236,6 +236,7 @@ public class DBMat extends SQLiteOpenHelper {
         if (cursor.moveToFirst() && cursor2.moveToFirst()) {
             do {
                 materias = new Materia();
+
                 materias.setCodigo(cursor.getInt(0));
                 materias.setNome(cursor.getString(1));
                 materias.setCreditos(cursor.getInt(2));
@@ -244,7 +245,8 @@ public class DBMat extends SQLiteOpenHelper {
                 materias.setSala(cursor.getString(5));
                 materias.setDia(cursor2.getInt(3));
                 materias.setHora(cursor2.getInt(2));
-            } while (cursor.moveToNext() || cursor.isLast() == true && cursor2.moveToNext() || cursor2.isLast() == true);
+
+            } while ((cursor.moveToNext() || cursor.isLast() == true) && (cursor2.moveToNext() || cursor2.isLast() == true));
         }
 
         closeDB();

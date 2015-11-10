@@ -17,9 +17,9 @@ module.exports = function (app) {
 	// Fim do mock do db
 
 	//Funcao de autenticacao provisoria
-	function auth(req, res, next){
+	function auth(req, res, next) {
 		console.log(req.headers)
-		if(req.headers.token == globalToken)
+		if (req.headers.token == globalToken)
 			next()
 		else
 			res.sendStatus(401)
@@ -35,7 +35,10 @@ module.exports = function (app) {
 	app.post('/login', function (req, res) {
 		if (req.body.matricula == user.matricula)
 			if (req.body.senha == user.senha)
-				res.json({ token: globalToken })
+				res.json({
+					token: globalToken,
+					user: user
+				})
 			else
 				res.sendStatus(401)
 		else
@@ -60,19 +63,19 @@ module.exports = function (app) {
 			periodo: user.periodo
 		})
 	})
-	
+
 	app.get('/getMaterias', auth, function (req, res) {
 		res.json({
 			materias: user.materias
 		})
 	})
-	
+
 	app.get('/getHistorico', auth, function (req, res) {
 		res.json({
 			historico: user.historico
 		})
 	})
-	
+
 	app.get('/getUser', auth, function (req, res) {
 		res.json({
 			user: user

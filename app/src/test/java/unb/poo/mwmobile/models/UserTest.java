@@ -27,6 +27,7 @@ public class UserTest extends AndroidTestCase {
 
     ArrayList<Materia> materias;
     ArrayList<MateriaCursada> historico;
+    ArrayList<Horario> horarios;
 
     Materia materia;
     MateriaCursada materiaCursada;
@@ -47,13 +48,14 @@ public class UserTest extends AndroidTestCase {
 
         historico = new ArrayList<>();
         materias = new ArrayList<>();
+        horarios = new ArrayList<>();
+
+        horarios.add(new Horario(10, 1));
 
         materia = new Materia();
         materia.setNome("POO");
         materia.setProfessor(new Professor("Rodrigo Bonifacio"));
-        materia.setHorarios(new ArrayList<Horario>());
-        materia.addHorario(800, 2);
-        materia.addHorario(800, 4);
+        materia.setHorarios(horarios);
 
         materiaCursada = new MateriaCursada();
         materiaCursada.setNome("ED");
