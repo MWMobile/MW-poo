@@ -1,4 +1,4 @@
-package unb.poo.mwmobile.integracao;
+package unb.poo.mwmobile.integracao.ServerInterface;
 
 /**
  * Interface com os metodos que pode
