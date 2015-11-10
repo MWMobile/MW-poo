@@ -31,7 +31,7 @@ public class DBCore extends SQLiteOpenHelper {
     private static final String TABLE_HIST = "historico";
 
     private static final String KEY_ID= "id";
-    private static final String KEY_IDM = "idM";
+    private static final String KEY_IDM = "codigo";
     private static final String KEY_MATRICULA = "matricula";
     private static final String KEY_MATERIA = "materia";
     private static final String KEY_SENHA = "senha";
@@ -62,9 +62,13 @@ public class DBCore extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createDb = "CREATE TABLE IF NOT EXISTS " + TABLE_USER +
-                "("+ KEY_ID + " INTEGER, " + KEY_MATRICULA + " INTEGER, " + KEY_SENHA + " TEXT, "
-                + KEY_NOME + " TEXT, " + KEY_CURSO + " TEXT, " + KEY_PERIODO + " INTEGER)";
+        String createDb = "CREATE TABLE IF NOT EXISTS " + TABLE_USER + "(" +
+                KEY_ID + " INTEGER, " +
+                KEY_MATRICULA + " INTEGER, " +
+                KEY_SENHA + " TEXT, " +
+                KEY_NOME + " TEXT, " +
+                KEY_CURSO + " TEXT, " +
+                KEY_PERIODO + " INTEGER" + ")";
         db.execSQL(createDb);
 
         String createDbM = "CREATE TABLE IF NOT EXISTS " + TABLE_MATERIA + " (" +
@@ -73,10 +77,14 @@ public class DBCore extends SQLiteOpenHelper {
                 KEY_CREDITO + " INTEGER" + ")";
         db.execSQL(createDbM);
 
-        String createDbH = "CREATE TABLE IF NOT EXISTS " + TABLE_HIST +
-                "(" + KEY_MATRICULA + " INTEGER, " + KEY_IDM + " INTEGER, " + KEY_MATERIA + " TEXT, "
-                + KEY_MENCAO + " TEXT, " + KEY_OBRIG + " INTEGER, " + KEY_PERIODO + " INTEGER, "
-                + KEY_CREDITO + " INTEGER)";
+        String createDbH = "CREATE TABLE IF NOT EXISTS " + TABLE_HIST + "(" +
+                KEY_MATRICULA + " INTEGER, " +
+                KEY_IDM + " INTEGER, " +
+                KEY_MATERIA + " TEXT, " +
+                KEY_MENCAO + " TEXT, " +
+                KEY_OBRIG + " INTEGER, " +
+                KEY_PERIODO + " INTEGER, " +
+                KEY_CREDITO + " INTEGER" + ")";
         db.execSQL(createDbH);
 
         this.db = db;

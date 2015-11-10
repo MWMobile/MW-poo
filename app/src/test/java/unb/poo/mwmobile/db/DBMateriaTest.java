@@ -45,46 +45,52 @@ public class DBMateriaTest extends InstrumentationTestCase {
 
     @Test
     public void testDropDB() throws Exception{
-        Materia materia = new Materia();                        // Adiciona uma materia
-        ArrayList<Horario> horario = new ArrayList<>();         //
-        horario.add(new Horario(10, 1));                        // Cria uma array de informação de horario
-        materia.setNome("ADL");                                 //
-        materia.setCodigo(1122);                                 //
+        ArrayList<Horario> horario = new ArrayList<>();
+        horario.add(new Horario(10, 1));
+
+        Materia materia = new Materia();
+        materia.setNome("ADL");
+        materia.setCodigo(1122);
         materia.setHorarios(horario);
         materia.setProfessor(new Professor("ProfessorTeste"));
         materia.setTurma("A");
         materia.setSala("Sala");
+
         db.dropDB();
+
         assertNull(db.getMateria("ADL"));
     }
 
     @Test
     public void testPrintDB() throws Exception{
-        ArrayList<Materia> matList = new ArrayList<>();         //
-        ArrayList<Horario> horario = new ArrayList<>();         //
-        Materia materia = new Materia();                        // Adiciona uma materia
-        horario.add(new Horario(10, 1));                        // Cria uma array de informação de horario
-        materia.setNome("ADL");                                 //
-        materia.setCodigo(1122);                                 //
+        ArrayList<Horario> horario = new ArrayList<>();
+        horario.add(new Horario(10, 1));
+
+        Materia materia = new Materia();
+        materia.setNome("ADL");
+        materia.setCodigo(1122);
         materia.setHorarios(horario);
         materia.setProfessor(new Professor("ProfessorTeste"));
         materia.setTurma("A");
         materia.setSala("Sala");
-        matList.add(materia);
-        db.addMaterias(matList);
 
+        ArrayList<Materia> matList = new ArrayList<>();
+        matList.add(materia);
+
+        db.addMaterias(matList);
+        assertNotNull(db.getMateria("ADL"));
         db.printDB();
     }
 
     @Test
     public void testAddMat() throws Exception{
-        ArrayList<Materia> matList = new ArrayList<>();         //
-        ArrayList<Horario> horario = new ArrayList<>();         //
-        Materia materia = new Materia();                        // Adiciona uma materia
+        ArrayList<Materia> matList = new ArrayList<>();
+        ArrayList<Horario> horario = new ArrayList<>();
+        Materia materia = new Materia();
 
-        horario.add(new Horario(10, 1));                        // Cria uma array de informação de horario
-        materia.setNome("ADL");                                 //
-        materia.setCodigo(1122);                                 //
+        horario.add(new Horario(10, 1));
+        materia.setNome("ADL");
+        materia.setCodigo(1122);
         materia.setHorarios(horario);
         materia.setProfessor(new Professor("ProfessorTeste"));
         materia.setTurma("A");
@@ -93,72 +99,76 @@ public class DBMateriaTest extends InstrumentationTestCase {
 
         db.addMaterias(matList);
 
-        assertNotNull(db.getMateria("ADL"));         // Checa se existe o materia recém-criada
-        assertEquals(1122, db.getMateria("ADL").getCodigo());    // Checa o código
+        assertNotNull(db.getMateria("ADL"));
+        assertEquals(materia.getCodigo(), db.getMateria("ADL").getCodigo());
     }
 
     @Test
     public void testGetMat() throws Exception{
-        ArrayList<Materia> matList = new ArrayList<>();         //
-        ArrayList<Horario> horario = new ArrayList<>();         //
+        ArrayList<Materia> matList = new ArrayList<>();
+        ArrayList<Horario> horario = new ArrayList<>();
 
-        Materia materia = new Materia();                        // Adiciona uma materia
+        Materia materia = new Materia();
 
-        horario.add(new Horario(10, 1));                        // Cria uma array de informação de horario
+        horario.add(new Horario(10, 1));
 
-        materia.setNome("ADL");                                 //
-        materia.setCodigo(1122);                                 //
-        materia.setHorarios(horario);                           //
-        materia.setProfessor(new Professor("ProfessorTeste"));
-        materia.setTurma("A");
-        materia.setSala("Sala");
-
-        matList.add(materia);
-
-        db.addMaterias(matList);                            //
-
-        Materia matNew = db.getMateria("ADL");                   //
-        assertNotNull(matNew);                                  //Checa se o DB possui a materia
-        matNew = db.getMateria(1122);                   //
-        assertNotNull(matNew);
-    }
-
-    @Test
-    public void testUpdMat() throws Exception{
-        ArrayList<Materia> matList = new ArrayList<>();         //
-        ArrayList<Horario> horario = new ArrayList<>();         //
-        Materia materia = new Materia();                        // Adiciona uma materia
-        horario.add(new Horario(10, 1));                        // Cria uma array de informação de horario
-        materia.setNome("ADL");                                 //
-        materia.setCodigo(1122);                                 //
+        materia.setNome("ADL");
+        materia.setCodigo(1122);
         materia.setHorarios(horario);
         materia.setProfessor(new Professor("ProfessorTeste"));
         materia.setTurma("A");
         materia.setSala("Sala");
-        matList.add(materia);
-        db.addMaterias(matList);                            //
 
-        db.updMateria(db.getMateria("ADL"));                    // TODO dar um jeito de verificar as informações além do status do objeto
-        assertNotNull(db.getMateria("ADL"));                    //
+        matList.add(materia);
+
+        assertNull(db.getMateria("ADL"));
+
+        db.addMaterias(matList);
+
+        assertNotNull(db.getMateria("ADL"));
+        assertNotNull(db.getMateria(1122));
+    }
+
+    @Test
+    public void testUpdMat() throws Exception{
+        ArrayList<Horario> horario = new ArrayList<>();
+        horario.add(new Horario(10, 1));
+
+        Materia materia = new Materia();
+        materia.setNome("ADL");
+        materia.setCodigo(1122);
+        materia.setHorarios(horario);
+        materia.setProfessor(new Professor("ProfessorTeste"));
+        materia.setTurma("A");
+        materia.setSala("Sala");
+
+        ArrayList<Materia> matList = new ArrayList<>();
+        matList.add(materia);
+
+        db.addMaterias(matList);
+        db.updMateria(db.getMateria("ADL"));
+        assertNotNull(db.getMateria("ADL"));
     }
 
     @Test
     public void testDelMat() throws Exception{
-        ArrayList<Materia> matList = new ArrayList<>();         //
         ArrayList<Horario> horario = new ArrayList<>();         //
-        Materia materia = new Materia();                        // Adiciona uma materia
         horario.add(new Horario(10, 1));                        // Cria uma array de informação de horario
+
+        Materia materia = new Materia();                        // Adiciona uma materia
         materia.setNome("ADL");                                 //
         materia.setCodigo(1122);                                 //
         materia.setHorarios(horario);                           //
         materia.setProfessor(new Professor("ProfessorTeste"));
         materia.setTurma("A");
         materia.setSala("Sala");
+
+        ArrayList<Materia> matList = new ArrayList<>();         //
         matList.add(materia);
+
         db.addMaterias(matList);                            //
-
-
         db.delMateria(db.getMateria("ADL"));
+
         assertNull(db.getMateria("ADL"));                        // Verifica se a exclusão foi efetuada.
    }
 

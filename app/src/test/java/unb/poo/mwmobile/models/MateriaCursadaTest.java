@@ -173,34 +173,4 @@ public class MateriaCursadaTest {
 
     }
 
-    @Test
-    public void testDescribeContents() throws Exception {
-        assertEquals(m.describeContents(),0);
-    }
-
-    @Test
-    public void testWriteToParcel() throws Exception {
-        Parcel in = Parcel.obtain();
-        assertNotNull(in);
-        m.writeToParcel(in,m.describeContents());
-        in.setDataPosition(0);
-        MateriaCursada newMateria = MateriaCursada.CREATOR.createFromParcel(in);
-
-        assertNotNull(newMateria);
-
-        assertEquals(m.getCodigo(), newMateria.getCodigo());
-        assertEquals(m.getNome(), newMateria.getNome());
-        assertEquals(m.getCreditos(), newMateria.getCreditos());
-
-        // Erro de NullPointException aqui, o resto em baixo passa
-//        assertEquals(m.getProfessor().getNome(), newMateria.getProfessor().getNome());
-
-        assertNotNull(newMateria.getHorarios());
-        assertEquals(m.getSala(), newMateria.getSala());
-        assertEquals(m.getTurma(),newMateria.getTurma());
-        assertEquals(m.getObrigatoria(),newMateria.getObrigatoria());
-        assertEquals(m.getPeriodoCursado(), newMateria.getPeriodoCursado());
-        assertNotNull(newMateria.getMencao());
-        in.recycle();
-    }
 }

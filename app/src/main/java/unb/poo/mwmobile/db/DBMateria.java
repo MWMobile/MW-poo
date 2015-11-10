@@ -126,6 +126,9 @@ public class DBMateria {
                 materia.setCodigo(cursor.getInt(0));
                 materia.setNome(cursor.getString(1));
                 materia.setCreditos(cursor.getInt(2));
+//                materia.setProfessor(new Professor(cursor.getString(3)));
+//                materia.setTurma(cursor.getString(4));
+//                materia.setSala(cursor.getString(5));
 
                 materias.add(materia);
             } while (cursor.moveToNext() || cursor.isLast() == true);
