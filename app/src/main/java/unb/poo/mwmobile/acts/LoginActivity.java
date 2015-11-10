@@ -156,6 +156,7 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
 
             Log.d("JSON",String.valueOf(jsonObject));
             User user = gson.fromJson(String.valueOf(jsonObject), User.class);
+
             for(MateriaCursada m: user.getHistorico()){
                 m.setPesoMencao(m.getMencao());
             }
