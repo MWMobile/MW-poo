@@ -26,7 +26,7 @@ import unb.poo.mwmobile.db.DBMat;
  * aplicativo, ele tem uma senha de acesso.
  */
 
-public class User implements Parcelable{
+public class User{
 
     private int matricula;
     private String senha;
@@ -60,45 +60,7 @@ public class User implements Parcelable{
         this.historico = new ArrayList<>();
     }
 
-    /**
-     * Transmite todas as informacoes do usuario pelo Parcel.
-     * @param in
-     */
-    public User(Parcel in) {
-        setIRA();
 
-        nome = in.readString();
-        matricula = in.readInt();
-        senha = in.readString();
-        IRA = in.readDouble();
-        curso = in.readString();
-        periodo = in.readInt();
-        materias = new ArrayList<>();
-        historico = new ArrayList<>();
-
-        in.readTypedList(materias, Materia.CREATOR);
-        in.readTypedList(historico, MateriaCursada.CREATOR);
-    }
-
-    /**
-     * Metodo de serializacao das informacoes
-     * do usuario da matricula pelo Parcel.
-     * @param dest
-     * @param flags
-     */
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags){
-        dest.writeString(nome);
-        dest.writeInt(matricula);
-        dest.writeString(senha);
-        dest.writeDouble(IRA);
-        dest.writeString(curso);
-        dest.writeInt(periodo);
-
-        dest.writeTypedList(materias);
-        dest.writeTypedList(historico);
-    }
 
     /**
      * Metodo de retorno do valor da matricula do usuario.
@@ -317,24 +279,6 @@ public class User implements Parcelable{
         db.addUser(user, materias, historico);
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    /**
-     * Instancia a classe User pela classe Parcel.
-     */
-
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 
     /**
      * Metodo de adicao de materias que o usuario esta cursando.

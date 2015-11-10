@@ -23,6 +23,7 @@ import unb.poo.mwmobile.integracao.ServerInterface.Sigra;
 import unb.poo.mwmobile.integracao.ServerRequest.Transaction;
 import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.singleton.SingletonUser;
 
 public class LoginActivity extends AppCompatActivity implements Transaction{
 
@@ -149,19 +150,24 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
     @Override
     public void doAfter(JSONObject jsonObject) {
         if( jsonObject != null){
-            Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
+
             Gson gson = new Gson();
 
 
 
-            Log.d("JSON",String.valueOf(jsonObject));
+            Log.d("JSON", String.valueOf(jsonObject));
             User user = gson.fromJson(String.valueOf(jsonObject), User.class);
 
             for(MateriaCursada m: user.getHistorico()){
                 m.setPesoMencao(m.getMencao());
             }
 
-            homeAct.putExtra("user", user);
+            Toast.makeText(getApplicationContext(), "FOi", Toast.LENGTH_SHORT).show();
+
+            SingletonUser singletonUser = SingletonUser.getINSTANCE();
+            singletonUser.setUser(user);
+
+            Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
             startActivity(homeAct);
             finish();
 
