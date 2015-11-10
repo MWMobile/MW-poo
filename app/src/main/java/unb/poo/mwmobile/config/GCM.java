@@ -3,7 +3,7 @@ package unb.poo.mwmobile.config;
 /**
  * Created by sousa on 20/10/2015.
  */
-public class GCMConfig {
+public class GCM {
 
     private static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     private static final String REGISTRATION_COMPLETE = "registrationComplete";
