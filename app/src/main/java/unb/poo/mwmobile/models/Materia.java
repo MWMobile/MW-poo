@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * turmas e salas disponiveis, quantos creditos valem. Ela utiliza
  * a interface Parcelable.
  */
-public class Materia extends Horario implements Parcelable {
+public class Materia extends Horario{
 
     /**
      * Os parametros sao definidos como protected
@@ -35,51 +35,6 @@ public class Materia extends Horario implements Parcelable {
     protected String sala;
     protected int creditos;
 
-    /**
-     *Metodo de leitura das informacoes da materia pelo Parcel.
-     * @param in classe: Parcel
-     */
-
-    public Materia(Parcel in) {
-        professor = new Professor(in.readString());
-        codigo = in.readInt();
-        turma = in.readString();
-        nome = in.readString();
-        sala = in.readString();
-        creditos = in.readInt();
-    }
-
-    public Materia() {
-
-    }
-
-    /**
-     * Metodo de serializacao de todas as
-     * informacoes da materia com o uso de Parcel.
-     * @param dest classe: Parcel
-     * @param flags tipo: int
-     */
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-        /**
-         * Quando nao ha professores numa materia, sera escrita
-         * uma frase de aviso determinada pela condiçao else.
-         */
-        if (professor != null) {
-            dest.writeString(professor.getNome());
-        }
-        else {
-            dest.writeString("A DESIGNAR");
-        }
-
-        dest.writeInt(codigo);
-        dest.writeString(turma);
-        dest.writeString(nome);
-        dest.writeString(sala);
-        dest.writeInt(creditos);
-    }
 
     /**
      * Metodo de retorno da classe Professor que contem o nome do docente.
@@ -212,28 +167,4 @@ public class Materia extends Horario implements Parcelable {
         db.onCreate(materia, horarios);
     }*/
 
-    /**
-     * Retorna o bitmask como zero, ou seja, nenhum bit vai indicar
-     * a um tipo de objeto especial ordenado pela interface Parcelable.
-     * @return 0
-     */
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    /**
-     * Metodo que instancia uma classe Materia pela classe Parcel.
-     */
-
-    public static final Parcelable.Creator<Materia> CREATOR = new Parcelable.Creator<Materia>() {
-        public Materia createFromParcel(Parcel in) {
-            return new Materia(in);
-        }
-
-        public Materia[] newArray(int size) {
-            return new Materia[size];
-        }
-    };
 }
