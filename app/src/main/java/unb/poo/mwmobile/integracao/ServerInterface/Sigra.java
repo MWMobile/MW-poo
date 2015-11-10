@@ -1,9 +1,12 @@
-package unb.poo.mwmobile.integracao;
+package unb.poo.mwmobile.integracao.ServerInterface;
 
 import android.content.Context;
 
 import java.util.HashMap;
-import java.util.Map;
+
+import unb.poo.mwmobile.integracao.ServerRequest.MiddleServer;
+import unb.poo.mwmobile.integracao.ServerRequest.Transaction;
+import unb.poo.mwmobile.integracao.ServerRequest.WrapObjToNetwork;
 
 /**
  * Classe que faz a interface entre quem pede

@@ -3,9 +3,6 @@ package unb.poo.mwmobile.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Created by vinic on 04-Oct-15.
  *
@@ -17,8 +14,6 @@ import java.util.Arrays;
  */
 public class MateriaCursada extends Materia implements Parcelable {
 
-    private ArrayList<String> mencao = new ArrayList<>();                                           //Lista de Menções (uma menção única caso o aluno não tenha reprovado)
-    private ArrayList<Integer> periodosCursados = new ArrayList<>();                                //Períodos em que a matéria foi cursada (em caso de reprovação)
 
     private boolean obrigatoria;                                                                    // Boolean que checa a obrigatoriedade da matéria
     private boolean trancada = false;                                                               // Verifica se a matéria foi trancada.
@@ -26,21 +21,16 @@ public class MateriaCursada extends Materia implements Parcelable {
     private int reprovacoes;                                                                        //Número de vezes que o aluno reprovou
     private int avaliacaoMateria;                                                                   //Avaliação numérica de 0 a 100% da qualidade da matéria(envolve desde
     private int pesoMencao;
-    private String mencaoTag;
+    private String mencao;
 
-    public String getMencaoTag() {
-        return mencaoTag;
+    public String getMencao() {
+        return mencao;
     }
 
-    public void setMencaoTag(String mencaoTag) {
-        this.mencaoTag = mencaoTag;
+    public void setMencao(String mencao) {
+        this.mencao = mencao;
     }
 
-    public MateriaCursada() {
-        super();
-        this.mencao = new ArrayList<>();
-        this.periodosCursados = new ArrayList<>();
-    }
 
     public MateriaCursada(Parcel in) {
         super(in);
@@ -67,15 +57,13 @@ public class MateriaCursada extends Materia implements Parcelable {
         reprovacoes = in.readInt();
         avaliacaoMateria = in.readInt();
         pesoMencao = in.readInt();
-        mencao = new ArrayList<String>();
-        in.readStringList(mencao);
+
+
         int nPer = in.readInt();
         int[] pArray = new int[nPer];
+
         in.readIntArray(pArray);
-        periodosCursados = new ArrayList<>();
-        for (int i = 0; i < nPer; i++) {
-            periodosCursados.add(new Integer(pArray[i]));
-        }
+
     }
 
     @Override
@@ -131,14 +119,7 @@ public class MateriaCursada extends Materia implements Parcelable {
         dest.writeInt(reprovacoes);
         dest.writeInt(avaliacaoMateria);
         dest.writeInt(pesoMencao);
-        dest.writeStringList(mencao);
-        int nPer = 0;
-        if (periodosCursados != null) {
-            nPer = periodosCursados.size();
-        }
-        int[] perArray = new int[nPer];
-        dest.writeInt(nPer);
-        dest.writeIntArray(perArray);
+
     }
 
 
@@ -178,13 +159,7 @@ public class MateriaCursada extends Materia implements Parcelable {
         this.reprovacoes = reprovacoes;
     }
 
-    public ArrayList<String> getMencao() {
-        return mencao;
-    }
 
-    public void setMencao(ArrayList<String> mencao) {
-        this.mencao = mencao;
-    }
 
     public int getAvaliacaoMateria() {
         return avaliacaoMateria;
@@ -211,13 +186,6 @@ public class MateriaCursada extends Materia implements Parcelable {
         return (!obrigatoria && trancada);
     }
 
-    public ArrayList<Integer> getPeriodosCursados() {
-        return periodosCursados;
-    }
-
-    public void setPeriodosCursados(ArrayList<Integer> periodosCursados) {
-        this.periodosCursados = periodosCursados;
-    }
 
     public void setObrigatoria(boolean OBR){
         this.obrigatoria=OBR;

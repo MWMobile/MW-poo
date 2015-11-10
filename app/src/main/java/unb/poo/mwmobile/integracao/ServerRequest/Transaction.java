@@ -1,4 +1,4 @@
-package unb.poo.mwmobile.integracao;
+package unb.poo.mwmobile.integracao.ServerRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
