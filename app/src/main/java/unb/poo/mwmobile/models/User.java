@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import unb.poo.mwmobile.config.MencaoConfig;
 import unb.poo.mwmobile.db.DBCore;
-import unb.poo.mwmobile.db.DBMat;
+import unb.poo.mwmobile.db.DBMateria;
 
 /**
  * @author Andrei Sousa
@@ -277,8 +277,6 @@ public class User{
 
     private void saveOnDb(User user, Context context){
         DBCore db = new DBCore(context);
-        DBMat dbMat = new DBMat(context);
-        dbMat.addMat(materias);
         db.addUser(user, materias, historico);
     }
 

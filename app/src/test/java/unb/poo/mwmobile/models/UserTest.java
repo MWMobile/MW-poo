@@ -185,11 +185,6 @@ public class UserTest extends AndroidTestCase {
     }
 
     @Test
-    public void testDescribeContents() throws Exception {
-        assertEquals(u.describeContents(), 0);
-    }
-
-    @Test
     public void testAddMateria() throws Exception{
         Materia newMateria = new Materia();
         newMateria.setNome("Materia");
@@ -208,32 +203,5 @@ public class UserTest extends AndroidTestCase {
         assertNotNull(u.getMateriaCursada("Materia"));
         assertEquals(newMateria, u.getMateriaCursada("Materia"));
     }
-
-
-    @Test
-    public void testWriteToParcel() throws Exception {
-        //Bundle bTest = new Bundle();
-        //bTest.putParcelable("JUnitUser",u);
-        //User newUser = bTest.getParcelable("JUnitUser");
-
-        Parcel in = Parcel.obtain();
-        assertNotNull(in);
-        u.writeToParcel(in,0);
-        in.setDataPosition(0);
-        User newUser = User.CREATOR.createFromParcel(in);
-
-        assertNotNull(newUser);
-        assertEquals(u.getNome(),newUser.getNome());
-        assertEquals(u.getCurso(),newUser.getCurso());
-        assertEquals(u.getIRA(),newUser.getIRA());
-        assertEquals(u.getMatricula(),newUser.getMatricula());
-        assertEquals(u.getPeriodo(),newUser.getPeriodo());
-        assertEquals(u.getSenha(), newUser.getSenha());
-        assertNotNull(newUser.getMateria("POO"));
-        assertNotNull(newUser.getMateriaCursada("ED"));
-        assertEquals(newUser.getMateria("POO").getProfessor().getNome(), "Rodrigo Bonifacio");
-        in.recycle();
-    }
-
 
 }

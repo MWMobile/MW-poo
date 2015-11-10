@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.db.DBCore;
-import unb.poo.mwmobile.db.DBMat;
+import unb.poo.mwmobile.db.DBMateria;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonUser;
 import unb.poo.mwmobile.utils.MateriaAdapter;
@@ -100,10 +100,8 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             DBCore db = new DBCore(this);
-            DBMat dbMat = new DBMat(this);
 
             db.dropDB();
-            dbMat.dropDB();
 
             super.onBackPressed();
             return;

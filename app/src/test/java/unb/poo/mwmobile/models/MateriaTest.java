@@ -175,27 +175,4 @@ public class MateriaTest {
     public void testDescribeContents() throws Exception {
         assertEquals(m.describeContents(),0);
     }
-
-    @Test
-    public void testWriteToParcel() throws Exception {
-        //Bundle bTest = new Bundle();
-        //bTest.putParcelable("JUnitMateria", m);
-        //Materia newMateria = bTest.getParcelable("JUnitMateria");
-        Parcel in = Parcel.obtain();
-
-        assertNotNull(in);
-        m.writeToParcel(in, m.describeContents());
-        in.setDataPosition(0);
-        Materia newMateria = Materia.CREATOR.createFromParcel(in);
-
-        assertNotNull(newMateria);
-        assertEquals(m.getCodigo(), newMateria.getCodigo());
-        assertEquals(m.getNome(),newMateria.getNome());
-        assertEquals(m.getCreditos(),newMateria.getCreditos());
-        assertEquals(m.getProfessor().getNome(),newMateria.getProfessor().getNome());
-        assertNotNull(newMateria.getHorarios());
-        assertEquals(m.getSala(),newMateria.getSala());
-        assertEquals(m.getTurma(),newMateria.getTurma());
-        in.recycle();
-    }
 }
