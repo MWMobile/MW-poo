@@ -184,7 +184,7 @@ public class MateriaTest {
         Parcel in = Parcel.obtain();
 
         assertNotNull(in);
-        m.writeToParcel(in,m.describeContents());
+        m.writeToParcel(in, m.describeContents());
         in.setDataPosition(0);
         Materia newMateria = Materia.CREATOR.createFromParcel(in);
 

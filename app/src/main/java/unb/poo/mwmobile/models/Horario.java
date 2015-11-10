@@ -19,6 +19,13 @@ public class Horario {
     private int hora;
     private int dia;
 
+    public Horario(int h, int d) {
+        this.hora = h;
+        this.dia = d;
+    }
+
+    public Horario(){}
+
     /**
      * Metodo de definicao de valor dos parametros privados da classe Horario.
      * @param hora tipo: int

@@ -20,7 +20,7 @@ public class HorarioTest {
         hora = 1000;
         dia = 1;
 
-        h = new Horario(hora, dia);
+        h = new Horario();
     }
 
     @After
