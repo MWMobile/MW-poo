@@ -12,7 +12,7 @@ import android.os.Parcelable;
  * avaliação do aluno sobre  a matéria e número de reprovações.
  * Mais tarde as notas serão utilizadas para o cálculo de IRA.
  */
-public class MateriaCursada extends Materia implements Parcelable {
+public class MateriaCursada extends Materia{
 
 
     private boolean obrigatoria;                                                                    // Boolean que checa a obrigatoriedade da matéria
@@ -34,97 +34,7 @@ public class MateriaCursada extends Materia implements Parcelable {
     public MateriaCursada() {
     }
 
-    public MateriaCursada(Parcel in) {
-        super(in);
-
-        /*professor = new Professor(in.readString());
-        codigo = in.readInt();
-        turma = in.readString();
-        nome = in.readString();
-        sala = in.readString();
-        creditos = in.readInt();
-        int tam = in.readInt();
-        int[] horarioHora = new int[tam];
-        int[] horarioDia = new int[tam];
-        in.readIntArray(horarioHora);
-        in.readIntArray(horarioDia);
-        horarios = new ArrayList<>();
-        for (int i = 0; i < tam; i++) {
-            horarios.add(new Horario(horarioHora[i],horarioDia[i]));
-        }*/
-
-        obrigatoria = Boolean.parseBoolean(in.readString());
-        trancada = Boolean.parseBoolean(in.readString());
-        periodoTerminado = in.readInt();
-        reprovacoes = in.readInt();
-        avaliacaoMateria = in.readInt();
-        pesoMencao = in.readInt();
-
-
-        int nPer = in.readInt();
-        int[] pArray = new int[nPer];
-
-        in.readIntArray(pArray);
-
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<MateriaCursada> CREATOR = new Creator<MateriaCursada>() {
-        @Override
-        public MateriaCursada createFromParcel(Parcel in) {
-            return new MateriaCursada(in);
-        }
-
-        @Override
-        public MateriaCursada[] newArray(int size) {
-            return new MateriaCursada[size];
-        }
-    };
-
-    @Override
-    public void writeToParcel(Parcel dest,int flags) {
-        super.writeToParcel(dest, flags);
-
-        /*if (this.professor != null) {
-            dest.writeString(this.professor.getNome());
-        }
-        else {
-            dest.writeString("A DESIGNAR");
-        }
-        dest.writeInt(this.codigo);
-        dest.writeString(this.turma);
-        dest.writeString(this.nome);
-        dest.writeString(this.sala);
-        dest.writeInt(this.creditos);
-        if (this.horarios == null) {
-            this.horarios = new ArrayList<>();
-        }
-        int[] horarioHora = new int[this.horarios.size()];
-        int[] horarioDia = new int[this.horarios.size()];
-        dest.writeInt(this.horarios.size());
-        int i = 0;
-        for (Horario hora : horarios) {
-            horarioHora[i] = hora.getHora();
-            horarioDia[i] = hora.getDia();
-            i++;
-        }
-        dest.writeIntArray(horarioHora);
-        dest.writeIntArray(horarioDia);*/
-
-        dest.writeString(Boolean.toString(obrigatoria));
-        dest.writeString(Boolean.toString(trancada));
-        dest.writeInt(periodoTerminado);
-        dest.writeInt(reprovacoes);
-        dest.writeInt(avaliacaoMateria);
-        dest.writeInt(pesoMencao);
-
-    }
-
-
+    
     public void setPesoMencao(String MENCAO){
         switch(MENCAO){
             default:

@@ -18,6 +18,7 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.db.DBMateria;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.singleton.SingletonUser;
 import unb.poo.mwmobile.utils.MateriaAdapter;
 
 public class HomeActivity extends AppCompatActivity {
@@ -36,8 +37,9 @@ public class HomeActivity extends AppCompatActivity {
         apos isso ele popula estes campos com os valores do usuario que lhe foi passado
         */
 
-        Intent thisIntent = getIntent();
-        User user = thisIntent.getParcelableExtra("user");
+        SingletonUser singletonUser = SingletonUser.getINSTANCE();
+
+        User user = singletonUser.getUser();
 
         TextView nome = (TextView) findViewById(R.id.nomeField);
         TextView matricula = (TextView) findViewById(R.id.matriculaField);
