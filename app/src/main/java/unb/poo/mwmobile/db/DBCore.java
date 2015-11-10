@@ -213,6 +213,7 @@ public class DBCore extends SQLiteOpenHelper {
 
         ContentValues values0 = new ContentValues();
 
+
         values0.put(KEY_ID, 0);
         values0.put(KEY_MATRICULA, user.getMatricula());
         values0.put(KEY_SENHA, user.getSenha());
@@ -225,14 +226,10 @@ public class DBCore extends SQLiteOpenHelper {
         for (int i = 0; i < user.getMaterias().size(); i++){
             ContentValues values1 = new ContentValues();
 
-            String materi = materia.get(i).getNome();
-            int code = materia.get(i).getCodigo();
-            int cred = materia.get(i).getCreditos();
-
             values1.put(KEY_MATRICULA, user.getMatricula());
-            values1.put(KEY_IDM, code);
-            values1.put(KEY_MATERIA, materi);
-            values1.put(KEY_CREDITO, cred);
+            values1.put(KEY_IDM, materia.get(i).getCodigo());
+            values1.put(KEY_MATERIA, materia.get(i).getNome());
+            values1.put(KEY_CREDITO, materia.get(i).getCreditos());
 
             db.insert(TABLE_MATERIA, null, values1);
         }
@@ -240,43 +237,40 @@ public class DBCore extends SQLiteOpenHelper {
         for (int i = 0; i < user.getHistorico().size(); i++){
             ContentValues values2 = new ContentValues();
 
-            int codeH = historico.get(i).getCodigo();
-            String hist = historico.get(i).getNome();
-            int credm = historico.get(i).getCreditos();
-            String mencao = historico.get(i).getMencao().toString();
-            boolean obrig = historico.get(i).getObrigatoria();
-            int perio = historico.get(i).getPeriodoCursado();
-            String menc;
 
-            switch(mencao){
-                default:
-                case "[SR]":
-                    menc = "SR";
-                    break;
-                case "[II]":
-                    menc = "II";
-                    break;
-                case "[MI]":
-                    menc = "MI";
-                    break;
-                case "[MM]":
-                    menc = "MM";
-                    break;
-                case "[MS]":
-                    menc = "MS";
-                    break;
-                case "[SS]":
-                    menc = "SS";
-                    break;
-            }
+//            String mencao = historico.get(i).getMencao().toString();
+//            String menc;
+//
+//            switch(mencao){
+//                default:
+//                case "[SR]":
+//                    menc = "SR";
+//                    break;
+//                case "[II]":
+//                    menc = "II";
+//                    break;
+//                case "[MI]":
+//                    menc = "MI";
+//                    break;
+//                case "[MM]":
+//                    menc = "MM";
+//                    break;
+//                case "[MS]":
+//                    menc = "MS";
+//                    break;
+//                case "[SS]":
+//                    menc = "SS";
+//                    break;
+//            }
+
 
             values2.put(KEY_MATRICULA, user.getMatricula());
-            values2.put(KEY_IDM, codeH);
-            values2.put(KEY_MATERIA, hist);
-            values2.put(KEY_MENCAO, menc);
-            values2.put(KEY_OBRIG, obrig);
-            values2.put(KEY_PERIODO, perio);
-            values2.put(KEY_CREDITO, credm);
+            values2.put(KEY_IDM, historico.get(i).getCodigo());
+            values2.put(KEY_MATERIA, historico.get(i).getNome());
+            values2.put(KEY_MENCAO, historico.get(i).getMencao());
+            values2.put(KEY_OBRIG, historico.get(i).getObrigatoria());
+            values2.put(KEY_PERIODO, historico.get(i).getPeriodoCursado());
+            values2.put(KEY_CREDITO, historico.get(i).getCreditos());
 
             db.insert(TABLE_HIST, null, values2);
         }
@@ -317,15 +311,15 @@ public class DBCore extends SQLiteOpenHelper {
     private User search(String query) {
         openRead();
 
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor userCursor = db.rawQuery(query, null);
 
         User user = null;
-        if (cursor.moveToFirst()) {
+        if (userCursor.moveToFirst()) {
             do {
-                user = new User(cursor.getInt(1));
-                user.setSenha(cursor.getString(2));
-                user.setNome(cursor.getString(3));
-            } while (cursor.moveToNext() || cursor.isLast() == true);
+                user = new User(userCursor.getInt(1));
+                user.setSenha(userCursor.getString(2));
+                user.setNome(userCursor.getString(3));
+            } while (userCursor.moveToNext() || userCursor.isLast());
         }
 
         String query2 = "SELECT * FROM " + TABLE_MATERIA;
@@ -356,14 +350,12 @@ public class DBCore extends SQLiteOpenHelper {
         if (cursor3.moveToFirst()) {
             ArrayList<MateriaCursada> h = new ArrayList<MateriaCursada>();
             do {
-                ArrayList<String> menc2 = new ArrayList<String>();
                 MateriaCursada mat2 = new MateriaCursada();
 
                 String nomeM = cursor3.getString(2);
                 int codigoM = cursor3.getInt(1);
                 int creditM = cursor3.getInt(6);
-                menc2.add(cursor3.getString(3));
-                String mencaoM = cursor3.getString(3);
+                String mencao = cursor3.getString(3);
                 int obrigatoria = cursor3.getInt(4);
                 int period = cursor3.getInt(5);
 
@@ -378,8 +370,7 @@ public class DBCore extends SQLiteOpenHelper {
                 mat2.setCodigo(codigoM);
                 mat2.setNome(nomeM);
                 mat2.setCreditos(creditM);
-                mat2.setMencao(menc2);
-                mat2.setPesoMencao(mencaoM);
+                mat2.setMencao(mencao);
                 mat2.setPeriodoCursado(period);
 
                 h.add(mat2);

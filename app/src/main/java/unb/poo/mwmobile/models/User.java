@@ -5,16 +5,11 @@ package unb.poo.mwmobile.models;
  * para implementar certos metodos da classe User.
  */
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.provider.SyncStateContract;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.db.DBMat;

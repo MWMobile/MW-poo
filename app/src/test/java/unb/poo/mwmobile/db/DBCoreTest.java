@@ -1,36 +1,21 @@
 package unb.poo.mwmobile.db;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
-import android.test.InstrumentationTestCase;
-import android.test.RenamingDelegatingContext;
-import android.test.mock.MockApplication;
-import android.test.mock.MockContext;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.io.File;
 import java.util.ArrayList;
 
-import unb.poo.mwmobile.acts.HomeActivity;
-import unb.poo.mwmobile.acts.MainActivity;
 import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
-import unb.poo.mwmobile.utils.Utils;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by sousa on 14/10/2015.
