@@ -18,7 +18,7 @@ public class GCM {
     }
 
     public static String[] getTopics(){
-        return TOPICS;
+         return TOPICS;
     }
 
 }

@@ -1,9 +1,7 @@
 package unb.poo.mwmobile.db;
 
 import android.app.Activity;
-import android.content.Context;
 import android.test.InstrumentationTestCase;
-import android.test.mock.MockContext;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,20 +11,21 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
 
 import unb.poo.mwmobile.models.Horario;
 import unb.poo.mwmobile.models.Materia;
+import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.Professor;
+import unb.poo.mwmobile.models.User;
 
 /**
  * Created by Raphael on 26/10/2015.
  */
 @Config(manifest = Config.NONE)
 @RunWith(RobolectricTestRunner.class)
-public class DBMatTest extends InstrumentationTestCase {
-    DBMat db;
+public class DBMateriaTest extends InstrumentationTestCase {
+    DBCore db;
 
     Activity main;
 
@@ -36,26 +35,12 @@ public class DBMatTest extends InstrumentationTestCase {
 
         main = Robolectric.setupActivity(Activity.class);
 
-        db = new DBMat(main);
+        db = new DBCore(main);
     }
 
     @After
     public void tearDown() throws Exception{
 
-    }
-
-    @Test
-    public void testeOnCreate() throws Exception{
-        DBMat newDB = new DBMat(main);
-        newDB.onCreate(db.getWritableDatabase());
-        assertNotNull(newDB);
-    }
-
-    @Test
-    public void testOnUpgrade() throws Exception{
-        DBMat newDB = new DBMat(main);
-        newDB.onUpgrade(db.getWritableDatabase(), 0, 2);
-        assertNotNull(newDB );
     }
 
     @Test
@@ -74,7 +59,7 @@ public class DBMatTest extends InstrumentationTestCase {
     }
 
     @Test
-    public void testPrinDB() throws Exception{
+    public void testPrintDB() throws Exception{
         ArrayList<Materia> matList = new ArrayList<>();         //
         ArrayList<Horario> horario = new ArrayList<>();         //
         Materia materia = new Materia();                        // Adiciona uma materia
@@ -86,9 +71,9 @@ public class DBMatTest extends InstrumentationTestCase {
         materia.setTurma("A");
         materia.setSala("Sala");
         matList.add(materia);
-        db.addMat(matList);                            //
+        db.addMaterias(matList);
 
-        db.printDbM();
+        db.printDB();
     }
 
     @Test
@@ -105,7 +90,8 @@ public class DBMatTest extends InstrumentationTestCase {
         materia.setTurma("A");
         materia.setSala("Sala");
         matList.add(materia);
-        db.addMat(matList);                            //
+
+        db.addMaterias(matList);
 
         assertNotNull(db.getMateria("ADL"));         // Checa se existe o materia recém-criada
         assertEquals(1122, db.getMateria("ADL").getCodigo());    // Checa o código
@@ -115,16 +101,21 @@ public class DBMatTest extends InstrumentationTestCase {
     public void testGetMat() throws Exception{
         ArrayList<Materia> matList = new ArrayList<>();         //
         ArrayList<Horario> horario = new ArrayList<>();         //
+
         Materia materia = new Materia();                        // Adiciona uma materia
+
         horario.add(new Horario(10, 1));                        // Cria uma array de informação de horario
+
         materia.setNome("ADL");                                 //
         materia.setCodigo(1122);                                 //
         materia.setHorarios(horario);                           //
         materia.setProfessor(new Professor("ProfessorTeste"));
         materia.setTurma("A");
         materia.setSala("Sala");
+
         matList.add(materia);
-        db.addMat(matList);                            //
+
+        db.addMaterias(matList);                            //
 
         Materia matNew = db.getMateria("ADL");                   //
         assertNotNull(matNew);                                  //Checa se o DB possui a materia
@@ -145,7 +136,7 @@ public class DBMatTest extends InstrumentationTestCase {
         materia.setTurma("A");
         materia.setSala("Sala");
         matList.add(materia);
-        db.addMat(matList);                            //
+        db.addMaterias(matList);                            //
 
         db.updMateria(db.getMateria("ADL"));                    // TODO dar um jeito de verificar as informações além do status do objeto
         assertNotNull(db.getMateria("ADL"));                    //
@@ -164,7 +155,7 @@ public class DBMatTest extends InstrumentationTestCase {
         materia.setTurma("A");
         materia.setSala("Sala");
         matList.add(materia);
-        db.addMat(matList);                            //
+        db.addMaterias(matList);                            //
 
 
         db.delMateria(db.getMateria("ADL"));

@@ -5,13 +5,10 @@ package unb.poo.mwmobile.models;
  * executar algumas funcionalidades da classe Materia.
  */
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-
-import unb.poo.mwmobile.db.DBMat;
 
 /**
  * @author Andrei Sousa
@@ -211,7 +208,7 @@ public class Materia extends Horario implements Parcelable {
 
 
     /*public void saveOnDbM(Materia materia, Context context){
-        DBMat db = new DBMat(context);
+        DBMateria db = new DBMateria(context);
         db.onCreate(materia, horarios);
     }*/
 

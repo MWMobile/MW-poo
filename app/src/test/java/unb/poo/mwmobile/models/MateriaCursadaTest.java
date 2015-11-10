@@ -24,9 +24,6 @@ public class MateriaCursadaTest {
 
     MateriaCursada m;
 
-    ArrayList<Integer> periodosCursados;
-    ArrayList<String> mencao;
-
     boolean obrigatoria;
     boolean trancada;
 
@@ -34,17 +31,17 @@ public class MateriaCursadaTest {
     int reprovacoes;
     int avaliacaoMateria;
     int pesoMencao;
+
+    String mencao;
+
     Activity main;
 
     @Before
     public void setUp() throws Exception {
         main = Robolectric.setupActivity(Activity.class);
         m = new MateriaCursada();
-        periodosCursados = new ArrayList<Integer>();
-        periodosCursados.add(3);
 
-        mencao = new ArrayList<>();
-        mencao.add("SS");
+        mencao= "SS";
 
         obrigatoria = true;
         trancada = false;
@@ -54,7 +51,6 @@ public class MateriaCursadaTest {
         avaliacaoMateria = 10;
         pesoMencao = 5;
 
-        m.setPeriodosCursados(periodosCursados);
         m.setMencao(mencao);
         m.setObrigatoria(obrigatoria);
         m.setPeriodoCursado(periodoCursado);
@@ -87,8 +83,7 @@ public class MateriaCursadaTest {
 
     @Test
     public void testSetMencao() throws Exception {
-        ArrayList<String> newMencao = new ArrayList<String>();
-        newMencao.add("MM");
+        String newMencao = "SS";
         m.setMencao(newMencao);
         assertEquals(newMencao, m.getMencao());
     }
@@ -125,19 +120,6 @@ public class MateriaCursadaTest {
     @Test
     public void testOptativaTrancada() throws Exception {
         assertEquals((!obrigatoria && trancada), m.optativaTrancada());
-    }
-
-    @Test
-    public void testGetPeriodosCursados() throws Exception {
-        assertEquals(periodosCursados, m.getPeriodosCursados());
-    }
-
-    @Test
-    public void testSetPeriodosCursados() throws Exception {
-        ArrayList<Integer> newPeriodosCursados = new ArrayList<Integer>();
-        newPeriodosCursados.add(4);
-        m.setPeriodosCursados(newPeriodosCursados);
-        assertEquals(newPeriodosCursados, m.getPeriodosCursados());
     }
 
     @Test
@@ -218,7 +200,6 @@ public class MateriaCursadaTest {
         assertEquals(m.getTurma(),newMateria.getTurma());
         assertEquals(m.getObrigatoria(),newMateria.getObrigatoria());
         assertEquals(m.getPeriodoCursado(), newMateria.getPeriodoCursado());
-        assertNotNull(newMateria.getPeriodosCursados());
         assertNotNull(newMateria.getMencao());
         in.recycle();
     }
