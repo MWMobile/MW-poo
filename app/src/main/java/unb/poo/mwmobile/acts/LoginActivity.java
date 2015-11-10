@@ -23,13 +23,11 @@ import unb.poo.mwmobile.integracao.Sigra;
 import unb.poo.mwmobile.integracao.Transaction;
 import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
-import unb.poo.mwmobile.utils.Utils;
 
 public class LoginActivity extends AppCompatActivity implements Transaction{
 
     boolean doubleBackToExitPressedOnce = false;
     User user;
-    Utils utils = new Utils();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +159,7 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
             for(MateriaCursada m: user.getHistorico()){
                 m.setPesoMencao(m.getMencaoTag());
             }
+
             homeAct.putExtra("user", user);
             startActivity(homeAct);
             finish();

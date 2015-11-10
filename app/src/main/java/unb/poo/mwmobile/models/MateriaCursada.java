@@ -141,6 +141,7 @@ public class MateriaCursada extends Materia implements Parcelable {
         dest.writeIntArray(perArray);
     }
 
+
     public void setPesoMencao(String MENCAO){
         switch(MENCAO){
             default:
