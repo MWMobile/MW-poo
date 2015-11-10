@@ -1,4 +1,4 @@
-package unb.poo.mwmobile.integracao;
+package unb.poo.mwmobile.integracao.ServerRequest;
 
 /**
  * Classe anemica para mandar dados

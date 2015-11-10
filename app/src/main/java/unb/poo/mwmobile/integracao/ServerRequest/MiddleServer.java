@@ -1,4 +1,4 @@
-package unb.poo.mwmobile.integracao;
+package unb.poo.mwmobile.integracao.ServerRequest;
 
 
 import android.content.Context;
@@ -12,7 +12,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;

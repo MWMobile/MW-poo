@@ -245,9 +245,6 @@ public class User implements Parcelable{
          *
          */
 
-
-
-
         double constante;
         double disc = 0,disc2 = 0;
         double variavel;
