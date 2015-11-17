@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
     boolean doubleBackToExitPressedOnce = false;
     User user;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,8 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
         */
 
 
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
         Button loginBtn = (Button) findViewById(R.id.loginButton);
         loginBtn.setOnClickListener(login);
@@ -69,6 +74,12 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
                     try {
                         String matricula = String.valueOf(matriculaField.getText());
                         String password = String.valueOf(passwordField.getText());
+
+                        matriculaField.setVisibility(View.GONE);
+                        passwordField.setVisibility(View.GONE);
+
+                        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                        progressBar.setVisibility(View.VISIBLE);
 
 
                         Sigra sigra = new Sigra(LoginActivity.this.getApplicationContext(),
@@ -154,22 +165,27 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
             Gson gson = new Gson();
 
 
-
             Log.d("JSON", String.valueOf(jsonObject));
             User user = gson.fromJson(String.valueOf(jsonObject), User.class);
 
 
-            Toast.makeText(getApplicationContext(), "FOi", Toast.LENGTH_SHORT).show();
-
             SingletonUser singletonUser = SingletonUser.getINSTANCE();
             singletonUser.setUser(user);
 
-            Intent homeAct = new Intent(getBaseContext(), HomeActivity.class);
-            startActivity(homeAct);
+            Intent welcomeAct = new Intent(getBaseContext(), WelcomeActivity.class);
+            startActivity(welcomeAct);
             finish();
 
         }
         else {
+
+            EditText matriculaField = (EditText) findViewById(R.id.matriculaField);
+            EditText passwordField = (EditText) findViewById(R.id.passwordField);
+            matriculaField.setVisibility(View.VISIBLE);
+            passwordField.setVisibility(View.VISIBLE);
+
+            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), "Falha no Login", Toast.LENGTH_SHORT).show();
         }
     }

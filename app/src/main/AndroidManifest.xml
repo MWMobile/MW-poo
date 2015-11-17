@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="unb.poo.mwmobile">
+    package="unb.poo.mwmobile" >
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,29 +13,28 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <!-- Para usar o GCM-->
+    <!-- Para usar o GCM -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="unb.poo.mwmobile.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <permission
+        android:name="unb.poo.mwmobile.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="unb.poo.mwmobile.permission.C2D_MESSAGE" />
-
-
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-         <meta-data
+        <meta-data
             android:name="com.google.android.gms.version"
-            tools:replace="android:value"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"
+            tools:replace="android:value" />
 
         <activity
             android:name=".acts.MainActivity"
@@ -46,7 +45,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".acts.LoginActivity"
             android:label="@string/title_activity_login" >
@@ -63,6 +61,7 @@
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="unb.poo.mwmobile" />
             </intent-filter>
         </receiver>
@@ -73,23 +72,26 @@
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="unb.poo.mwmobile" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.GCM.InstanceIDListenerService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
-                <action android:name="com.google.android.gms.iid.InstanceID"/>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.GCM.RegistrationIntentService"
-            android:exported="false">
+            android:exported="false" >
         </service>
 
+        <activity
+            android:name=".acts.WelcomeActivity"
+            android:label="@string/title_activity_welcome" >
+        </activity>
     </application>
 
 </manifest>

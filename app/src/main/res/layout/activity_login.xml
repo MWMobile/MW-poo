@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/passwordField"
         android:inputType="textPassword"
-        android:hint="******"
+        android:hint="senha"
         android:layout_above="@+id/loginButton"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="60dp" />
@@ -36,6 +36,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="120dp" />
+
+
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>
 
