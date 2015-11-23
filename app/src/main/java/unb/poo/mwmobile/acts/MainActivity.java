@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -89,7 +90,7 @@ public class MainActivity extends Activity {
         if(user == null)
             loginAct = new Intent(this, LoginActivity.class);
         else {
-            loginAct = new Intent(this, HomeActivity.class);
+            loginAct = new Intent(this, WelcomeActivity.class);
             SingletonUser singletonUser = SingletonUser.getINSTANCE();
             singletonUser.setUser(user);
         }

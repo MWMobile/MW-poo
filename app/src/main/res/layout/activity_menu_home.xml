@@ -1,0 +1,106 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="unb.poo.mwmobile.acts.MenuHomeActivity"  >
+
+    <ImageView
+        android:id="@+id/logoUnb"
+        android:layout_width="250dp"
+        android:layout_height="225dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:transitionName="logoUnb"
+        android:background="@mipmap/ic_unb"/>
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp">
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:transitionName="menuIcon"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/matriculaMenu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            fancy:fb_iconResource="@mipmap/ic_launcher"
+            fancy:fb_defaultColor="#007e29"
+            fancy:fb_focusColor="#00E457"
+            fancy:fb_radius="50dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Matricula"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/matriculaMenu"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true" >
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:transitionName="menuIcon"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/materiaMenu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            fancy:fb_iconResource="@drawable/ic_menu_white"
+            fancy:fb_defaultColor="#007e29"
+            fancy:fb_focusColor="#00E457"
+            fancy:fb_radius="50dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Materias"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/materiaMenu"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp">
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:transitionName="menuIcon"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/selfMenu"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            fancy:fb_iconResource="@mipmap/ic_launcher"
+            fancy:fb_defaultColor="#007e29"
+            fancy:fb_focusColor="#00E457"
+            fancy:fb_radius="50dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/selfMenu"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

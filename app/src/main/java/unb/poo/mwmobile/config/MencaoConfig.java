@@ -1,5 +1,7 @@
 package unb.poo.mwmobile.config;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import java.util.Map;
  */
 public class MencaoConfig {
 
+    private final String TAG = "MENCAOCONFIG";
     private final Map<String,Integer>  mencao = new HashMap<>();
 
     public MencaoConfig(){

@@ -21,6 +21,8 @@ public class HorarioTest {
         dia = 1;
 
         h = new Horario();
+        h.setDia(dia);
+        h.setHora(hora);
     }
 
     @After

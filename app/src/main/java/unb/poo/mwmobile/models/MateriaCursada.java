@@ -68,7 +68,7 @@ public class MateriaCursada extends Materia{
 
 
     public void setObrigatoria(boolean OBR){
-        this.obrigatoria=OBR;
+        this.obrigatoria = OBR;
     }
     public boolean getObrigatoria(){return obrigatoria;}
 

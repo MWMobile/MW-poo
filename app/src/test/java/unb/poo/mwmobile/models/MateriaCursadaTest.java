@@ -145,32 +145,4 @@ public class MateriaCursadaTest {
         assertEquals(trancada, m.getTrancada());
     }
 
-    @Test
-    public void testSetPesoMencao() throws Exception {
-        String newMencao = "SS";
-        m.setPesoMencao(newMencao);
-        assertEquals(5, m.getPesoMencao());
-
-        newMencao = "MS";
-        m.setPesoMencao(newMencao);
-        assertEquals(4, m.getPesoMencao());
-
-        newMencao = "MM";
-        m.setPesoMencao(newMencao);
-        assertEquals(3, m.getPesoMencao());
-
-        newMencao = "MI";
-        m.setPesoMencao(newMencao);
-        assertEquals(2, m.getPesoMencao());
-
-        newMencao = "II";
-        m.setPesoMencao(newMencao);
-        assertEquals(1, m.getPesoMencao());
-
-        newMencao = "SR";
-        m.setPesoMencao(newMencao);
-        assertEquals(0, m.getPesoMencao());
-
-    }
-
 }

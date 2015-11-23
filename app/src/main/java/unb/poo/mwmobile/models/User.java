@@ -157,12 +157,8 @@ public class User{
      */
 
     public void setHistorico(ArrayList<MateriaCursada> historico) {
-        calculaIRA();
         this.historico = historico;
-    }
-
-    public void calculaIRA(double IRA) {
-        this.IRA = IRA;
+        calculaIRA();
     }
 
     public String getToken() {
@@ -172,8 +168,6 @@ public class User{
     public void setToken(String token) {
         this.token = token;
     }
-
-
 
     /**
      * Metodo de retorno do valor do IRA do usuario
@@ -218,20 +212,18 @@ public class User{
         MencaoConfig mencaoConfig = new MencaoConfig();
 
 
-        for (MateriaCursada materia : historico) {
-            if (materia.obrigatoriaTrancada()) {
+        for (MateriaCursada materia : this.historico) {
+            if (materia.obrigatoriaTrancada())
                 DTp++;
-            }
-            if (materia.optativaTrancada()) {
+            if (materia.optativaTrancada())
                 DTb++;
-            }
         }
 
-        DC = historico.size();
+        DC = this.historico.size();
         constante = 1 - (((0.6 * DTb) + (0.4 * DTp))/DC);
         //-----------------------------------------
 
-        for(MateriaCursada materia : historico){
+        for(MateriaCursada materia : this.historico){
             Peso_mencao = mencaoConfig.pesoMencao(materia.getMencao());
             Periodo_disciplina = materia.getPeriodoCursado();
             Credito_disciplina = materia.getCreditos();
@@ -260,7 +252,7 @@ public class User{
 
         if(this.getMatricula() == fakeUser.getMatricula())
             if (this.getSenha().equals(fakeUser.getSenha())) {
-                saveOnDb(this, context);
+                saveOnDb(context);
                 return true;
             } else
                 return false;
@@ -271,13 +263,12 @@ public class User{
 
     /**
      * Adiciona as materias no banco de dados do usuario.
-     * @param user
      * @param context
      */
 
-    private void saveOnDb(User user, Context context){
+    private void saveOnDb(Context context){
         DBCore db = new DBCore(context);
-        db.addUser(user, materias, historico);
+        db.addUser(this, materias, historico);
     }
 
 
@@ -296,7 +287,8 @@ public class User{
      */
 
     public void addMateriaCursada(MateriaCursada cursada) {
-        historico.add(cursada);
+        this.historico.add(cursada);
+        calculaIRA();
     }
 
     /**
@@ -323,7 +315,7 @@ public class User{
 
     public MateriaCursada getMateriaCursada(String nomeMateria) {
         MateriaCursada ref = null;
-        for (MateriaCursada auxiliar : historico) {
+        for (MateriaCursada auxiliar : this.historico) {
             if (auxiliar.getNome().equals(nomeMateria)) {
                 ref = auxiliar;
             }
