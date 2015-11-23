@@ -1,5 +1,6 @@
 package unb.poo.mwmobile.acts;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,11 +28,18 @@ import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonUser;
 
-public class LoginActivity extends AppCompatActivity implements Transaction{
+public class LoginActivity extends Activity implements Transaction{
 
     boolean doubleBackToExitPressedOnce = false;
     User user;
 
+
+    ProgressBar progressBar;
+
+    EditText matriculaField;
+    EditText passwordField;
+
+    Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +51,18 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
         * depois ele adiciona um listener para esse botao (evento de click)
         */
 
+        matriculaField = (EditText) findViewById(R.id.matriculaField);
+        passwordField = (EditText) findViewById(R.id.passwordField);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
-        Button loginBtn = (Button) findViewById(R.id.loginButton);
+        loginBtn = (Button) findViewById(R.id.loginButton);
         loginBtn.setOnClickListener(login);
+
+        matriculaField.setText("123456789");
+        passwordField.setText("1234");
+
     }
 
 
@@ -64,23 +78,14 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
         @Override
         public void onClick(View v) {
 
-
-            EditText matriculaField = (EditText) findViewById(R.id.matriculaField);
-            EditText passwordField = (EditText) findViewById(R.id.passwordField);
-
             if(!matriculaField.getText().toString().trim().equals("")){
                 if(!passwordField.getText().toString().trim().equals("")){
 
                     try {
+                        toggleLoading();
+
                         String matricula = String.valueOf(matriculaField.getText());
                         String password = String.valueOf(passwordField.getText());
-
-                        matriculaField.setVisibility(View.GONE);
-                        passwordField.setVisibility(View.GONE);
-
-                        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                        progressBar.setVisibility(View.VISIBLE);
-
 
                         Sigra sigra = new Sigra(LoginActivity.this.getApplicationContext(),
                                 LoginActivity.this,
@@ -100,6 +105,22 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
         }
     };
 
+
+    private void toggleLoading() {
+        if(progressBar.getVisibility() == View.VISIBLE) {
+
+            progressBar.setVisibility(View.GONE);
+            passwordField.setVisibility(View.VISIBLE);
+            matriculaField.setVisibility(View.VISIBLE);
+            loginBtn.setVisibility(View.VISIBLE);
+        } else {
+
+            matriculaField.setVisibility(View.GONE);
+            passwordField.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+            loginBtn.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,7 +177,9 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
         MiddleServer.getInstance(LoginActivity.this.getApplicationContext())
                 .getRequestQueue()
                 .cancelAll(LoginActivity.class+"");
+        toggleLoading();
     }
+
 
     @Override
     public void doAfter(JSONObject jsonObject) {
@@ -164,9 +187,8 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
 
             Gson gson = new Gson();
 
-
             Log.d("JSON", String.valueOf(jsonObject));
-            User user = gson.fromJson(String.valueOf(jsonObject), User.class);
+            user = gson.fromJson(String.valueOf(jsonObject), User.class);
 
 
             SingletonUser singletonUser = SingletonUser.getINSTANCE();
@@ -174,10 +196,9 @@ public class LoginActivity extends AppCompatActivity implements Transaction{
 
             Intent welcomeAct = new Intent(getBaseContext(), WelcomeActivity.class);
             startActivity(welcomeAct);
-            finish();
 
-        }
-        else {
+
+        } else {
 
             EditText matriculaField = (EditText) findViewById(R.id.matriculaField);
             EditText passwordField = (EditText) findViewById(R.id.passwordField);

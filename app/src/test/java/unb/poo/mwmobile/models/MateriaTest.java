@@ -171,8 +171,4 @@ public class MateriaTest {
         assertEquals(newCreditos, m.getCreditos());
     }
 
-    @Test
-    public void testDescribeContents() throws Exception {
-        assertEquals(m.describeContents(),0);
-    }
 }

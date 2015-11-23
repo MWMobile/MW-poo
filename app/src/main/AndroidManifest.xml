@@ -36,24 +36,6 @@
             android:value="@integer/google_play_services_version"
             tools:replace="android:value" />
 
-        <activity
-            android:name=".acts.MainActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".acts.LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
-        <activity
-            android:name=".acts.HomeActivity"
-            android:label="@string/title_activity_home" >
-        </activity>
-
         <!-- Recebe GCM -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
@@ -89,8 +71,33 @@
         </service>
 
         <activity
+            android:name=".acts.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".acts.LoginActivity"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name=".acts.HomeActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
             android:name=".acts.WelcomeActivity"
             android:label="@string/title_activity_welcome" >
+        </activity>
+        <activity
+            android:name=".acts.MenuHomeActivity"
+            android:label="@string/title_activity_menu" >
+        </activity>
+        <activity
+            android:name=".acts.MenuGradeActivity"
+            android:label="@string/title_activity_menu_grade" >
         </activity>
     </application>
 

@@ -59,6 +59,7 @@ public class UserTest extends AndroidTestCase {
 
         materiaCursada = new MateriaCursada();
         materiaCursada.setNome("ED");
+        materiaCursada.setMencao("SS");
 
         materias.add(materia);
         historico.add(materiaCursada);
@@ -141,7 +142,9 @@ public class UserTest extends AndroidTestCase {
     public void testSetMaterias() throws Exception {
         ArrayList<Materia> newMaterias = new ArrayList<>();
         newMaterias.add(new Materia());
+
         u.setMaterias(newMaterias);
+
         assertEquals(newMaterias, u.getMaterias());
     }
 
@@ -152,14 +155,29 @@ public class UserTest extends AndroidTestCase {
 
     @Test
     public void testSetHistorico() throws Exception {
+
+        MateriaCursada m = new MateriaCursada();
+        m.setNome("ED");
+        m.setMencao("SS");
+
         ArrayList<MateriaCursada> newHistorico = new ArrayList<>();
-        newHistorico.add(new MateriaCursada());
+        newHistorico.add(m);
+
         u.setHistorico(newHistorico);
+
         assertEquals(newHistorico, u.getHistorico());
     }
 
     @Test
     public void testGetIRA() throws Exception {
+        MateriaCursada m = new MateriaCursada();
+        m.setNome("ED");
+        m.setMencao("SS");
+
+        ArrayList<MateriaCursada> newHistorico = new ArrayList<>();
+        newHistorico.add(m);
+
+        u.setHistorico(newHistorico);
         assertNotNull(u.getIRA());
     }
 
@@ -197,11 +215,58 @@ public class UserTest extends AndroidTestCase {
     @Test
     public void testAddMateriaCursada() throws Exception{
         MateriaCursada newMateria = new MateriaCursada();
-        newMateria.setNome("Materia");
-        u.addMateriaCursada(newMateria);
+        newMateria.setNome("Materia1");
+        newMateria.setObrigatoria(true);
+        newMateria.setMencao("SS");
 
-        assertNotNull(u.getMateriaCursada("Materia"));
-        assertEquals(newMateria, u.getMateriaCursada("Materia"));
+        MateriaCursada newMateria2 = new MateriaCursada();
+        newMateria2.setNome("Materia2");
+        newMateria2.setObrigatoria(true);
+        newMateria2.trancar();
+        newMateria2.setMencao("SS");
+
+        MateriaCursada newMateria3 = new MateriaCursada();
+        newMateria3.setNome("Materia3");
+        newMateria3.setObrigatoria(false);
+        newMateria3.setMencao("SS");
+
+        MateriaCursada newMateria4 = new MateriaCursada();
+        newMateria4.setNome("Materia4");
+        newMateria4.setObrigatoria(false);
+        newMateria4.trancar();
+        newMateria4.setMencao("SS");
+
+
+        u.addMateriaCursada(newMateria);
+        u.addMateriaCursada(newMateria2);
+        u.addMateriaCursada(newMateria3);
+        u.addMateriaCursada(newMateria4);
+
+        assertNotNull(u.getMateriaCursada("Materia1"));
+        assertNotNull(u.getMateriaCursada("Materia2"));
+        assertNotNull(u.getMateriaCursada("Materia3"));
+        assertNotNull(u.getMateriaCursada("Materia4"));
+
+        assertEquals(newMateria, u.getMateriaCursada("Materia1"));
+        assertEquals(newMateria2, u.getMateriaCursada("Materia2"));
+        assertEquals(newMateria3, u.getMateriaCursada("Materia3"));
+        assertEquals(newMateria4, u.getMateriaCursada("Materia4"));
+    }
+
+    @Test
+    public void testGetToken() {
+        String token = "tokenTest";
+
+        u.setToken(token);
+        assertEquals(token, u.getToken());
+    }
+
+    @Test
+    public void testSetToken() {
+        String token = "tokenTest";
+
+        u.setToken(token);
+        assertNotNull(token);
     }
 
 }

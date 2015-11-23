@@ -51,6 +51,7 @@ public class MateriaAdapterTest {
 
         materiaCursada = new MateriaCursada();
         materiaCursada.setNome("ED");
+        materiaCursada.setMencao("SS");
 
         materias.add(materia);
         historico.add(materiaCursada);

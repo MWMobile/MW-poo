@@ -1,5 +1,6 @@
 package unb.poo.mwmobile.acts;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonUser;
 import unb.poo.mwmobile.utils.MateriaAdapter;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends Activity {
 
     boolean doubleBackToExitPressedOnce = false;
 

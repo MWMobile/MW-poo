@@ -6,11 +6,11 @@ de mensagem Telegram e envie uma mensagem
 
 #gcmNode
 Pre requisitos:
--NodeJs
+- NodeJs
 
 Para rodar use
--npm install
--node index.js
+- npm install
+- node index.js
 
 ##ATENCAO!
 Favor nao rodar o gcmNode vide que uma instancia sua ja esta

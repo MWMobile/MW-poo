@@ -33,12 +33,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'com.android.support:appcompat-v7:23.0.0'
-    compile 'com.google.android.gms:play-services-gcm:8.1.0'
-    compile 'com.google.code.gson:gson:2.3.1'
 
     androidTestCompile 'com.android.support.test:runner:0.2'
-    androidTestCompile 'com.android.support:support-annotations:23.0.0'
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
 
     // Unit testing dependencies
@@ -51,5 +48,12 @@ dependencies {
     testCompile "org.robolectric:robolectric:3.0"
 
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.google.android.gms:play-services-gcm:8.1.0'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.android.support:design:23.1.1'
+
+    //lib de botoes
+    compile 'com.github.medyo:fancybuttons:1.5@aar'
 }
 
