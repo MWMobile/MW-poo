@@ -99,6 +99,10 @@
             android:name=".acts.MenuGradeActivity"
             android:label="@string/title_activity_menu_grade" >
         </activity>
+        <activity
+            android:name=".acts.HistoricoActivity"
+            android:label="Historico" >
+        </activity>
     </application>
 
 </manifest>
