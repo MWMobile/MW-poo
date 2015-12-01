@@ -1,0 +1,69 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp"
+    android:id="@+id/cardView">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:id="@+id/title"
+            android:background="@color/colorPrimary"
+            android:text="Matéria"
+            android:gravity="center_vertical"
+            android:textColor="#ffffff"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/codeField"
+            android:gravity="center_vertical"
+            android:text="Código: "
+            android:textSize="10dp"
+            android:layout_below="@id/title"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profField"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="10dp"
+            android:gravity="center_vertical"
+            android:text="Professor: "
+            android:layout_below="@id/codeField" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/periodoField"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/profField"
+            android:text="Período Cursado: "
+            android:textSize="10dp"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mencaoField"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/title"
+            android:layout_alignParentEnd="true"
+            android:text="MNC"
+            android:textSize="50dp"
+            android:gravity="center_vertical" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
