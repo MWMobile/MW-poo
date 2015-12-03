@@ -117,8 +117,8 @@ public class LoginActivity extends Activity implements Transaction{
 
             matriculaField.setVisibility(View.GONE);
             passwordField.setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
             loginBtn.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
         }
     }
 

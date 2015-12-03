@@ -103,6 +103,10 @@
             android:name=".acts.HistoricoActivity"
             android:label="Historico" >
         </activity>
+        <activity
+            android:name=".acts.QuadroResumoActivity"
+            android:label="Quadro Resumo" >
+        </activity>
     </application>
 
 </manifest>
