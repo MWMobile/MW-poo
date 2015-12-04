@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin"
+    tools:context="unb.poo.mwmobile.acts.QuadroResumoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aluno: "
+        android:textSize="15dp"
+        android:id="@+id/alunoField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/alunoField"
+        android:layout_marginTop="5dp"
+        android:text="Curso: "
+        android:textSize="15dp"
+        android:id="@+id/cursoField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cursoField"
+        android:layout_marginTop="5dp"
+        android:text="IRA: "
+        android:textSize="15dp"
+        android:id="@+id/iraField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iraField"
+        android:text="SR = "
+        android:textSize="15dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:id="@+id/srField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/srField"
+        android:text="II = "
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/iiField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iiField"
+        android:text="MI = "
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/miField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/srField"
+        android:layout_below="@+id/iraField"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="MM = "
+        android:textSize="15dp"
+        android:id="@+id/mmField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iiField"
+        android:layout_below="@+id/mmField"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/mmField"
+        android:text="MS = "
+        android:textSize="15dp"
+        android:id="@+id/msField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msField"
+        android:layout_toEndOf="@+id/miField"
+        android:layout_alignLeft="@+id/msField"
+        android:layout_marginTop="5dp"
+        android:text="SS = "
+        android:textSize="15dp"
+        android:id="@+id/ssField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iraField"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/mmField"
+        android:layout_marginLeft="40dp"
+        android:text="CC = "
+        android:textSize="15dp"
+        android:id="@+id/ccField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/miField"
+        android:layout_marginTop="40dp"
+        android:text="Total de Créditos: "
+        android:textSize="15dp"
+        android:id="@+id/msgField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/msgField"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:text="- A obter: "
+        android:textSize="15dp"
+        android:id="@+id/obterField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/obterField"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/obterField"
+        android:text="- Obtidos: "
+        android:textSize="15dp"
+        android:id="@+id/obtidoField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/obtidoField"
+        android:layout_alignLeft="@+id/obtidoField"
+        android:text="- Exigidos: "
+        android:textSize="15dp"
+        android:id="@+id/exigField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CC = Créditos Concedidos"
+        android:id="@+id/ccMean"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/exigField"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ccMean"
+        android:text="SR = Sem Rendimento"
+        android:id="@+id/srMean"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/srMean"
+        android:text="IRA = Índice de Rendimento Acadêmico"
+        android:id="@+id/iraMean"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>

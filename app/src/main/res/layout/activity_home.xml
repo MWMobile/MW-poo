@@ -1,45 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context="unb.poo.unb.poo.mwmobile.acts.HomeActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nomeField"
-        android:text="Nome"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/matriculaField"
-        android:text="Matricula"
-        android:layout_below="@id/nomeField"
-        android:layout_marginTop="5dp"/>
-
-    <GridView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gradeHoraria"
-        android:numColumns="5"
-        android:layout_below="@id/matriculaField"
-        android:verticalSpacing="2dp"
-        android:horizontalSpacing="0dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        android:layout_marginTop="15dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="IRA: 0.00000"
-        android:id="@+id/iraField"
-        android:layout_alignRight="@+id/gradeHoraria"
-        android:layout_alignEnd="@+id/gradeHoraria"
-        android:layout_alignTop="@+id/matriculaField" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cardList2"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>
