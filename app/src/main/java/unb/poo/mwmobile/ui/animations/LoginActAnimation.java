@@ -32,6 +32,7 @@ public class LoginActAnimation {
 
 
         Animation animation = AnimationUtils.loadAnimation(activity, android.R.anim.fade_in);
+        animation.setStartOffset(300);
 
         matriculaField.startAnimation(animation);
         passwordField.startAnimation(animation);

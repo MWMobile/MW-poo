@@ -27,8 +27,7 @@ import unb.poo.mwmobile.singleton.SingletonUser;
 import unb.poo.mwmobile.ui.animations.LoginActAnimation;
 
 public class LoginActivity extends Activity implements Transaction{
-
-    boolean doubleBackToExitPressedOnce = false;
+    
     User user;
 
     Activity context;
@@ -149,33 +148,6 @@ public class LoginActivity extends Activity implements Transaction{
 
         return super.onOptionsItemSelected(item);
     }
-
-
-    /*
-    funcao basica de clique duplo no botao voltar para sair
-    verifica se tem menos de 2 segundos que o usuario clicou o botao de voltar
-    se sim ele fecha o app, se nao ele reseta o contador
-    */
-
-    @Override
-    public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Aperte VOLTAR novamente para sair", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
-            }
-        }, 2000);
-    }
-
 
     @Override
     protected void onStop() {
