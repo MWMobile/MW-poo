@@ -94,8 +94,7 @@
         </activity>
         <activity
             android:name=".acts.MenuHomeActivity"
-            android:label="@string/title_activity_menu"
-            android:noHistory="true" >
+            android:label="@string/title_activity_menu">
         </activity>
         <activity
             android:name=".acts.MenuGradeActivity"
