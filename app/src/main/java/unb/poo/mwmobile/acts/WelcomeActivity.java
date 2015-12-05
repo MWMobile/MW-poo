@@ -1,24 +1,17 @@
 package unb.poo.mwmobile.acts;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
 import java.util.StringTokenizer;
 
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.singleton.SingletonUser;
-import unb.poo.mwmobile.ui.WelcomeAct;
+import unb.poo.mwmobile.ui.animations.WelcomeAct;
 
 public class WelcomeActivity extends Activity {
 
