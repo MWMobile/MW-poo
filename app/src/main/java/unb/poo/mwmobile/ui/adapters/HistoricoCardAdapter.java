@@ -3,16 +3,13 @@ package unb.poo.mwmobile.ui.adapters;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import unb.poo.mwmobile.R;
@@ -22,14 +19,16 @@ import unb.poo.mwmobile.models.MateriaCursada;
  * Created by sousa on 04/12/2015.
  */
 //Adapter do CardView, classe para inserir os dados do historico na card view.
-public class HistoricoCard extends RecyclerView.Adapter<HistoricoCard.CardViewHolder> {
+public class HistoricoCardAdapter extends RecyclerView.Adapter<HistoricoCardAdapter.CardViewHolder> {
 
     private String TAG = "HistoricoCardAdapter";
 
     private Context context;
     private ArrayList<MateriaCursada> hist;
 
-    public HistoricoCard(ArrayList<MateriaCursada> historico, Context c) {
+    private int lastPos = -1;
+
+    public HistoricoCardAdapter(ArrayList<MateriaCursada> historico, Context c) {
 //        super();
         this.hist = historico;
         this.context = c;
@@ -107,9 +106,10 @@ public class HistoricoCard extends RecyclerView.Adapter<HistoricoCard.CardViewHo
     }
 
     private void setAnimation(View toAnimate, int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        toAnimate.startAnimation(animation);
+        if(position >= lastPos + 1) {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            toAnimate.startAnimation(animation);
+            lastPos = position;
+        }
     }
 }
-
-//TODO estudar "bug" grafico da animacao de scroll

@@ -266,7 +266,7 @@ public class User{
      * @param context
      */
 
-    private void saveOnDb(Context context){
+    public void saveOnDb(Context context){
         DBCore db = new DBCore(context);
         db.addUser(this, materias, historico);
     }

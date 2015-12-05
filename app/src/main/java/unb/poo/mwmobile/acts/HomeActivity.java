@@ -25,7 +25,6 @@ import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.db.DBMateria;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonUser;
-import unb.poo.mwmobile.utils.MateriaAdapter;
 
 public class HomeActivity extends Activity {
 
@@ -79,20 +78,4 @@ public class HomeActivity extends Activity {
             }
         }
     }
-
-    /*public void gradePopulate(GridView gridView, final Context context, User user) {
-
-        MateriaAdapter adapter = new MateriaAdapter(context,user);
-        gridView.setAdapter(adapter);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> a, View v, int pos, long id) {
-                LinearLayout parent = (LinearLayout) v;
-                TextView t = (TextView) parent.findViewById(R.id.grid_materia);
-                Toast.makeText(context, t.getText(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }*/
-
 }

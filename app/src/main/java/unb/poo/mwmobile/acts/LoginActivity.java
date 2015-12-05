@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -24,15 +22,16 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.integracao.ServerRequest.MiddleServer;
 import unb.poo.mwmobile.integracao.ServerInterface.Sigra;
 import unb.poo.mwmobile.integracao.ServerRequest.Transaction;
-import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonUser;
+import unb.poo.mwmobile.ui.animations.LoginActAnimation;
 
 public class LoginActivity extends Activity implements Transaction{
 
     boolean doubleBackToExitPressedOnce = false;
     User user;
 
+    Activity context;
 
     ProgressBar progressBar;
 
@@ -46,6 +45,7 @@ public class LoginActivity extends Activity implements Transaction{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        context = this;
         /**
         * primeiro ele pega o botao do xml da view do app e atrela ele a uma variavel
         * depois ele adiciona um listener para esse botao (evento de click)
@@ -123,6 +123,12 @@ public class LoginActivity extends Activity implements Transaction{
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        LoginActAnimation.setScreen(this);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
@@ -174,10 +180,10 @@ public class LoginActivity extends Activity implements Transaction{
     @Override
     protected void onStop() {
         super.onStop();
+        toggleLoading();
         MiddleServer.getInstance(LoginActivity.this.getApplicationContext())
                 .getRequestQueue()
                 .cancelAll(LoginActivity.class+"");
-        toggleLoading();
     }
 
 
@@ -189,6 +195,7 @@ public class LoginActivity extends Activity implements Transaction{
 
             Log.d("JSON", String.valueOf(jsonObject));
             user = gson.fromJson(String.valueOf(jsonObject), User.class);
+            user.saveOnDb(context);
 
 
             SingletonUser singletonUser = SingletonUser.getINSTANCE();

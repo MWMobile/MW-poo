@@ -89,11 +89,13 @@
         </activity>
         <activity
             android:name=".acts.WelcomeActivity"
-            android:label="@string/title_activity_welcome" >
+            android:label="@string/title_activity_welcome"
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".acts.MenuHomeActivity"
-            android:label="@string/title_activity_menu" >
+            android:label="@string/title_activity_menu"
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".acts.MenuGradeActivity"

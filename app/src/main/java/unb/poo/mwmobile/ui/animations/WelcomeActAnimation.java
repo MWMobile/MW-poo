@@ -18,7 +18,7 @@ import unb.poo.mwmobile.acts.MenuHomeActivity;
 /**
  * Created by sousa on 23/11/2015.
  */
-public class WelcomeAct {
+public class WelcomeActAnimation {
 
     private static AnimatorSet animatorSet = new AnimatorSet();
 
@@ -30,45 +30,16 @@ public class WelcomeAct {
         TextView name = (TextView) view.findViewById(R.id.name);
 
         ObjectAnimator welcomeOA = ObjectAnimator.ofFloat(welcome, "alpha", 0, 1);
-        welcomeOA.setStartDelay(500);
-        welcomeOA.setDuration(2000);
+        welcomeOA.setStartDelay(300);
+        welcomeOA.setDuration(1250);
 
         ObjectAnimator nameOA = ObjectAnimator.ofFloat(name, "alpha", 0, 1);
-        nameOA.setStartDelay(1500);
-        nameOA.setDuration(2000);
+        nameOA.setStartDelay(1250);
+        nameOA.setDuration(1250);
 
         animatorSet.setInterpolator(new LinearInterpolator());
         animatorSet.play(welcomeOA).with(nameOA);
 
-        animatorSet.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                try {
-                    Thread.sleep(500);
-                    Log.d("animation", "done");
-                    Intent homeAct = new Intent(activity, MenuHomeActivity.class);
-                    activity.startActivity(homeAct);
-                    activity.finish();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
 
         return animatorSet;
     }

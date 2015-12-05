@@ -11,7 +11,7 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.models.MateriaCursada;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonUser;
-import unb.poo.mwmobile.ui.adapters.HistoricoCard;
+import unb.poo.mwmobile.ui.adapters.HistoricoCardAdapter;
 
 /**
  * Created by Raphael on 24/11/2015.
@@ -39,7 +39,7 @@ public class HistoricoActivity extends Activity {
         recList.setLayoutManager(new LinearLayoutManager(this));
         recList.setHasFixedSize(true);
 
-        recList.setAdapter(new HistoricoCard(hist, this));
+        recList.setAdapter(new HistoricoCardAdapter(hist, this));
     }
 }
 
