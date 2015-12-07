@@ -14,7 +14,7 @@ android:id="@+id/cardView">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:id="@+id/title"
             android:background="#666"
             android:text="Matéria"
@@ -67,31 +67,26 @@ android:id="@+id/cardView">
 
             <LinearLayout
                 android:layout_alignParentEnd="true"
+                android:layout_marginRight="110dp"
+                android:layout_width="3dp"
+                android:layout_height="60dp"
                 android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_marginRight="15dp"
-                    android:layout_width="3dp"
-                    android:layout_height="60dp"
-                    android:background="#666"
-                    android:id="@+id/divider"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/mencaoField"
-                    android:layout_marginTop="0dp"
-                    android:text="MNC"
-                    android:textSize="50dp"
-                    android:gravity="center_vertical" />
+                android:background="#666"
+                android:id="@+id/divider"
+                android:orientation="horizontal">
 
             </LinearLayout>
 
+            <TextView
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/mencaoField"
+                android:layout_marginTop="0dp"
+                android:text="MM"
+                android:textSize="50dp"
+                android:gravity="center" />
 
         </RelativeLayout>
     </LinearLayout>
