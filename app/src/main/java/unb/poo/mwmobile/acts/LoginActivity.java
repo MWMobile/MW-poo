@@ -104,16 +104,18 @@ public class LoginActivity extends Activity implements Transaction{
 
     private void toggleLoading() {
         if(progressBar.getVisibility() == View.VISIBLE) {
-
             progressBar.setVisibility(View.GONE);
+
             passwordField.setVisibility(View.VISIBLE);
             matriculaField.setVisibility(View.VISIBLE);
             loginBtn.setVisibility(View.VISIBLE);
-        } else {
 
+            LoginActAnimation.setScreen(this);
+        } else {
             matriculaField.setVisibility(View.GONE);
             passwordField.setVisibility(View.GONE);
             loginBtn.setVisibility(View.GONE);
+
             progressBar.setVisibility(View.VISIBLE);
         }
     }
@@ -127,7 +129,6 @@ public class LoginActivity extends Activity implements Transaction{
     @Override
     protected void onStop() {
         super.onStop();
-        toggleLoading();
         MiddleServer.getInstance(LoginActivity.this.getApplicationContext())
                 .getRequestQueue()
                 .cancelAll(LoginActivity.class+"");
@@ -154,14 +155,8 @@ public class LoginActivity extends Activity implements Transaction{
 
         } else {
 
-            EditText matriculaField = (EditText) findViewById(R.id.matriculaField);
-            EditText passwordField = (EditText) findViewById(R.id.passwordField);
-            matriculaField.setVisibility(View.VISIBLE);
-            passwordField.setVisibility(View.VISIBLE);
-
-            ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-            progressBar.setVisibility(View.GONE);
             Toast.makeText(getApplicationContext(), "Falha no Login", Toast.LENGTH_SHORT).show();
         }
+        toggleLoading();
     }
 }
