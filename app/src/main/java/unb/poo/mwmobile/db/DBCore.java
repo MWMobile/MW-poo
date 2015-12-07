@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.MateriaCursada;
-import unb.poo.mwmobile.models.Professor;
 import unb.poo.mwmobile.models.User;
 
 // TODO modificar o autor e verificar a documentação Javadoc.
@@ -203,7 +202,7 @@ public class DBCore extends SQLiteOpenHelper {
             values2.put(KEY_MATERIA, historico.get(i).getNome());
             values2.put(KEY_MENCAO, historico.get(i).getMencao());
             values2.put(KEY_OBRIG, historico.get(i).getObrigatoria());
-            values2.put(KEY_PERIODO, historico.get(i).getPeriodoCursado());
+            values2.put(KEY_PERIODO, historico.get(i).getPeriodoTerminado());
             values2.put(KEY_CREDITO, historico.get(i).getCreditos());
 
             db.insert(TABLE_HIST, null, values2);
@@ -284,7 +283,7 @@ public class DBCore extends SQLiteOpenHelper {
                     mat2.setNome(nomeM);
                     mat2.setCreditos(creditM);
                     mat2.setMencao(mencao);
-                    mat2.setPeriodoCursado(period);
+                    mat2.setPeriodoTerminado(period);
 
                     h.add(mat2);
                 } while (cursor.moveToNext() || cursor.isLast() == true);

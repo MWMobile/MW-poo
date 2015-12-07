@@ -16,7 +16,7 @@ public class SingletonUser {
     private static final SingletonUser INSTANCE = new SingletonUser();
     private SingletonUser(){}
 
-    public static SingletonUser getINSTANCE() {
+    public static SingletonUser getInstance() {
         return INSTANCE;
     }
 

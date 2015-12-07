@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <!-- ...and here we setting appcompat’s color theming attrs -->
@@ -12,9 +13,9 @@
 
         <!-- specify shared element transitions -->
         <!--<item name="android:windowSharedElementEnterTransition">-->
-            <!--@transition/change_item_transform</item>-->
+        <!--@transition/change_item_transform</item>-->
         <!--<item name="android:windowSharedElementExitTransition">-->
-            <!--@transition/change_item_transform</item>-->
+        <!--@transition/change_item_transform</item>-->
 
     </style>
 </resources>

@@ -76,7 +76,7 @@ public class DBHistorico {
             values.put(KEY_MATERIA, materias.get(i).getNome());
             values.put(KEY_MENCAO, materias.get(i).getMencao());
             values.put(KEY_OBRIG, materias.get(i).getObrigatoria() ? 1 : 0);
-            values.put(KEY_PERIODO, materias.get(i).getPeriodoCursado());
+            values.put(KEY_PERIODO, materias.get(i).getPeriodoTerminado());
             values.put(KEY_CREDITO, materias.get(i).getCreditos());
 
 //            values.put(KEY_PROFESSOR, materias.get(i).getProfessor().getNome());
@@ -126,7 +126,7 @@ public class DBHistorico {
                 materia.setCodigo(cursor.getInt(1));
                 materia.setNome(cursor.getString(2));
                 materia.setCreditos(cursor.getInt(6));
-                materia.setPeriodoCursado(cursor.getInt(5));
+                materia.setPeriodoTerminado(cursor.getInt(5));
                 materia.setMencao(cursor.getString(3));
                 materia.setObrigatoria(cursor.getInt(4) == 1);
 //                materia.setProfessor(new Professor(cursor.getString(3)));

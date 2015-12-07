@@ -84,7 +84,7 @@
         <mehdi.sakout.fancybuttons.FancyButton
             android:transitionName="menuIcon"
             android:layout_centerHorizontal="true"
-            android:id="@+id/selfMenu"
+            android:id="@+id/profileMenu"
             android:layout_width="50dp"
             android:layout_height="50dp"
             fancy:fb_iconResource="@mipmap/ic_launcher"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:text="Profile"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/selfMenu"
+            android:layout_below="@id/profileMenu"
             android:layout_marginTop="5dp"/>
     </RelativeLayout>
 

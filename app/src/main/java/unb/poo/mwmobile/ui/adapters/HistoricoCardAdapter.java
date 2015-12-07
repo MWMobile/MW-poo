@@ -1,13 +1,19 @@
 package unb.poo.mwmobile.ui.adapters;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -53,8 +59,9 @@ public class HistoricoCardAdapter extends RecyclerView.Adapter<HistoricoCardAdap
         String mencao = hist.get(i).getMencao();
 
         int code = hist.get(i).getCodigo();
-        int periodo = hist.get(i).getPeriodoCursado();
-//        String prof = hist.get(i).getProfessor().getNome();
+        int periodo = hist.get(i).getPeriodoTerminado();
+//      String prof = hist.get(i).getProfessor().getNome();
+
 
         holder.vTitle.setText(nome);
         holder.vMencao.setText(mencao);
@@ -62,6 +69,24 @@ public class HistoricoCardAdapter extends RecyclerView.Adapter<HistoricoCardAdap
         holder.vCode.setText(String.format("Código: %d", code));
         //holder.vProf.setText("Professor: " + prof);
         holder.vPeriodo.setText(String.format("Periodo: %d", periodo));
+
+        String color = "#000";
+
+        switch (mencao){
+            case "SS":
+                color = "#51ae35";
+                break;
+            case "MM":
+            case "MS":
+                color = "#3926bf";
+                break;
+            default:
+                color = "#ed140a";
+                break;
+        }
+
+        holder.vDivider.setBackgroundColor(Color.parseColor(color));
+        holder.vMencao.setTextColor(Color.parseColor(color));
 
         setAnimation(holder.container, i);
     }
@@ -71,7 +96,7 @@ public class HistoricoCardAdapter extends RecyclerView.Adapter<HistoricoCardAdap
     //sera criado e colocado dentro do recycler view
     @Override
     public CardViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardlist, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_historico, viewGroup, false);
         return new CardViewHolder(view);
     }
 
@@ -89,6 +114,8 @@ public class HistoricoCardAdapter extends RecyclerView.Adapter<HistoricoCardAdap
         protected TextView vProf;
         protected TextView vPeriodo;
 
+        protected LinearLayout vDivider;
+
         protected CardView container;
 
         public CardViewHolder(View v) {
@@ -102,14 +129,18 @@ public class HistoricoCardAdapter extends RecyclerView.Adapter<HistoricoCardAdap
             this.vPeriodo = (TextView) v.findViewById(R.id.periodoField);
 
             this.container = (CardView) v.findViewById(R.id.cardView);
+
+            this.vDivider = (LinearLayout) v.findViewById(R.id.divider);
         }
     }
 
     private void setAnimation(View toAnimate, int position) {
-        if(position >= lastPos + 1) {
+        if (position >= lastPos + 1) {
             Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
             toAnimate.startAnimation(animation);
             lastPos = position;
         }
     }
+
+
 }

@@ -1,9 +1,7 @@
 package unb.poo.mwmobile.acts;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import unb.poo.mwmobile.R;
@@ -25,7 +23,7 @@ public class QuadroResumoActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qr);
+        setContentView(R.layout.activity_quadro_resumo);
 
         TextView alunoView = (TextView) findViewById(R.id.alunoField);
         TextView cursoView = (TextView) findViewById(R.id.cursoField);
@@ -41,7 +39,7 @@ public class QuadroResumoActivity extends Activity {
         TextView obtidoView = (TextView) findViewById(R.id.obtidoField);
         TextView exigView = (TextView) findViewById(R.id.exigField);
 
-        SingletonUser singletonUser = SingletonUser.getINSTANCE();
+        SingletonUser singletonUser = SingletonUser.getInstance();
 
         this.user = singletonUser.getUser();
 

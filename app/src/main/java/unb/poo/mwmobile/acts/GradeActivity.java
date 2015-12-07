@@ -1,45 +1,37 @@
 package unb.poo.mwmobile.acts;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import unb.poo.mwmobile.R;
-import unb.poo.mwmobile.db.DBCore;
-import unb.poo.mwmobile.db.DBMateria;
 import unb.poo.mwmobile.models.User;
+import unb.poo.mwmobile.singleton.SingletonSemana;
 import unb.poo.mwmobile.singleton.SingletonUser;
 
-public class HomeActivity extends Activity {
+public class GradeActivity extends Activity {
+
+    private static String TAG = "GradeActivity";
 
     User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_grade);
 
-        SingletonUser singletonUser = SingletonUser.getINSTANCE();
+        SingletonUser singletonUser = SingletonUser.getInstance();
 
         this.user = singletonUser.getUser();
 
-        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList2);
+        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
         recList.setLayoutManager(new LinearLayoutManager(this));
         recList.setHasFixedSize(true);
 
@@ -48,18 +40,23 @@ public class HomeActivity extends Activity {
 
     public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
 
+        SingletonSemana singletonSemana;
+
         public CardAdapter() {
             super();
+            singletonSemana = SingletonSemana.getInstance();
         }
 
         @Override
         public int getItemCount() {
-            return user.getMaterias().size();
+//            return user.getMaterias().size();
+//            System.out.println(singletonSemana.getDias().size());
+            return singletonSemana.getDias().size();
         }
 
         @Override
         public void onBindViewHolder(CardViewHolder holder, int i) {
-
+            holder.dia.setText(singletonSemana.getDias().get(i));
         }
 
         @Override
@@ -73,9 +70,14 @@ public class HomeActivity extends Activity {
 
         public class CardViewHolder extends RecyclerView.ViewHolder {
 
+            protected TextView dia;
+
             public CardViewHolder(View v) {
                 super(v);
+
+                this.dia = (TextView) v.findViewById(R.id.dia);
             }
         }
     }
 }
+// TODO fazer sliding para as materias

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import unb.poo.mwmobile.config.MencaoConfig;
 import unb.poo.mwmobile.db.DBCore;
-import unb.poo.mwmobile.db.DBMateria;
 
 /**
  * @author Andrei Sousa
@@ -225,7 +224,7 @@ public class User{
 
         for(MateriaCursada materia : this.historico){
             Peso_mencao = mencaoConfig.pesoMencao(materia.getMencao());
-            Periodo_disciplina = materia.getPeriodoCursado();
+            Periodo_disciplina = materia.getPeriodoTerminado();
             Credito_disciplina = materia.getCreditos();
 
             disc = disc + (Periodo_disciplina * Peso_mencao * Credito_disciplina);

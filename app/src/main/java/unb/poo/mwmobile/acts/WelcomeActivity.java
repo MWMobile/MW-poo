@@ -3,11 +3,8 @@ package unb.poo.mwmobile.acts;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 
 import java.util.StringTokenizer;
@@ -28,7 +25,7 @@ public class WelcomeActivity extends Activity {
 
         context = this;
 
-        SingletonUser singletonUser = SingletonUser.getINSTANCE();
+        SingletonUser singletonUser = SingletonUser.getInstance();
 
         StringTokenizer st = new StringTokenizer(singletonUser.getUser().getNome());
 
