@@ -2,8 +2,11 @@ package unb.poo.mwmobile.acts;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +18,18 @@ import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonSemana;
 import unb.poo.mwmobile.singleton.SingletonUser;
+import unb.poo.mwmobile.ui.adapters.GradePagerAdapter;
+import unb.poo.mwmobile.ui.adapters.HistoricoPagerAdapter;
 
-public class GradeActivity extends Activity {
+public class GradeActivity extends AppCompatActivity {
 
     private static String TAG = "GradeActivity";
 
     User user;
+    android.support.v7.widget.Toolbar toolbar;
+
+    private GradePagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,53 +40,50 @@ public class GradeActivity extends Activity {
 
         this.user = singletonUser.getUser();
 
-        RecyclerView recList = (RecyclerView) findViewById(R.id.cardList);
-        recList.setLayoutManager(new LinearLayoutManager(this));
-        recList.setHasFixedSize(true);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.gradeToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Segunda");
 
-        recList.setAdapter(new CardAdapter());
-    }
+        mSectionsPagerAdapter = new GradePagerAdapter(getSupportFragmentManager());
 
-    public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardViewHolder> {
+        mViewPager = (ViewPager) findViewById(R.id.gradeContainer);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        SingletonSemana singletonSemana;
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
-        public CardAdapter() {
-            super();
-            singletonSemana = SingletonSemana.getInstance();
-        }
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        @Override
-        public int getItemCount() {
-//            return user.getMaterias().size();
-//            System.out.println(singletonSemana.getDias().size());
-            return singletonSemana.getDias().size();
-        }
-
-        @Override
-        public void onBindViewHolder(CardViewHolder holder, int i) {
-            holder.dia.setText(singletonSemana.getDias().get(i));
-        }
-
-        @Override
-        public CardViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.
-                    from(viewGroup.getContext()).
-                    inflate(R.layout.card_item_grade, viewGroup, false);
-
-            return new CardViewHolder(view);
-        }
-
-        public class CardViewHolder extends RecyclerView.ViewHolder {
-
-            protected TextView dia;
-
-            public CardViewHolder(View v) {
-                super(v);
-
-                this.dia = (TextView) v.findViewById(R.id.dia);
             }
-        }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0){
+                    getSupportActionBar().setTitle("Segunda");
+                    getSupportActionBar().setElevation((float) 0.5);
+                }
+                if(position == 1) {
+                    getSupportActionBar().setTitle("Terça");
+                }
+                if(position == 2) {
+                    getSupportActionBar().setTitle("Quarta");
+                }
+                if(position == 3) {
+                    getSupportActionBar().setTitle("Quinta");
+                }
+                if(position == 4) {
+                    getSupportActionBar().setTitle("Sexta");
+                }
+                if(position == 5) {
+                    getSupportActionBar().setTitle("Sábado");
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }
 // TODO fazer sliding para as materias

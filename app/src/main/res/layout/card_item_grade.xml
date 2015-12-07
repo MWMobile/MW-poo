@@ -4,101 +4,22 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/cardList3"
-    android:scrollbars="horizontal">
+    android:id="@+id/cardList3">
 
     <RelativeLayout
         android:id="@+id/contaier"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:scrollbars="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:id="@+id/dia"
-            android:textColor="#ffffff"
-            android:text="Segunda"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:background="@color/colorPrimaryDark"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/oitoField"
-            android:layout_below="@+id/dia"
+            android:id="@+id/horaField"
             android:text="8h"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="5dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/dezField"
-            android:layout_below="@+id/oitoField"
-            android:text="10h"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/dozeField"
-            android:layout_below="@+id/dezField"
-            android:text="12h"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/doisField"
-            android:layout_below="@+id/dozeField"
-            android:text="14h"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/quatroField"
-            android:layout_below="@+id/doisField"
-            android:text="16h"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/seisField"
-            android:layout_below="@+id/quatroField"
-            android:text="18h"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/oitonField"
-            android:layout_below="@+id/seisField"
-            android:text="20h"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/deznField"
-            android:layout_below="@+id/oitonField"
-            android:text="22h"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 
