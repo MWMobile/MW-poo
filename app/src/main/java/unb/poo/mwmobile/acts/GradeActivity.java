@@ -50,7 +50,6 @@ public class GradeActivity extends AppCompatActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -58,25 +57,8 @@ public class GradeActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0){
-                    getSupportActionBar().setTitle("Segunda");
-                    getSupportActionBar().setElevation((float) 0.5);
-                }
-                if(position == 1) {
-                    getSupportActionBar().setTitle("Terça");
-                }
-                if(position == 2) {
-                    getSupportActionBar().setTitle("Quarta");
-                }
-                if(position == 3) {
-                    getSupportActionBar().setTitle("Quinta");
-                }
-                if(position == 4) {
-                    getSupportActionBar().setTitle("Sexta");
-                }
-                if(position == 5) {
-                    getSupportActionBar().setTitle("Sábado");
-                }
+                SingletonSemana singletonSemana;singletonSemana = SingletonSemana.getInstance();
+                getSupportActionBar().setTitle(singletonSemana.getDias().get(position));
             }
 
             @Override
