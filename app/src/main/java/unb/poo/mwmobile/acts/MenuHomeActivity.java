@@ -50,9 +50,14 @@ public class MenuHomeActivity extends Activity {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(context, Teste.class);
-//                startActivity(intent);
+            public void onClick(View v){
+                Intent intent = new Intent(context, ProfileActivity.class);
+                // create the transition animation - the images in the layouts
+                // of both activities are defined with android:transitionName="robot"
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(context, materiaBtn, "menuIcon");
+                // start the new activity
+                startActivity(intent, options.toBundle());
             }
         });
 

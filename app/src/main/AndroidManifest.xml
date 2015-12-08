@@ -102,6 +102,9 @@
         <activity
             android:name=".acts.QuadroResumoActivity"
             android:label="Quadro Resumo" />
+        <activity
+            android:name=".acts.ProfileActivity"
+            android:label="Profile" />
     </application>
 
 </manifest>
