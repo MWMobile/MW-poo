@@ -72,7 +72,7 @@ public class MiddleServer {
         Gson gson = new Gson();
 
 
-        final CustomRequest request = new CustomRequest(
+        final CustomRequestJsonObject request = new CustomRequestJsonObject(
                 Request.Method.POST,
                 MiddleServerConfig.URL + header,
                 params,
