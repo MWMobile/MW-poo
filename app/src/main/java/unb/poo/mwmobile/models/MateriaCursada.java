@@ -50,11 +50,11 @@ public class MateriaCursada extends Materia{
     }
 
 
-    public int getPeriodoCursado() {
+    public int getPeriodoTerminado() {
         return periodoTerminado;
     }
 
-    public void setPeriodoCursado(int periodoCursado) {
+    public void setPeriodoTerminado(int periodoCursado) {
         this.periodoTerminado = periodoCursado;
     }
 

@@ -9,19 +9,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 
-import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.config.GCM;
 import unb.poo.mwmobile.db.DBCore;
 import unb.poo.mwmobile.db.DBMateria;
-import unb.poo.mwmobile.models.Materia;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.services.GCM.RegistrationIntentService;
 import unb.poo.mwmobile.singleton.SingletonUser;
@@ -91,7 +86,7 @@ public class MainActivity extends Activity {
             loginAct = new Intent(this, LoginActivity.class);
         else {
             loginAct = new Intent(this, WelcomeActivity.class);
-            SingletonUser singletonUser = SingletonUser.getINSTANCE();
+            SingletonUser singletonUser = SingletonUser.getInstance();
             singletonUser.setUser(user);
         }
 
@@ -128,30 +123,5 @@ public class MainActivity extends Activity {
                 new IntentFilter(GCM.getRegistrationComplete()));
 
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
 
 }

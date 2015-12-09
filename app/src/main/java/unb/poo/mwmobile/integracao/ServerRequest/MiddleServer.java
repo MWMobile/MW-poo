@@ -72,7 +72,7 @@ public class MiddleServer {
         Gson gson = new Gson();
 
 
-        final CustomRequest request = new CustomRequest(
+        final CustomRequestJsonObject request = new CustomRequestJsonObject(
                 Request.Method.POST,
                 MiddleServerConfig.URL + header,
                 params,
@@ -86,11 +86,16 @@ public class MiddleServer {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.d("LOG","onErrorResponse(): "+volleyError);
+                        Log.d(TAG,"onErrorResponse(): " + volleyError);
                         transaction.doAfter(null);
                     }
                 }
         );
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         request.setTag(tag);
         request.setRetryPolicy(new DefaultRetryPolicy());

@@ -1,8 +1,7 @@
 package unb.poo.mwmobile.models;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.os.Parcel;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +9,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -53,7 +50,7 @@ public class MateriaCursadaTest {
 
         m.setMencao(mencao);
         m.setObrigatoria(obrigatoria);
-        m.setPeriodoCursado(periodoCursado);
+        m.setPeriodoTerminado(periodoCursado);
         m.setReprovacoes(reprovacoes);
         m.setAvaliacaoMateria(avaliacaoMateria);
 
@@ -102,14 +99,14 @@ public class MateriaCursadaTest {
 
     @Test
     public void testGetPeriodoCursado() throws Exception {
-        assertEquals(periodoCursado, m.getPeriodoCursado());
+        assertEquals(periodoCursado, m.getPeriodoTerminado());
     }
 
     @Test
     public void testSetPeriodoCursado() throws Exception {
         int newPeriodoCursado = 4;
-        m.setPeriodoCursado(newPeriodoCursado);
-        assertEquals(newPeriodoCursado, m.getPeriodoCursado());
+        m.setPeriodoTerminado(newPeriodoCursado);
+        assertEquals(newPeriodoCursado, m.getPeriodoTerminado());
     }
 
     @Test

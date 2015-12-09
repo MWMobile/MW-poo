@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="unb.poo.mwmobile" >
+    package="unb.poo.mwmobile">
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,8 +9,10 @@
  To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
      option is required to comply with the Google+ Sign-In developer policies
     -->
-    <uses-permission android:name="android.permission.USE_CREDENTIALS" /> <!-- To retrieve the account name (email) as part of sign-in: -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <!-- To retrieve the account name (email) as part of sign-in: -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -30,7 +32,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"
@@ -40,7 +42,7 @@
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -51,7 +53,7 @@
         <!-- Services do GCM -->
         <service
             android:name=".services.GCM.GCMListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -60,19 +62,18 @@
         </service>
         <service
             android:name=".services.GCM.InstanceIDListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
         <service
             android:name=".services.GCM.RegistrationIntentService"
-            android:exported="false" >
-        </service>
+            android:exported="false" />
 
         <activity
             android:name=".acts.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -81,24 +82,29 @@
         </activity>
         <activity
             android:name=".acts.LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
+            android:label="@string/title_activity_login" />
         <activity
-            android:name=".acts.HomeActivity"
-            android:label="@string/title_activity_home" >
-        </activity>
+            android:name=".acts.GradeActivity"
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".acts.WelcomeActivity"
-            android:label="@string/title_activity_welcome" >
-        </activity>
+            android:label="@string/title_activity_welcome"
+            android:noHistory="true" />
         <activity
             android:name=".acts.MenuHomeActivity"
-            android:label="@string/title_activity_menu" >
-        </activity>
+            android:label="@string/title_activity_menu" />
         <activity
-            android:name=".acts.MenuGradeActivity"
-            android:label="@string/title_activity_menu_grade" >
-        </activity>
+            android:name=".acts.MenuMateriasActivity"
+            android:label="@string/title_activity_menu_grade" />
+        <activity
+            android:name=".acts.HistoricoActivity"
+            android:label="Historico" />
+        <activity
+            android:name=".acts.QuadroResumoActivity"
+            android:label="Quadro Resumo" />
+        <activity
+            android:name=".acts.ProfileActivity"
+            android:label="Profile" />
     </application>
 
 </manifest>

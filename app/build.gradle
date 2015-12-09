@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "unb.poo.unb.poo.mwmobile"
@@ -31,13 +31,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile 'com.android.support.test:runner:0.2'
     androidTestCompile 'com.android.support:support-annotations:23.1.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.1'
-
     // Unit testing dependencies
     testCompile 'junit:junit:4.12'
     // Set this dependency if you want to use Mockito
@@ -45,15 +42,15 @@ dependencies {
     // Set this dependency if you want to use Hamcrest matching
     testCompile 'org.hamcrest:hamcrest-library:1.1'
     // roboeletric para teste
-    testCompile "org.robolectric:robolectric:3.0"
-
+    testCompile 'org.robolectric:robolectric:3.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.google.android.gms:play-services-gcm:8.1.0'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.android.support:design:23.1.1'
-
     //lib de botoes
     compile 'com.github.medyo:fancybuttons:1.5@aar'
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:cardview-v7:21.0.+'
 }
 

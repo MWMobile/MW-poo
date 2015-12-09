@@ -1,37 +1,26 @@
 package unb.poo.mwmobile.acts;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
 import android.test.ActivityUnitTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.widget.Button;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
-
-import java_cup.Main;
-import unb.poo.mwmobile.BuildConfig;
-import unb.poo.mwmobile.R;
 
 /**
  * Created by sousa on 14/10/2015.
  */
 @RunWith(RobolectricTestRunner.class)
 //@Config(constants = BuildConfig.class, manifest = "src/main/AndroidManifest.xml", sdk = 16)
-public class MainActivityTest extends ActivityUnitTestCase<HomeActivity> {
+public class MainActivityTest extends ActivityUnitTestCase<GradeActivity> {
 
     private Activity mainActivity;
     private ActivityController controller;
 
     public MainActivityTest() {
-        super(HomeActivity.class);
+        super(GradeActivity.class);
     }
 
     @Before
