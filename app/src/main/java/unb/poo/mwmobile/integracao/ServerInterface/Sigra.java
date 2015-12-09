@@ -2,11 +2,16 @@ package unb.poo.mwmobile.integracao.ServerInterface;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
 
 import unb.poo.mwmobile.integracao.ServerRequest.MiddleServer;
 import unb.poo.mwmobile.integracao.ServerRequest.Transaction;
 import unb.poo.mwmobile.integracao.ServerRequest.WrapObjToNetwork;
+import unb.poo.mwmobile.models.Materia;
 
 /**
  * Classe que faz a interface entre quem pede
@@ -14,7 +19,7 @@ import unb.poo.mwmobile.integracao.ServerRequest.WrapObjToNetwork;
  *
  * Created by Eduardo Scartezini on 30/10/2015.
  */
-public class SigraUser implements ISigraUser {
+public class Sigra implements ISigra {
 
     //Constantes
     private static final String AUTENTICA = "login";
@@ -25,7 +30,9 @@ public class SigraUser implements ISigraUser {
     private static final String NOME = "getNome";
     private static final String CURSO = "getCurso";
     private static final String MATERIAS = "getMaterias";
-
+    private static final String DBMATERIAS = "getDBMaterias";
+    private static final String MATRICULA = "requestMatricula";
+    private static final String CANCELARMATRICULA = "cancelMatricula";
 
 
     private MiddleServer server;
@@ -34,9 +41,10 @@ public class SigraUser implements ISigraUser {
     private Transaction transaction;
     private WrapObjToNetwork obj;
     private HashMap<String,String> params;
+    private Gson gson;
 
     /**
-     * Construtor padrao do SigraUser
+     * Construtor padrao do Sigra
      *
      * @param context
      *      contexto da aplicacao
@@ -47,7 +55,7 @@ public class SigraUser implements ISigraUser {
      *      Tag para parrar o request caso o app entre no
      *      onStop
      */
-    public SigraUser(Context context, Transaction transaction, String tag) {
+    public Sigra(Context context, Transaction transaction, String tag) {
         server = MiddleServer.getInstance(context);
         this.tag = tag;
         this.transaction = transaction;
@@ -61,7 +69,7 @@ public class SigraUser implements ISigraUser {
         params.put("matricula",matricula);
         params.put("senha",senha);
 
-        server.execute(transaction,tag, SigraUser.AUTENTICA,params);
+        server.execute(transaction,tag, Sigra.AUTENTICA,params);
     }
 
     @Override
@@ -69,7 +77,7 @@ public class SigraUser implements ISigraUser {
         params = new HashMap<>();
         params.put("token",token);
 
-        server.execute(transaction,tag, SigraUser.IRA,params);
+        server.execute(transaction,tag, Sigra.IRA,params);
     }
 
     @Override
@@ -77,7 +85,7 @@ public class SigraUser implements ISigraUser {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag, SigraUser.CURSO,params);
+        server.execute(transaction,tag, Sigra.CURSO,params);
 
     }
 
@@ -86,7 +94,7 @@ public class SigraUser implements ISigraUser {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag, SigraUser.MATERIAS,params);
+        server.execute(transaction,tag, Sigra.MATERIAS,params);
     }
 
     @Override
@@ -94,7 +102,7 @@ public class SigraUser implements ISigraUser {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag, SigraUser.PERIODO,params);
+        server.execute(transaction,tag, Sigra.PERIODO,params);
 
     }
 
@@ -103,7 +111,7 @@ public class SigraUser implements ISigraUser {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag, SigraUser.HISTORICO,params);
+        server.execute(transaction,tag, Sigra.HISTORICO,params);
 
     }
 
@@ -112,7 +120,7 @@ public class SigraUser implements ISigraUser {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag, SigraUser.NOME,params);
+        server.execute(transaction,tag, Sigra.NOME,params);
 
     }
 
@@ -121,6 +129,38 @@ public class SigraUser implements ISigraUser {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag, SigraUser.USER,params);
+        server.execute(transaction,tag, Sigra.USER,params);
     }
+
+    @Override
+    public void requestDBMaterias(String token) {
+        params = new HashMap<>();
+        params.put("token", token);
+
+        server.execute(transaction,tag, Sigra.DBMATERIAS,params);
+    }
+
+    @Override
+    public void requestMatricula(String token, Materia materia) {
+        params = new HashMap<>();
+        gson = new Gson();
+
+        params.put("token", token);
+        params.put("Materia",gson.toJson(materia));
+
+        server.execute(transaction,tag,Sigra.MATRICULA,params);
+    }
+
+    @Override
+    public void cancelarMatricula(String token, Materia materia) {
+        params = new HashMap<>();
+        gson = new Gson();
+
+        params.put("token", token);
+        params.put("Materia",gson.toJson(materia));
+
+        server.execute(transaction,tag,Sigra.CANCELARMATRICULA,params);
+    }
+
+
 }

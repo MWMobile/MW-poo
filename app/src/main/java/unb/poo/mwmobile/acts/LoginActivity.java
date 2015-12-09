@@ -13,10 +13,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 import unb.poo.mwmobile.R;
-import unb.poo.mwmobile.integracao.ServerInterface.SigraUser;
+import unb.poo.mwmobile.integracao.ServerInterface.Sigra;
 import unb.poo.mwmobile.integracao.ServerRequest.MiddleServer;
 import unb.poo.mwmobile.integracao.ServerRequest.Transaction;
 import unb.poo.mwmobile.models.User;
@@ -83,7 +83,7 @@ public class LoginActivity extends Activity implements Transaction{
                         String matricula = String.valueOf(matriculaField.getText());
                         String password = String.valueOf(passwordField.getText());
 
-                        SigraUser sigra = new SigraUser(LoginActivity.this.getApplicationContext(),
+                        Sigra sigra = new Sigra(LoginActivity.this.getApplicationContext(),
                                 LoginActivity.this,
                                 LoginActivity.class+"");
 
@@ -136,13 +136,13 @@ public class LoginActivity extends Activity implements Transaction{
 
 
     @Override
-    public void doAfter(JSONObject jsonObject) {
-        if( jsonObject != null){
+    public void doAfter(JSONArray jsonArray) {
+        if( jsonArray != null){
 
             Gson gson = new Gson();
 
-            Log.d("JSON", String.valueOf(jsonObject));
-            user = gson.fromJson(String.valueOf(jsonObject), User.class);
+            Log.d("JSON", String.valueOf(jsonArray));
+            user = gson.fromJson(String.valueOf(jsonArray), User.class);
             user.saveOnDb(context);
 
 

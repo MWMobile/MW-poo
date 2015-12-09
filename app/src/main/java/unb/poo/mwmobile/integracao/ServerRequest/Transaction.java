@@ -22,5 +22,5 @@ public interface Transaction {
      *
      * @param jsonObject
      */
-    public void doAfter(JSONObject jsonObject);
+    public void doAfter(JSONArray jsonObject);
 }

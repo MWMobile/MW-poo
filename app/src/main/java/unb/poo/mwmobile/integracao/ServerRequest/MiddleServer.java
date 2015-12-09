@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -72,13 +73,13 @@ public class MiddleServer {
         Gson gson = new Gson();
 
 
-        final CustomRequestJsonObject request = new CustomRequestJsonObject(
+        final CustomRequestJsonArray request = new CustomRequestJsonArray(
                 Request.Method.POST,
                 MiddleServerConfig.URL + header,
                 params,
-                new Response.Listener<JSONObject>() {
+                new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(JSONArray response) {
                         Log.d(TAG, "String" + response);
                         transaction.doAfter(response);
                     }

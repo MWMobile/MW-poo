@@ -57,7 +57,7 @@ public class GradeActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                SingletonSemana singletonSemana;singletonSemana = SingletonSemana.getInstance();
+                SingletonSemana singletonSemana = SingletonSemana.getInstance();
                 getSupportActionBar().setTitle(singletonSemana.getDias().get(position));
             }
 
