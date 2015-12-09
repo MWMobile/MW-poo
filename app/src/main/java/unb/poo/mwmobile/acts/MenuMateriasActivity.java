@@ -30,7 +30,6 @@ public class MenuMateriasActivity extends Activity {
         gradeBtn = (FancyButton) findViewById(R.id.gradeBtn);
         historicoBtn = (FancyButton) findViewById(R.id.historicoBtn);
         quadroBtn = (FancyButton) findViewById(R.id.quadroBtn);
-
         matriculaMenuBtn = (FancyButton) findViewById(R.id.matriculaMenu);
 
         gradeBtn.setOnClickListener(new View.OnClickListener() {

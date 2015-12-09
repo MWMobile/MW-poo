@@ -32,7 +32,7 @@
             android:id="@+id/matriculaMenu"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            fancy:fb_iconResource="@mipmap/ic_launcher"
+            fancy:fb_iconResource="@drawable/edit"
             fancy:fb_defaultColor="#007e29"
             fancy:fb_focusColor="#00E457"
             fancy:fb_radius="50dp" />
@@ -87,7 +87,7 @@
             android:id="@+id/profileMenu"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            fancy:fb_iconResource="@mipmap/ic_launcher"
+            fancy:fb_iconResource="@drawable/profile"
             fancy:fb_defaultColor="#007e29"
             fancy:fb_focusColor="#00E457"
             fancy:fb_radius="50dp" />

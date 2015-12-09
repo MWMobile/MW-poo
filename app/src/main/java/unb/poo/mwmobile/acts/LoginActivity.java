@@ -16,8 +16,8 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import unb.poo.mwmobile.R;
+import unb.poo.mwmobile.integracao.ServerInterface.SigraUser;
 import unb.poo.mwmobile.integracao.ServerRequest.MiddleServer;
-import unb.poo.mwmobile.integracao.ServerInterface.Sigra;
 import unb.poo.mwmobile.integracao.ServerRequest.Transaction;
 import unb.poo.mwmobile.models.User;
 import unb.poo.mwmobile.singleton.SingletonUser;
@@ -83,7 +83,7 @@ public class LoginActivity extends Activity implements Transaction{
                         String matricula = String.valueOf(matriculaField.getText());
                         String password = String.valueOf(passwordField.getText());
 
-                        Sigra sigra = new Sigra(LoginActivity.this.getApplicationContext(),
+                        SigraUser sigra = new SigraUser(LoginActivity.this.getApplicationContext(),
                                 LoginActivity.this,
                                 LoginActivity.class+"");
 
@@ -131,7 +131,7 @@ public class LoginActivity extends Activity implements Transaction{
         super.onStop();
         MiddleServer.getInstance(LoginActivity.this.getApplicationContext())
                 .getRequestQueue()
-                .cancelAll(LoginActivity.class+"");
+                .cancelAll(LoginActivity.class + "");
     }
 
 

@@ -6,7 +6,7 @@ package unb.poo.mwmobile.integracao.ServerInterface;
  *
  * Created by scartezini on 16/10/2015.
  */
-public interface ISigra {
+public interface ISigraUser {
 
     /**
      * Autentica o loguin de um usuario com o servidor

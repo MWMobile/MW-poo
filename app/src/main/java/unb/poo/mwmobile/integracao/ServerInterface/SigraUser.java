@@ -14,7 +14,7 @@ import unb.poo.mwmobile.integracao.ServerRequest.WrapObjToNetwork;
  *
  * Created by Eduardo Scartezini on 30/10/2015.
  */
-public class Sigra implements ISigra {
+public class SigraUser implements ISigraUser {
 
     //Constantes
     private static final String AUTENTICA = "login";
@@ -36,7 +36,7 @@ public class Sigra implements ISigra {
     private HashMap<String,String> params;
 
     /**
-     * Construtor padrao do Sigra
+     * Construtor padrao do SigraUser
      *
      * @param context
      *      contexto da aplicacao
@@ -47,7 +47,7 @@ public class Sigra implements ISigra {
      *      Tag para parrar o request caso o app entre no
      *      onStop
      */
-    public Sigra(Context context, Transaction transaction, String tag) {
+    public SigraUser(Context context, Transaction transaction, String tag) {
         server = MiddleServer.getInstance(context);
         this.tag = tag;
         this.transaction = transaction;
@@ -61,7 +61,7 @@ public class Sigra implements ISigra {
         params.put("matricula",matricula);
         params.put("senha",senha);
 
-        server.execute(transaction,tag,Sigra.AUTENTICA,params);
+        server.execute(transaction,tag, SigraUser.AUTENTICA,params);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Sigra implements ISigra {
         params = new HashMap<>();
         params.put("token",token);
 
-        server.execute(transaction,tag,Sigra.IRA,params);
+        server.execute(transaction,tag, SigraUser.IRA,params);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Sigra implements ISigra {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.CURSO,params);
+        server.execute(transaction,tag, SigraUser.CURSO,params);
 
     }
 
@@ -86,7 +86,7 @@ public class Sigra implements ISigra {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.MATERIAS,params);
+        server.execute(transaction,tag, SigraUser.MATERIAS,params);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class Sigra implements ISigra {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.PERIODO,params);
+        server.execute(transaction,tag, SigraUser.PERIODO,params);
 
     }
 
@@ -103,7 +103,7 @@ public class Sigra implements ISigra {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.HISTORICO,params);
+        server.execute(transaction,tag, SigraUser.HISTORICO,params);
 
     }
 
@@ -112,7 +112,7 @@ public class Sigra implements ISigra {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.NOME,params);
+        server.execute(transaction,tag, SigraUser.NOME,params);
 
     }
 
@@ -121,6 +121,6 @@ public class Sigra implements ISigra {
         params = new HashMap<>();
         params.put("token", token);
 
-        server.execute(transaction,tag,Sigra.USER,params);
+        server.execute(transaction,tag, SigraUser.USER,params);
     }
 }
