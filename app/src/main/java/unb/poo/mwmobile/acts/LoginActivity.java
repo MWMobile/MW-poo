@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import unb.poo.mwmobile.R;
 import unb.poo.mwmobile.integracao.ServerInterface.Sigra;
@@ -136,13 +137,13 @@ public class LoginActivity extends Activity implements Transaction{
 
 
     @Override
-    public void doAfter(JSONArray jsonArray) {
-        if( jsonArray != null){
+    public void doAfter(JSONObject jsonObject) {
+        if( jsonObject != null){
 
             Gson gson = new Gson();
 
-            Log.d("JSON", String.valueOf(jsonArray));
-            user = gson.fromJson(String.valueOf(jsonArray), User.class);
+            Log.d("JSON", String.valueOf(jsonObject));
+            user = gson.fromJson(String.valueOf(jsonObject), User.class);
             user.saveOnDb(context);
 
 

@@ -73,13 +73,13 @@ public class MiddleServer {
         Gson gson = new Gson();
 
 
-        final CustomRequestJsonArray request = new CustomRequestJsonArray(
+        final CustomRequestJsonObject request = new CustomRequestJsonObject(
                 Request.Method.POST,
                 MiddleServerConfig.URL + header,
                 params,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG, "String" + response);
                         transaction.doAfter(response);
                     }
