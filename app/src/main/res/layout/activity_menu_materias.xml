@@ -128,16 +128,12 @@
             android:id="@+id/quadroBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:paddingBottom="7dp"
-            android:paddingLeft="7dp"
-            android:paddingRight="7dp"
-            android:paddingTop="7dp"
+            android:layout_centerHorizontal="true"
             fancy:fb_iconResource="@drawable/quadro"
             fancy:fb_borderColor="#FFF"
             fancy:fb_borderWidth="1dp"
             fancy:fb_defaultColor="#00983a"
             fancy:fb_focusColor="#00E457"
-            fancy:fb_iconPosition="top"
             fancy:fb_radius="50dp" />
 
         <TextView
